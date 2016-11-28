@@ -1,0 +1,52 @@
+/**index.wxss**/
+.login-bind{
+  position: relative;
+}
+.login-bind .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-bind .logo {
+  border-radius: 50%;
+  background: #fff;
+}
+
+.login-bind .logo-img {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.login-bind .name {
+  color: #000;
+  margin-top: 40rpx;
+}
+
+.login-bind .user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 160rpx;
+}
+
+.login-bind .user input {
+  width: 480rpx;
+  border: 2rpx solid #bbb;
+  border-radius: 20rpx;
+  background: #fff;
+  margin: 20rpx;
+  padding: 4rpx 20rpx;
+  font-size: 28rpx;
+}
+
+.login-bind .user button {
+  width: 320rpx;
+  border-radius: 20rpx;
+  margin: 20rpx;
+  padding: 1rpx 16rpx;
+  font-size: 32rpx;
+}
