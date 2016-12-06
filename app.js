@@ -5,6 +5,9 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    // wx.redirectTo({
+    //   url: 'pages/login/login'
+    // })
   },
   getUserInfo:function(cb){
     var that = this

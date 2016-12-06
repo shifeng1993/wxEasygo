@@ -1,0 +1,62 @@
+/* pages/login/login.wxss */
+
+/*以下是login绑定页面*/
+
+.login-bind {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 200rpx 0;
+  background: #f0f0f2;
+}
+
+.login-bind .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-bind .logo {
+  border-radius: 50%;
+  background: #fff;
+  width:168rpx;
+  height: 168rpx;
+}
+
+.login-bind .logo-img {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.login-bind .name {
+  color: #000;
+  margin-top: 40rpx;
+}
+
+.login-bind .user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 160rpx;
+}
+
+.login-bind .user input {
+  width: 480rpx;
+  border: 2rpx solid #bbb;
+  border-radius: 20rpx;
+  background: #fff;
+  margin: 20rpx;
+  padding: 4rpx 20rpx;
+  font-size: 28rpx;
+}
+
+.login-bind .user button {
+  width: 320rpx;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  padding: 1rpx 16rpx;
+  font-size: 32rpx;
+}

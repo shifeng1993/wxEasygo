@@ -1,0 +1,101 @@
+<view class="container">
+  <view class="index">
+    <view class="tab-wrap">
+      <view class="navbar">
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+          <view id="{{index}}" class="item {{activeIndex == index ? 'active' : ''}}" bindtap="tabClick">
+            <view class="navbar-title">{{item}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="tab-content">
+        <view class="tab-card" hidden="{{activeIndex != 0}}">
+          <view class="search">
+            <view class="group-key">组织：
+              <view class="group-val">{{group}}</view>
+              <button type="default" class="group-btn" bindtap="default" hover-class="group-btn-hover"> 更换 </button>
+            </view>
+            <view class="date-key">设备：
+              <view class="date-val">{{equipment}}</view>
+              <button type="default" class="date-btn" bindtap="default" hover-class="date-btn-hover"> 更换 </button>
+            </view>
+            <view class="query">
+              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
+            </view>
+          </view>
+          <view class="table-title">
+            <view class="title">{{tab1Title}}</view>
+          </view>
+          <view class="form">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Table heading</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Table cell</td>
+                </tr>
+              </tbody>
+            </table>
+          </view>
+        </view>
+        <view class="tab-card" hidden="{{activeIndex != 1}}">
+          <view class="search">
+            <view class="group-key">组织：
+              <view class="group-val">前海易购</view>
+              <button type="default" class="group-btn" bindtap="default" hover-class="group-btn-hover"> 更换 </button>
+            </view>
+            <view class="date-key">设备：
+              <view class="date-val">大梅沙二号机</view>
+              <button type="default" class="date-btn" bindtap="default" hover-class="date-btn-hover"> 更换 </button>
+            </view>
+            <view class="query">
+              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
+            </view>
+          </view>
+          <view class="table-title">
+            <view class="title">{{tab2Title}}</view>
+          </view>
+          <view class="form">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Table heading</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Table cell</td>
+                </tr>
+              </tbody>
+            </table>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="left-list">
+  </view>
+</view>

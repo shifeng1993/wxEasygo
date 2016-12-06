@@ -1,0 +1,16 @@
+<!--login.wxml-->
+<view class="container">
+  <view class="login-bind">
+    <view bindtap="" class="header">
+      <view class="logo">
+        <image class="logo-img" src="{{logo}}"></image>
+      </view>
+      <text class="name">{{name}}</text>
+    </view>
+    <view class="user">
+      <input password type="text" placeholder="请输入后台账号" />
+      <input class="password" password type="text" placeholder="请输入密码" />
+      <button type="primary" bindtap="ajax"> 绑定微信账号 </button>
+    </view>
+  </view>
+</view>

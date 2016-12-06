@@ -1,10 +1,67 @@
 /**app.wxss**/
+@import "./style/weui.wxss";
+
+/*@import "./style/font-awesome.min.wxss";*/
+
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
+
+page {
+  width: 100%;
+  height: 100%;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #000;
+}
+.h1 {
+  font-weight: 500;
+  color: #242a30;
+  font-size: 48rpx;
+  margin: 0 0 40rpx;
+  padding: 0;
+  /*border: none;/dd*/
+  line-height: 56rpx;
+  font-family: inherit;
+}
+
+table {
+  display: table;
+}
+tbody{
+  display: table-row-group;
+}
+thead{
+  display:table-header-group;
+}
+tr {
+  display: table-row;
+}
+caption{
+  display: table-caption;
+  text-align: center;
+}
+
+th, td {
+  display: table-cell;
+}
+
+.bg-green {
+  background: #00acac !important;
+}
+
+.bg-blue {
+  background: #348fe2 !important;
+}
+
+.bg-purple {
+  background: #727cb6 !important;
+}
+
+.bg-red {
+  background: #ff5b57 !important;
+}

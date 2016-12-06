@@ -1,17 +1,119 @@
 
 <!--index.wxml-->
 <view class="container">
-  <view class="login-bind">
-    <view bindtap="" class="header">
-      <view class="logo">
-        <image class="logo-img" src="{{logo}}"></image>
+
+  <!--index start-->
+  <view class="index">
+
+    <!--h1 start -->
+    <view class="h1">昨日情况
+      <view class="small">{{lastDate}}销售情况</view>
+    </view>
+
+    <!--h1 end-->
+
+    <!--list start-->
+    <view class="list">
+
+      <!--wrap1 start-->
+      <view class="list-wrap">
+
+        <!--widget start-->
+        <view class="widget bg-green">
+          <view class="stats-icon">
+            <image class="fa money" src="../../img/money.png"></image>
+          </view>
+          <view class="stats-info">
+            <view class="stats-info-title">昨日销售额（元）</view>
+            <view class="p">3,291,922</view>
+          </view>
+          <view class="stats-link">
+            <view class="link"> 查看详细
+              <image class="fa send" src="../../img/send.png"></image>
+            </view>
+          </view>
+        </view>
+
+        <!--widget end-->
       </view>
-      <text class="name">{{name}}</text>
+
+      <!--wrap1 end-->
+
+      <!--wrap2 start-->
+      <view class="list-wrap">
+
+        <!--widget start-->
+        <view class="widget bg-blue">
+          <view class="stats-icon">
+            <image class="fa chart" src="../../img/chart.png"></image>
+          </view>
+          <view class="stats-info">
+            <view class="stats-info-title">昨日销量（个）</view>
+            <view class="p">3,291,922</view>
+          </view>
+          <view class="stats-link">
+            <view class="link"> 查看详细
+              <image class="fa send" src="../../img/send.png"></image>
+            </view>
+          </view>
+        </view>
+
+        <!--widget end-->
+      </view>
+
+      <!--wrap2 end-->
+
+      <!--wrap3 start-->
+      <view class="list-wrap">
+
+        <!--widget start-->
+        <view class="widget bg-red">
+          <view class="stats-icon">
+            <image class="fa offline" src="../../img/offline.png"></image>
+          </view>
+          <view class="stats-info">
+            <view class="stats-info-title">后台离线设备（台）</view>
+            <view class="p">3,291,922</view>
+          </view>
+          <view class="stats-link">
+            <view class="link"> 查看详细
+              <image class="fa send" src="../../img/send.png"></image>
+            </view>
+          </view>
+        </view>
+
+        <!--widget end-->
+      </view>
+
+      <!--wrap3 end-->
+
+      <!--wrap4 start-->
+      <view class="list-wrap">
+
+        <!--widget start-->
+        <view class="widget bg-purple">
+          <view class="stats-icon">
+            <image class="fa setup" src="../../img/setup.png"></image>
+          </view>
+          <view class="stats-info">
+            <view class="stats-info-title">建议补货设备（台）</view>
+            <view class="p">3,291,922</view>
+          </view>
+          <view class="stats-link">
+            <view class="link"> 查看详细
+              <image class="fa send" src="../../img/send.png"></image>
+            </view>
+          </view>
+        </view>
+
+        <!--widget end-->
+      </view>
+
+      <!--wrap4 end-->
     </view>
-    <view class="user">
-      <input password type="text" placeholder="请输入后台账号" />
-      <input class="password" password type="text" placeholder="请输入密码" />
-      <button type="primary" bindtap="primary"> 绑定微信账号 </button>
-    </view>
+
+    <!--list end-->
   </view>
+
+  <!--index end-->
 </view>

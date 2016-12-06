@@ -1,0 +1,192 @@
+<view class="container">
+  <view class="index" bindtap="init" style="transform:{{indexleft}};">
+    <view class="tab-wrap" bindtap="init">
+      <view class="navbar">
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+          <view id="{{index}}" class="item {{activeIndex == index ? 'active' : ''}}" bindtap="tabClick">
+            <view class="navbar-title">{{item}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="tab-content">
+        <view class="tab-card" hidden="{{activeIndex != 0}}">
+          <view class="search">
+            <view class="group-key">组织：
+              <view class="group-val">{{group}}</view>
+              <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
+            </view>
+            <view class="equipment-key">设备：
+              <view class="equipment-val">{{equipment}}</view>
+              <button type="default" class="equipment-btn" catchtap="equipmentPatch" hover-class="equipment-btn-hover"> 选择 </button>
+            </view>
+            <view class="query">
+              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
+            </view>
+          </view>
+
+          <!--wrap1 start-->
+          <view class="card-wrap">
+
+            <!--widget start-->
+            <view class="widget bg-purple">
+              <view class="stats-icon">
+                <image class="fa chart" src="../../img/chart.png"></image>
+              </view>
+              <view class="stats-info">
+                <view class="stats-info-title">缺货率（%）</view>
+                <view class="p">{{lack}}</view>
+              </view>
+            </view>
+
+            <!--widget end-->
+          </view>
+
+          <!--wrap1 end-->
+
+          <!--wrap1 start-->
+          <view class="card-wrap">
+
+            <!--widget start-->
+            <view class="widget bg-green">
+              <view class="stats-icon">
+                <image class="fa chart" src="../../img/chart.png"></image>
+              </view>
+              <view class="stats-info">
+                <view class="stats-info-title">断货率（%）</view>
+                <view class="p">{{nogoods}}</view>
+              </view>
+            </view>
+
+            <!--widget end-->
+          </view>
+
+          <!--wrap1 end-->
+          <view class="table-title">
+            <view class="title">待补货统计列表</view>
+          </view>
+          <view class="form">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>商品名称</th>
+                  <th>待补货数量</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Table cell</td>
+                </tr>
+              </tbody>
+            </table>
+          </view>
+        </view>
+        <view class="tab-card" hidden="{{activeIndex != 1}}">
+          <view class="search">
+            <view class="group-key">组织：
+              <view class="group-val">前海易购</view>
+              <button type="default" class="group-btn" bindtap="default" hover-class="group-btn-hover"> 更换 </button>
+            </view>
+            <view class="query">
+              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover"> 查询 </button>
+            </view>
+          </view>
+          <view class="table-title">
+            <view class="title">离线设备列表</view>
+          </view>
+          <view class="form">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>设备编号</th>
+                  <th>设备名称</th>
+                  <th>所属组织</th>
+                  <th>离线时长</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                </tr>
+              </tbody>
+            </table>
+          </view>
+        </view>
+        <view class="tab-card" hidden="{{activeIndex != 2}}">
+          <view class="copy">
+            <view class="wrap">
+              <view class="text">从</view>
+              <input password type="text" placeholder="完整的机器编号" />
+              <view class="text">复制到</view>
+              <input password type="text" placeholder="完整的机器编号" />
+            </view>
+            <button type="default" class="copy-btn" bindtap="default" hover-class="copy-btn-hover"> 确定 </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="sidebar" style="z-index:{{groupMenu}};">
+    <view class="group-menu">
+      <view class="list1">
+        <view class="menu-header">前海易购</view>
+        <block wx:for-items="{{grouplist1}}" wx:key="index">
+          <view id="{{index}}" class="item {{activeList1 == index ? 'active' : ''}}" bindtap="groupList1Click">
+            <view class="grouplist1-title" style="opacity:{{grouplist1opacity}};transform:{{grouplist1transform}};">
+              <view class="icon" hidden="{{activeList1 != index && grouplist1Selete[index] == null}}">
+                <image src="../../img/list1Icon.png">
+                </image>
+              </view>
+              {{item}}
+            </view>
+          </view>
+          <view class="list1-selete" hidden="{{activeList1 != index}}" style="opacity:{{grouplist1opacity}};transform:{{grouplist1transform}};">
+            <block wx:for-items="{{grouplist1Selete}}" wx:key="index">
+              <view id="{{index}}" class="item {{activeList1 == list1 && activeList1Selete == index ? 'active' : ''}}" bindtap="list1seleteClick">
+                <view class="grouplist1-title" style="opacity:{{grouplist1opacity}};transform:{{grouplist1transform}};">
+                  <view class="icon" hidden="{{activeList1Selete != index && grouplist1Selete[index] == null}}">
+                    <image src="../../img/list1seleteIcon.png">
+                    </image>
+                  </view>
+                  {{item}}
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class="list2">
+        <view class="list-wrap" hidden="{{activeList1 + activeList1Selete != 00}}">
+          <view>11
+          </view>
+          <view>11
+          </view>
+          <view>11
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
