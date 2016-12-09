@@ -3,15 +3,11 @@
 var app = getApp()
 Page({
   data: {
+    tabbar: [],
+    tabbarIndex: 0,
     lastDate: '',
     scanQrcode: '../../img/qrcode.png'
   },
-  //事件处理函数
-  // home: function() {
-  //   this.setData({
-  //       index:false
-  //   })
-  // },
   // ajax: function() {
   //   wx.request({
   //     url: 'https://open.easygovm.com/api/v1/machine/machineTypes',
@@ -24,8 +20,25 @@ Page({
   //   })
   // },
   onLoad: function () {
-    console.log('onLoad')
-    var that = this
+    let _this = this;
+    if (app.appDate.userInfo == null) {
+      wx.redirectTo({
+        url: '/pages/login/login'
+      })
+    }
+    if (this.data.tabbarIndex == null) {
+      _this.setData({
+        tabbarIndex: 0
+      });
+    }
+    wx.getStorage({
+      key: 'tabbarIndex',
+      success: function (res) {
+        _this.setData({
+          tabbarIndex: parseInt(res.data),
+        });
+      }
+    });
     function GetDateStr(AddDayCount) {
       var dd = new Date();
       dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
@@ -35,14 +48,25 @@ Page({
       return y + "-" + m + "-" + d;
     }
     this.setData({
-      lastDate: GetDateStr(-1)
+      lastDate: GetDateStr(-1),
+      tabbar: app.tabbar
     })
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
       //更新数据
-      that.setData({
+      _this.setData({
         userInfo: userInfo
       })
+    })
+  },
+  tabbarClick: function (e) {
+    let link = e.currentTarget.dataset.link;
+    wx.redirectTo({
+      url: link
+    });
+    wx.setStorage({
+      key: "tabbarIndex",
+      data: e.currentTarget.dataset.index
     })
   },
   onShow: function () {

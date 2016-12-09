@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="index" bindtap="init" style="transform:{{indexleft}};">
+  <scroll-view scroll-y="true" class="index" bindtap="init" style="transform:{{indexleft}};">
     <view class="tab-wrap" bindtap="init">
       <view class="navbar">
         <block wx:for-items="{{tabs}}" wx:key="{{index}}">
@@ -15,8 +15,13 @@
               <view class="group-val">{{group}}</view>
               <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
             </view>
-            <view class="equipment-key">设备：
-              <view class="equipment-val">{{equipment}}</view>
+            <view class="equipment-key">
+              <view class="equipment-title">设备：</view>
+              <view class="equipment-val">
+                <block wx:for-items="{{checkedValues}}" wx:key="index">
+                  <view>{{item}}</view>
+                </block>
+              </view>
               <button type="default" class="equipment-btn" catchtap="equipmentPatch" hover-class="equipment-btn-hover"> 选择 </button>
             </view>
             <view class="query">
@@ -92,8 +97,8 @@
         <view class="tab-card" hidden="{{activeIndex != 1}}">
           <view class="search">
             <view class="group-key">组织：
-              <view class="group-val">前海易购</view>
-              <button type="default" class="group-btn" bindtap="default" hover-class="group-btn-hover"> 更换 </button>
+              <view class="group-val">{{offline}}</view>
+              <button type="default" class="group-btn" catchtap="offlineGroup" hover-class="group-btn-hover"> 更换 </button>
             </view>
             <view class="query">
               <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover"> 查询 </button>
@@ -148,29 +153,25 @@
         </view>
       </view>
     </view>
-  </view>
-  <view class="sidebar" style="z-index:{{groupMenu}};">
-    <view class="group-menu">
+  </scroll-view>
+  <view class="sidebar" style="z-index:{{sidebarZindex}};">
+    <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
       <view class="list1">
-        <view class="menu-header">前海易购</view>
+        <view class="menu-header" >前海易购</view>
         <block wx:for-items="{{grouplist1}}" wx:key="index">
-          <view id="{{index}}" class="item {{activeList1 == index ? 'active' : ''}}" bindtap="groupList1Click">
-            <view class="grouplist1-title" style="opacity:{{grouplist1opacity}};transform:{{grouplist1transform}};">
-              <view class="icon" hidden="{{activeList1 != index && grouplist1Selete[index] == null}}">
-                <image src="../../img/list1Icon.png">
+          <view id="{{index}}" class="item {{activeList1 == index ? 'activeList1' : ''}}" bindtap="groupList1Click">
+            <view class="grouplist1-title">
+              <view class="icon" hidden="{{activeList1 != index}}">
+                <image src="../../img/downIcon.png">
                 </image>
               </view>
               {{item}}
             </view>
           </view>
-          <view class="list1-selete" hidden="{{activeList1 != index}}" style="opacity:{{grouplist1opacity}};transform:{{grouplist1transform}};">
+          <view class="list1-selete" hidden="{{activeList1 != index}}" >
             <block wx:for-items="{{grouplist1Selete}}" wx:key="index">
-              <view id="{{index}}" class="item {{activeList1 == list1 && activeList1Selete == index ? 'active' : ''}}" bindtap="list1seleteClick">
-                <view class="grouplist1-title" style="opacity:{{grouplist1opacity}};transform:{{grouplist1transform}};">
-                  <view class="icon" hidden="{{activeList1Selete != index && grouplist1Selete[index] == null}}">
-                    <image src="../../img/list1seleteIcon.png">
-                    </image>
-                  </view>
+              <view id="{{index}}" class="item {{activeList1 == list1 && activeList1Selete == index ? 'activeSelete' : ''}}" bindtap="list1seleteClick">
+                <view class="grouplist1-title">
                   {{item}}
                 </view>
               </view>
@@ -179,14 +180,45 @@
         </block>
       </view>
       <view class="list2">
-        <view class="list-wrap" hidden="{{activeList1 + activeList1Selete != 00}}">
-          <view>11
+        <block wx:for-items="{{grouplist2}}" wx:key="index">
+          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete != item }}">
+            <block wx:for-items="{{grouplist2item}}" wx:key="index">
+              <view id="{{index}}" class="item {{activeList2 == index ? 'active' : ''}}" bindtap="groupList2Click">
+                <view class="grouplist2-title">
+                  {{item}}
+                </view>
+              </view>
+            </block>
           </view>
-          <view>11
+        </block>
+      </view>
+      <view class="list3">
+        <block wx:for-items="{{grouplist3}}" wx:key="index">
+          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete + activeList2 != item }}">
+            <block wx:for-items="{{grouplist3item}}" wx:key="index">
+              <view id="{{index}}" class="item {{activeList3 == index && groupList3Color == true  ? 'active' : ''}}" data-item="{{item}}" bindtap="groupList3Click">
+                <view class="grouplist3-title">
+                  {{item}}
+                </view>
+              </view>
+            </block>
           </view>
-          <view>11
+        </block>
+      </view>
+    </view>
+    <view class="equipment-menu" wx:if="{{equipmentMenu}}" style="opacity:{{equipmentlistOpacity}};transform:{{equipmentlistTransform}};">
+      <view class="header">设备选择</view>
+      <!-- CheckboxGroup容器 -->
+      <view class="lxCheckboxGroup">
+        <block wx:for-items="{{equipmentItems}}" wx:key="index">
+          <view id="{{inedx}}" class="item" data-index="{{index}}" size="20" bindtap="bindCheckbox">
+            <icon type="{{item.type}}" size="20" />
+            <text>{{item.text}}</text>
           </view>
-        </view>
+        </block>
       </view>
     </view>
   </view>
+</view>
+<import src="/templates/tabbar.wxml" />
+<template is="TABBAR" data="{{tabbar,tabbarIndex}}"/>

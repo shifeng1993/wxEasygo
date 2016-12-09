@@ -117,3 +117,5 @@
 
   <!--index end-->
 </view>
+<import src="/templates/tabbar.wxml" />
+<template is="TABBAR" data="{{tabbar,tabbarIndex}}"/>

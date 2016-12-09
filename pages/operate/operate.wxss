@@ -1,5 +1,4 @@
 .container {
-  float: left;
   position: relative;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -14,6 +13,9 @@
   position: relative;
   transition: all 0.25s;
   z-index: 10;
+  overflow-x: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
 }
 
 .index .tab-wrap {
@@ -83,10 +85,30 @@
   margin: 50rpx 30rpx;
   margin-bottom: 30rpx;
   font-size: 32rpx;
+  vertical-align: top;
+  text-align: left;
 }
 
-.search .group-val, .search .equipment-val {
+.search .equipment-title, .search .group-val, .search .equipment-val {
   display: inline-block;
+}
+
+.search .equipment-val {
+}
+
+.search .equipment-val
+view {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+  width: 320rpx;
+  height: 50rpx;
+}
+
+.search .equipment-title {
+  vertical-align: top;
+  overflow: hidden;
 }
 
 .search .group-btn, .search .equipment-btn {
@@ -297,54 +319,182 @@
   top: 0;
   bottom: 0;
 }
-.group-menu .menu-header{
-  font: bold 48rpx/100rpx Montserrat;
-  color: #ffffff;
+
+.group-menu, .equipment-menu {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.4s;
 }
-.group-menu .list1,.group-menu .list2,.group-menu .list3 {
+
+.group-menu .menu-header {
+  font: bold 48rpx/100rpx Montserrat;
+  color: #fff;
+}
+
+.group-menu .list1, .group-menu .list2, .group-menu .list3 {
   height: 100%;
   width: 200rpx;
   display: inline-block;
   text-align: center;
   vertical-align: top;
 }
-.group-menu .list2,.group-menu .list3 {
-padding-top: 100rpx;
+
+.group-menu .list2, .group-menu .list3 {
+  padding-top: 100rpx;
 }
 
 .group-menu .list1 .item {
   color: #a8acb1;
+  position: relative;
 }
 
 .group-menu .list1 .grouplist1-title {
   font: bold 32rpx/84rpx Montserrat;
-  opacity: 0;
-  transform: translateX(50px);
-  transition: all 0.4s;
 }
 
-.group-menu .list1 .active {
+.group-menu .list1 .activeList1 {
   color: #fff;
+  border-radius: 10rpx;
+  background: #232a2f;
 }
+
+.group-menu .list1 .activeSelete {
+  color: #fff;
+  background: #232a2f;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
 .group-menu .list1 .icon {
   width: 30rpx;
-  height:30rpx;
-position: absolute;
-left: 0;
-top: 50%;
-margin-top: -15rpx;
-}
-.group-menu .list1 .icon image{
-  display: inline;
-}
-.group-menu .list1-selete{
-  color:#a8acb1;
-  font-size: 28rpx;
-  opacity: 0;
-  transform: translateX(50px);
-  transition: all 0.4s;
+  height: 30rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -15rpx;
 }
 
-.group-menu .list2-wrap{
-  
+.group-menu .list1 .icon image {
+  display: inline;
+}
+
+.group-menu .list1-selete {
+  color: #a8acb1;
+  font-size: 28rpx;
+}
+
+/*.icon-radius{
+    width: 15rpx;
+  height:15rpx;
+  border: 6rpx solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+}*/
+
+.group-menu .list2 .item {
+  color: #a8acb1;
+}
+
+.group-menu .list2 .grouplist2-title {
+  font: bold 32rpx/84rpx Montserrat;
+}
+
+.group-menu .list2 .active {
+  color: #fff;
+  background: #232a2f;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.group-menu .list2 .icon {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -15rpx;
+}
+
+.group-menu .list2-selete {
+  color: #a8acb1;
+  font-size: 28rpx;
+}
+
+.group-menu .list3 .item {
+  color: #a8acb1;
+}
+
+.group-menu .list3 .grouplist3-title {
+  font: bold 32rpx/84rpx Montserrat;
+}
+
+.group-menu .list3 .active {
+  color: #fff;
+  background: #232a2f;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.group-menu .list3 .icon {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -15rpx;
+}
+
+.group-menu .list3-selete {
+  color: #a8acb1;
+  font-size: 28rpx;
+}
+
+/*整个复选框组容器*/
+
+.lxCheckboxGroup {
+  margin: 20px auto;
+  color: #fff;
+}
+
+/*单个复选框容器*/
+
+.lxCheckboxGroup view {
+  /*上下间距4px*/
+  margin: 4px auto;
+}
+
+.lxCheckboxGroup .item {
+  display: inline-block;
+  width: 50%;
+}
+
+/*复选框图标*/
+
+.lxCheckboxGroup icon {
+  /*text用block描述，所以要左浮动*/
+  float: left;
+}
+
+/*文字标签样式*/
+
+.lxCheckboxGroup text {
+  font-size: 14px;
+  /*20px是左按钮的大小，4px是真实的左间距*/
+  margin-left: 24px;
+  /*高亮与icon相等，实现垂直居中*/
+  height: 20px;
+  /*文本垂直居中*/
+  line-height: 20px;
+  /*块布局，否则文本高度无效*/
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.equipment-menu .header {
+  font-size: 36rpx;
+  color: #fff;
+  padding: 10rpx;
 }

@@ -1,9 +1,21 @@
+.container {
+  position: relative;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
 .index {
   height: auto;
-  min-height:93.4%;
+  min-height: 93.4%;
   width: 90%;
   background: #d9e0e7;
   padding: 5%;
+  position: relative;
+  transition: all 0.25s;
+  z-index: 10;
+  overflow-x: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
 }
 
 .index .tab-wrap {
@@ -11,7 +23,7 @@
 }
 
 .index .navbar {
-  background: #c1ccd1;
+  background: #393a3f;
   -webkit-border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
@@ -19,6 +31,7 @@
   position: relative;
   z-index: 500;
   width: 100%;
+  color: #fff;
 }
 
 .index .navbar .item {
@@ -67,30 +80,47 @@
   transition: opacity 0.3s linear;
 }
 
-.group-key,.date-key {
+.search .group-key, .search .equipment-key {
   color: #000;
   margin: 50rpx 30rpx;
   margin-bottom: 30rpx;
   font-size: 32rpx;
+  vertical-align: top;
+  text-align: left;
 }
 
-.group-val,.date-val {
+.search .equipment-title, .search .group-val, .search .equipment-val {
   display: inline-block;
 }
+.search .equipment-val
+view {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+display: inline-block;
+}
 
-.group-btn,.date-btn {
+.search .equipment-title {
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.search .group-btn, .search .equipment-btn {
   width: 160rpx;
   height: 50rpx;
   float: right;
   font-size: 32rpx;
   line-height: 50rpx;
 }
-.query{
+
+.search .query {
   font-size: 32rpx;
   margin: 0 auto;
   padding: 15rpx;
 }
-.query-btn{
+
+.search .query-btn {
   height: 80rpx;
   font-size: 32rpx;
   line-height: 80rpx;
@@ -98,12 +128,15 @@
   color: #fff;
   background: #348fe2;
 }
-.query-btn-hover{
+
+.search .query-btn-hover {
   background: #727cb6;
 }
-.group-btn-hover,.date-btn-hover {
+
+.search .group-btn-hover, .search .equipment-btn-hover {
   background: #d9e0e7;
 }
+
 .form {
   width: 99%;
   margin-bottom: 15px;
@@ -126,7 +159,8 @@
   font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #707478;
 }
-.form tbody,.replenish-form thead{
+
+.form tbody, .form thead {
   width: 100%;
 }
 
@@ -144,15 +178,17 @@
   text-align: left;
   width: 14%;
 }
-.table-title{
-text-align: center;
-width: 100%;
-height: auto;
-border-bottom: 1px solid #ddd;
-margin-top: 30rpx;
+
+.table-title {
+  text-align: center;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  margin-top: 30rpx;
 }
-.table-title .title{
-    font-weight: 500;
+
+.table-title .title {
+  font-weight: 500;
   color: #242a30;
   font-size: 32rpx;
   line-height: 56rpx;
@@ -169,4 +205,291 @@ margin-top: 30rpx;
   border-top: 1px solid #ddd;
   text-align: left;
   width: 14%;
+}
+
+.copy {
+  height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+.copy .wrap {
+  width: 480rpx;
+  text-align: left;
+}
+
+.copy input {
+  width: 85%;
+  border: 2rpx solid #bbb;
+  border-radius: 20rpx;
+  background: #fff;
+  margin: 20rpx 0;
+  padding: 4rpx 20rpx;
+  font-size: 28rpx;
+}
+
+.copy .copy-btn {
+  margin: 80rpx auto;
+  color: #fff;
+  background: #348fe2;
+  height: 80rpx;
+  font-size: 32rpx;
+  line-height: 80rpx;
+  width: 70%;
+}
+
+.copy .copy-btn-hover {
+  background: #727cb6;
+}
+
+.card-wrap {
+  display: inline-block;
+  width: 45%;
+  padding: 0 2%;
+  min-height: 1px;
+  font-size: 12px;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #707478;
+  margin-left: 0.5%;
+}
+
+.card-wrap .widget {
+  position: relative;
+  margin: 20rpx 0;
+  color: #fff;
+  padding: 10rpx 20rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.card-wrap .stats-icon {
+  height: 96rpx;
+  width: 96rpx;
+  text-align: center;
+  position: absolute;
+  right: 20rpx;
+  top: 30rpx;
+  opacity: 0.1;
+  filter: alpha(opacity=20);
+}
+
+.card-wrap .fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stats-info-title {
+  margin: 5rpx 0;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.card-wrap .p {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 0;
+  margin: 0 0 10rpx;
+}
+
+.card-wrap .money, .card-wrap .chart, .card-wrap .offline, .card-wrap .setup {
+  width: 100%;
+  height: 100%;
+  margin: 5rpx;
+  margin-left: 10rpx;
+}
+
+.sidebar {
+  background: #393a3f;
+  width: 600rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.group-menu, .equipment-menu {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.4s;
+}
+
+.group-menu .menu-header {
+  font: bold 48rpx/100rpx Montserrat;
+  color: #fff;
+}
+
+.group-menu .list1, .group-menu .list2, .group-menu .list3 {
+  height: 100%;
+  width: 200rpx;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+}
+
+.group-menu .list2, .group-menu .list3 {
+  padding-top: 100rpx;
+}
+
+.group-menu .list1 .item {
+  color: #a8acb1;
+  position: relative;
+}
+
+.group-menu .list1 .grouplist1-title {
+  font: bold 32rpx/84rpx Montserrat;
+}
+
+.group-menu .list1 .activeList1 {
+  color: #fff;
+  border-radius: 10rpx;
+  background: #232a2f;
+}
+
+.group-menu .list1 .activeSelete {
+  color: #fff;
+  background: #232a2f;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.group-menu .list1 .icon {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -15rpx;
+}
+
+.group-menu .list1 .icon image {
+  display: inline;
+}
+
+.group-menu .list1-selete {
+  color: #a8acb1;
+  font-size: 28rpx;
+}
+
+/*.icon-radius{
+    width: 15rpx;
+  height:15rpx;
+  border: 6rpx solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+}*/
+
+.group-menu .list2 .item {
+  color: #a8acb1;
+}
+
+.group-menu .list2 .grouplist2-title {
+  font: bold 32rpx/84rpx Montserrat;
+}
+
+.group-menu .list2 .active {
+  color: #fff;
+  background: #232a2f;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.group-menu .list2 .icon {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -15rpx;
+}
+
+.group-menu .list2-selete {
+  color: #a8acb1;
+  font-size: 28rpx;
+}
+
+.group-menu .list3 .item {
+  color: #a8acb1;
+}
+
+.group-menu .list3 .grouplist3-title {
+  font: bold 32rpx/84rpx Montserrat;
+}
+
+.group-menu .list3 .active {
+  color: #fff;
+  background: #232a2f;
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.group-menu .list3 .icon {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -15rpx;
+}
+
+.group-menu .list3-selete {
+  color: #a8acb1;
+  font-size: 28rpx;
+}
+
+/*整个复选框组容器*/
+
+.lxCheckboxGroup {
+  margin: 20px auto;
+  color: #fff;
+}
+
+/*单个复选框容器*/
+
+.lxCheckboxGroup view {
+  /*上下间距4px*/
+  margin: 4px auto;
+}
+
+.lxCheckboxGroup .item {
+  display: inline-block;
+  width: 50%;
+}
+
+/*复选框图标*/
+
+.lxCheckboxGroup icon {
+  /*text用block描述，所以要左浮动*/
+  float: left;
+}
+
+/*文字标签样式*/
+
+.lxCheckboxGroup text {
+  font-size: 14px;
+  /*20px是左按钮的大小，4px是真实的左间距*/
+  margin-left: 24px;
+  /*高亮与icon相等，实现垂直居中*/
+  height: 20px;
+  /*文本垂直居中*/
+  line-height: 20px;
+  /*块布局，否则文本高度无效*/
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.equipment-menu .header {
+  font-size: 36rpx;
+  color: #fff;
+  padding: 10rpx;
 }

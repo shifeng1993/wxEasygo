@@ -1,11 +1,1 @@
-{
-    "window": {
-        "backgroundTextStyle": "dark",
-        "navigationBarTitleText": "易购售卖机运营",
-        "navigationBarTextStyle": "#fff",
-        "backgroundColor": "#000",
-        "navigationBarBackgroundColor": "#000"
-    },
-    "tabBar": {
-    }
-}
+{}

@@ -1,6 +1,6 @@
 <view class="container">
-  <view class="index">
-    <view class="tab-wrap">
+  <scroll-view scroll-y="true" class="index" bindtap="init" style="transform:{{indexleft}};">
+    <view class="tab-wrap" bindtap="init">
       <view class="navbar">
         <block wx:for-items="{{tabs}}" wx:key="{{index}}">
           <view id="{{index}}" class="item {{activeIndex == index ? 'active' : ''}}" bindtap="tabClick">
@@ -13,25 +13,72 @@
           <view class="search">
             <view class="group-key">组织：
               <view class="group-val">{{group}}</view>
-              <button type="default" class="group-btn" bindtap="default" hover-class="group-btn-hover"> 更换 </button>
+              <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
             </view>
-            <view class="date-key">设备：
-              <view class="date-val">{{equipment}}</view>
-              <button type="default" class="date-btn" bindtap="default" hover-class="date-btn-hover"> 更换 </button>
+            <view class="equipment-key">
+              <view class="equipment-title">日期：</view>
+              <view class="equipment-val">
+                <view class="picker">
+                  {{date}}
+                </view>
+              </view>
+              <view class="equipment-btn">
+                <picker mode="date" value="{{date}}" start="2010-01-01" end="2030-12-31" bindchange="bindDateChange">
+                  <button type="default" class="equipment-btn" catchtap="" hover-class="equipment-btn-hover"> 选择 </button>
+                </picker>
+              </view>
             </view>
             <view class="query">
               <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
             </view>
           </view>
+
+          <!--wrap1 start-->
+          <view class="card-wrap">
+
+            <!--widget start-->
+            <view class="widget bg-purple">
+              <view class="stats-icon">
+                <image class="fa chart" src="../../img/chart.png"></image>
+              </view>
+              <view class="stats-info">
+                <view class="stats-info-title">缺货率（%）</view>
+                <view class="p">{{lack}}</view>
+              </view>
+            </view>
+
+            <!--widget end-->
+          </view>
+
+          <!--wrap1 end-->
+
+          <!--wrap1 start-->
+          <view class="card-wrap">
+
+            <!--widget start-->
+            <view class="widget bg-green">
+              <view class="stats-icon">
+                <image class="fa chart" src="../../img/chart.png"></image>
+              </view>
+              <view class="stats-info">
+                <view class="stats-info-title">断货率（%）</view>
+                <view class="p">{{nogoods}}</view>
+              </view>
+            </view>
+
+            <!--widget end-->
+          </view>
+
+          <!--wrap1 end-->
           <view class="table-title">
-            <view class="title">{{tab1Title}}</view>
+            <view class="title">待补货统计列表</view>
           </view>
           <view class="form">
             <table class="table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Table heading</th>
+                  <th>商品名称</th>
+                  <th>待补货数量</th>
                 </tr>
               </thead>
               <tbody>
@@ -54,48 +101,129 @@
         <view class="tab-card" hidden="{{activeIndex != 1}}">
           <view class="search">
             <view class="group-key">组织：
-              <view class="group-val">前海易购</view>
-              <button type="default" class="group-btn" bindtap="default" hover-class="group-btn-hover"> 更换 </button>
-            </view>
-            <view class="date-key">设备：
-              <view class="date-val">大梅沙二号机</view>
-              <button type="default" class="date-btn" bindtap="default" hover-class="date-btn-hover"> 更换 </button>
+              <view class="group-val">{{offline}}</view>
+              <button type="default" class="group-btn" catchtap="offlineGroup" hover-class="group-btn-hover"> 更换 </button>
             </view>
             <view class="query">
-              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
+              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover"> 查询 </button>
             </view>
           </view>
           <view class="table-title">
-            <view class="title">{{tab2Title}}</view>
+            <view class="title">离线设备列表</view>
           </view>
           <view class="form">
             <table class="table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Table heading</th>
+                  <th>设备编号</th>
+                  <th>设备名称</th>
+                  <th>所属组织</th>
+                  <th>离线时长</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
                   <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
                 </tr>
                 <tr>
                   <td>3</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
                   <td>Table cell</td>
                 </tr>
               </tbody>
             </table>
           </view>
         </view>
+        <view class="tab-card" hidden="{{activeIndex != 2}}">
+          <view class="copy">
+            <view class="wrap">
+              <view class="text">从</view>
+              <input password type="text" placeholder="完整的机器编号" />
+              <view class="text">复制到</view>
+              <input password type="text" placeholder="完整的机器编号" />
+            </view>
+            <button type="default" class="copy-btn" bindtap="default" hover-class="copy-btn-hover"> 确定 </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="sidebar" style="z-index:{{sidebarZindex}};">
+    <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
+      <view class="list1">
+        <view class="menu-header">前海易购</view>
+        <block wx:for-items="{{grouplist1}}" wx:key="index">
+          <view id="{{index}}" class="item {{activeList1 == index ? 'activeList1' : ''}}" bindtap="groupList1Click">
+            <view class="grouplist1-title">
+              <view class="icon" hidden="{{activeList1 != index}}">
+                <image src="../../img/downIcon.png">
+                </image>
+              </view>
+              {{item}}
+            </view>
+          </view>
+          <view class="list1-selete" hidden="{{activeList1 != index}}">
+            <block wx:for-items="{{grouplist1Selete}}" wx:key="index">
+              <view id="{{index}}" class="item {{activeList1 == list1 && activeList1Selete == index ? 'activeSelete' : ''}}" bindtap="list1seleteClick">
+                <view class="grouplist1-title">
+                  {{item}}
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class="list2">
+        <block wx:for-items="{{grouplist2}}" wx:key="index">
+          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete != item }}">
+            <block wx:for-items="{{grouplist2item}}" wx:key="index">
+              <view id="{{index}}" class="item {{activeList2 == index ? 'active' : ''}}" bindtap="groupList2Click">
+                <view class="grouplist2-title">
+                  {{item}}
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class="list3">
+        <block wx:for-items="{{grouplist3}}" wx:key="index">
+          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete + activeList2 != item }}">
+            <block wx:for-items="{{grouplist3item}}" wx:key="index">
+              <view id="{{index}}" class="item {{activeList3 == index && groupList3Color == true  ? 'active' : ''}}" data-item="{{item}}" bindtap="groupList3Click">
+                <view class="grouplist3-title">
+                  {{item}}
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="equipment-menu" wx:if="{{equipmentMenu}}" style="opacity:{{equipmentlistOpacity}};transform:{{equipmentlistTransform}};">
+      <view class="header">设备选择</view>
+
+      <!-- CheckboxGroup容器 -->
+      <view class="lxCheckboxGroup">
+        <block wx:for-items="{{equipmentItems}}" wx:key="index">
+          <view id="{{inedx}}" class="item" data-index="{{index}}" size="20" bindtap="bindCheckbox">
+            <icon type="{{item.type}}" size="20" />
+            <text>{{item.text}}</text>
+          </view>
+        </block>
       </view>
     </view>
   </view>
-  <view class="left-list">
-  </view>
 </view>
+<import src="/templates/tabbar.wxml" />
+<template is="TABBAR" data="{{tabbar,tabbarIndex}}"/>
