@@ -126,8 +126,8 @@ Page({
             }
         });
         _this.setData({
-       tabbar: app.tabbar
-    });
+            tabbar: app.tabbar
+        });
         wx.getSystemInfo({
             success: function (res) {
                 _this.setData({
@@ -140,13 +140,25 @@ Page({
     },
     tabbarClick: function (e) {
         let link = e.currentTarget.dataset.link;
-        wx.redirectTo({
-            url: link
+        let tabbarIndex = e.currentTarget.dataset.index;
+        let _this=this
+        wx.getStorage({
+            key: 'tabbarIndex',
+            success: function (res) {
+                _this.setData({
+                    tabbarIndex: parseInt(res.data),
+                });
+            }
         });
-        wx.setStorage({
-            key: "tabbarIndex",
-            data: e.currentTarget.dataset.index
-        })
+        if (this.data.tabbarIndex != tabbarIndex) {
+            wx.redirectTo({
+                url: link
+            });
+            wx.setStorage({
+                key: "tabbarIndex",
+                data: e.currentTarget.dataset.index
+            })
+        }
     },
     tabClick: function (e) {
         this.setData({
@@ -160,7 +172,7 @@ Page({
     },
     groupPatch: function (e) {
         this.setData({
-            indexleft: "translateX(300px)",
+            indexleft: "translateX(80%)",
             groupMenu: true,
             equipmentMenu: false,
             sidebarZindex: "1",
@@ -587,7 +599,7 @@ Page({
     },
     equipmentPatch: function (e) {
         this.setData({
-            indexleft: "translateX(300px)",
+            indexleft: "translateX(80%)",
             groupMenu: false,
             equipmentMenu: true,
             sidebarZindex: "1",
@@ -630,7 +642,7 @@ Page({
 
     offlineGroup: function (e) {
         this.setData({
-            indexleft: "translateX(300px)",
+            indexleft: "translateX(80%)",
             groupMenu: true,
             equipmentMenu: false,
             sidebarZindex: "1",

@@ -3,7 +3,7 @@
 <view class="container">
 
   <!--index start-->
-  <view class="index">
+  <scroll-view scroll-y="true" class="index">
 
     <!--h1 start -->
     <view class="h1">昨日情况
@@ -113,7 +113,7 @@
     </view>
 
     <!--list end-->
-  </view>
+  </scroll-view>
 
   <!--index end-->
 </view>

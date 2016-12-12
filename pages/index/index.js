@@ -19,18 +19,24 @@ Page({
   //     }
   //   })
   // },
+
   onLoad: function () {
     let _this = this;
-    if (app.appDate.userInfo == null) {
-      wx.redirectTo({
-        url: '/pages/login/login'
-      })
-    }
+    // if (app.appDate.userInfo == null) {
+    //   wx.redirectTo({
+    //     url: '/pages/login/login'
+    //   })
+    // }
     if (this.data.tabbarIndex == null) {
       _this.setData({
         tabbarIndex: 0
       });
     }
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    })
     wx.getStorage({
       key: 'tabbarIndex',
       success: function (res) {
@@ -58,18 +64,31 @@ Page({
         userInfo: userInfo
       })
     })
+    setTimeout(function () {
+      wx.hideToast()
+    }, 100)
   },
+
   tabbarClick: function (e) {
     let link = e.currentTarget.dataset.link;
-    wx.redirectTo({
-      url: link
+    let tabbarIndex = e.currentTarget.dataset.index;
+    let _this= this;
+    wx.getStorage({
+      key: 'tabbarIndex',
+      success: function (res) {
+        _this.setData({
+          tabbarIndex: parseInt(res.data),
+        });
+      }
     });
-    wx.setStorage({
-      key: "tabbarIndex",
-      data: e.currentTarget.dataset.index
-    })
-  },
-  onShow: function () {
-
+    if (this.data.tabbarIndex != tabbarIndex) {
+      wx.redirectTo({
+        url: link
+      });
+      wx.setStorage({
+        key: "tabbarIndex",
+        data: e.currentTarget.dataset.index
+      })
+    }
   }
 })

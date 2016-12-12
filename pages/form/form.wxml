@@ -19,11 +19,11 @@
               <view class="equipment-title">日期：</view>
               <view class="equipment-val">
                 <view class="picker">
-                  {{date}}
+                  {{equipmentDate}}
                 </view>
               </view>
               <view class="equipment-btn">
-                <picker mode="date" value="{{date}}" start="2010-01-01" end="2030-12-31" bindchange="bindDateChange">
+                <picker mode="date" value="{{equipmentDate}}" start="2010-01-01" end="2030-12-31" bindchange="equipmentDateChange">
                   <button type="default" class="equipment-btn" catchtap="" hover-class="equipment-btn-hover"> 选择 </button>
                 </picker>
               </view>
@@ -32,93 +32,79 @@
               <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
             </view>
           </view>
-
-          <!--wrap1 start-->
-          <view class="card-wrap">
-
-            <!--widget start-->
-            <view class="widget bg-purple">
-              <view class="stats-icon">
-                <image class="fa chart" src="../../img/chart.png"></image>
-              </view>
-              <view class="stats-info">
-                <view class="stats-info-title">缺货率（%）</view>
-                <view class="p">{{lack}}</view>
-              </view>
-            </view>
-
-            <!--widget end-->
-          </view>
-
-          <!--wrap1 end-->
-
-          <!--wrap1 start-->
-          <view class="card-wrap">
-
-            <!--widget start-->
-            <view class="widget bg-green">
-              <view class="stats-icon">
-                <image class="fa chart" src="../../img/chart.png"></image>
-              </view>
-              <view class="stats-info">
-                <view class="stats-info-title">断货率（%）</view>
-                <view class="p">{{nogoods}}</view>
-              </view>
-            </view>
-
-            <!--widget end-->
-          </view>
-
-          <!--wrap1 end-->
           <view class="table-title">
-            <view class="title">待补货统计列表</view>
+            <view class="title">设备销量统计列表</view>
           </view>
           <view class="form">
             <table class="table">
               <thead>
                 <tr>
-                  <th>商品名称</th>
-                  <th>待补货数量</th>
+                  <th>设备名称</th>
+                  <th>销量（台）</th>
+                  <th>销售额（元）</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
+                  <td>1</td>
                   <td>Table cell</td>
                 </tr>
                 <tr>
                   <td>2</td>
+                  <td>1</td>
                   <td>Table cell</td>
                 </tr>
                 <tr>
                   <td>3</td>
+                  <td>1</td>
                   <td>Table cell</td>
                 </tr>
               </tbody>
             </table>
+          </view>
+          <view class="total">
+            设备总销售额：
+            <view class="total-info">{{equipmentTotal}}元</view>
           </view>
         </view>
         <view class="tab-card" hidden="{{activeIndex != 1}}">
           <view class="search">
-            <view class="group-key">组织：
-              <view class="group-val">{{offline}}</view>
-              <button type="default" class="group-btn" catchtap="offlineGroup" hover-class="group-btn-hover"> 更换 </button>
+             <view class="group-key">组织：
+              <view class="group-val">{{group}}</view>
+              <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
+            </view>
+             <view class="machine-key">机器编号：
+             <input type="text" placeholder="输入机器编号" class="machine-val"/>
+             
+            </view>
+            <view class="equipment-key">
+              <view class="equipment-title">日期：</view>
+              <view class="equipment-val">
+                <view class="picker">
+                  {{goodsDate}}
+                </view>
+              </view>
+              <view class="equipment-btn">
+                <picker mode="date" value="{{goodsDate}}" start="2010-01-01" end="2030-12-31" bindchange="goodsDateChange">
+                  <button type="default" class="equipment-btn" catchtap="" hover-class="equipment-btn-hover"> 选择 </button>
+                </picker>
+              </view>
             </view>
             <view class="query">
-              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover"> 查询 </button>
+              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
             </view>
           </view>
           <view class="table-title">
-            <view class="title">离线设备列表</view>
+            <view class="title">产品销量统计列表</view>
           </view>
           <view class="form">
             <table class="table">
               <thead>
                 <tr>
-                  <th>设备编号</th>
-                  <th>设备名称</th>
-                  <th>所属组织</th>
-                  <th>离线时长</th>
+                  <th>产品名称</th>
+                  <th>产品销量（个）</th>
+                  <th>销售额（元）</th>
                 </tr>
               </thead>
               <tbody>
@@ -126,11 +112,9 @@
                   <td>1</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
-                  <td>Table cell</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>Table cell</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
                 </tr>
@@ -138,10 +122,13 @@
                   <td>3</td>
                   <td>Table cell</td>
                   <td>Table cell</td>
-                  <td>Table cell</td>
                 </tr>
               </tbody>
             </table>
+          </view>
+          <view class="total">
+            产品总销售额：
+            <view class="total-info">{{goodsTotal}}元</view>
           </view>
         </view>
         <view class="tab-card" hidden="{{activeIndex != 2}}">
@@ -226,4 +213,4 @@
   </view>
 </view>
 <import src="/templates/tabbar.wxml" />
-<template is="TABBAR" data="{{tabbar,tabbarIndex}}"/>
+<template is="TABBAR" data="{{tabbar,tabbarIndex}}" />

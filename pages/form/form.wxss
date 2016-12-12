@@ -2,6 +2,7 @@
   position: relative;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  height: 91%;
 }
 
 .index {
@@ -80,7 +81,7 @@
   transition: opacity 0.3s linear;
 }
 
-.search .group-key, .search .equipment-key {
+.search .group-key,.search .machine-key,.search .equipment-key {
   color: #000;
   margin: 50rpx 30rpx;
   margin-bottom: 30rpx;
@@ -89,16 +90,26 @@
   text-align: left;
 }
 
-.search .equipment-title, .search .group-val, .search .equipment-val {
+.search .equipment-title, .search .group-val, .search .machine-val,.search .equipment-val {
   display: inline-block;
 }
+.search .machine-val{
+  width: 400rpx;
+  float: right;
+  border: 2rpx solid #bbb;
+  border-radius: 20rpx;
+  background: #fff;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
 .search .equipment-val
 view {
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   overflow: hidden;
-display: inline-block;
+  display: inline-block;
 }
 
 .search .equipment-title {
@@ -177,6 +188,23 @@ display: inline-block;
   vertical-align: bottom;
   text-align: left;
   width: 14%;
+}
+
+.total {
+  width: 91%;
+
+  padding: 30rpx;
+  color: #000;
+  font-size: 32rpx;
+  border-top: 2rpx solid #d9e0e7;
+}
+
+
+
+.total .total-info {
+display: inline;
+  color: red;
+  font-size: 42rpx;
 }
 
 .table-title {

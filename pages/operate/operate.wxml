@@ -74,7 +74,7 @@
               <thead>
                 <tr>
                   <th>商品名称</th>
-                  <th>待补货数量</th>
+                  <th>待补货数量（个）</th>
                 </tr>
               </thead>
               <tbody>

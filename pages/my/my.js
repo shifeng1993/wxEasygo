@@ -38,14 +38,26 @@ Page({
       })
     })
   },
-    tabbarClick: function (e) {
+  tabbarClick: function (e) {
     let link = e.currentTarget.dataset.link;
-    wx.redirectTo({
-      url: link
+    let tabbarIndex = e.currentTarget.dataset.index;
+    let _this= this;
+    wx.getStorage({
+      key: 'tabbarIndex',
+      success: function (res) {
+        _this.setData({
+          tabbarIndex: parseInt(res.data),
+        });
+      }
     });
-    wx.setStorage({
-      key: "tabbarIndex",
-      data: e.currentTarget.dataset.index
-    })
+    if (this.data.tabbarIndex != tabbarIndex) {
+      wx.redirectTo({
+        url: link
+      });
+      wx.setStorage({
+        key: "tabbarIndex",
+        data: e.currentTarget.dataset.index
+      })
+    }
   },
 })

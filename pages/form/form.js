@@ -10,7 +10,8 @@ Page({
         sliderOffset: 0,
         sliderLeft: 0,
         menuTop: 0,
-        date: "",
+        equipmentDate:"",
+        goodsDate: "",
         group: '',
         groupMenu: false,
         equipmentMenu: false,
@@ -114,7 +115,9 @@ Page({
         list1Selete: "0",
         checkedValues: [],
         groupList3Color: false,
-        offline: ""
+        offline: "",
+        goodsTotal:"333333",
+        equipmentTotal:"hhhh"
     },
     onLoad: function () {
         let _this = this;
@@ -135,8 +138,9 @@ Page({
             return y + "-" + m + "-" + d;
         };
         this.setData({
-            date: GetDateStr(-1),
-             tabbar: app.tabbar
+            equipmentDate: GetDateStr(-1),
+            goodsDate:GetDateStr(-1),
+            tabbar: app.tabbar
         });
         wx.getSystemInfo({
             success: function (res) {
@@ -148,16 +152,28 @@ Page({
             }
         });
     },
-  tabbarClick: function (e) {
-    let link = e.currentTarget.dataset.link;
-    wx.redirectTo({
-      url: link
-    });
-    wx.setStorage({
-      key: "tabbarIndex",
-      data: e.currentTarget.dataset.index
-    })
-  },
+    tabbarClick: function (e) {
+        let link = e.currentTarget.dataset.link;
+        let tabbarIndex = e.currentTarget.dataset.index;
+        let _this= this;
+        wx.getStorage({
+            key: 'tabbarIndex',
+            success: function (res) {
+                _this.setData({
+                    tabbarIndex: parseInt(res.data),
+                });
+            }
+        });
+        if (this.data.tabbarIndex != tabbarIndex) {
+            wx.redirectTo({
+                url: link
+            });
+            wx.setStorage({
+                key: "tabbarIndex",
+                data: e.currentTarget.dataset.index
+            })
+        }
+    },
     tabClick: function (e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
@@ -170,7 +186,7 @@ Page({
     },
     groupPatch: function (e) {
         this.setData({
-            indexleft: "translateX(300px)",
+            indexleft: "translateX(80%)",
             groupMenu: true,
             equipmentMenu: false,
             sidebarZindex: "1",
@@ -597,7 +613,7 @@ Page({
     },
     equipmentPatch: function (e) {
         this.setData({
-            indexleft: "translateX(300px)",
+            indexleft: "translateX(80%)",
             groupMenu: false,
             equipmentMenu: true,
             sidebarZindex: "1",
@@ -640,7 +656,7 @@ Page({
 
     offlineGroup: function (e) {
         this.setData({
-            indexleft: "translateX(300px)",
+            indexleft: "translateX(80%)",
             groupMenu: true,
             equipmentMenu: false,
             sidebarZindex: "1",
@@ -650,9 +666,14 @@ Page({
         });
 
     },
-    bindDateChange: function (e) {
+    equipmentDateChange: function (e) {
         this.setData({
-            date: e.detail.value
+            equipmentDate: e.detail.value
+        })
+    },
+    goodsDateChange: function (e) {
+        this.setData({
+            goodsDate: e.detail.value
         })
     },
     init: function (e) {
