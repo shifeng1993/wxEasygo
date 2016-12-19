@@ -4,7 +4,8 @@
     "pages/my/my",
     "pages/operate/operate",
     "pages/form/form",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/operateLogin/operateLogin"
   ],
 
     "window": {

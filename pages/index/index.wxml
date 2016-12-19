@@ -1,13 +1,17 @@
 
 <!--index.wxml-->
 <view class="container">
-
+<view class="operate-login" bindtap="operateLogin">
+<view class="icon"><image src="../../img/operateLogin.png"></image></view>
+<view class="text"><text>操作</text></view>
+</view>
   <!--index start-->
   <scroll-view scroll-y="true" class="index">
 
     <!--h1 start -->
     <view class="h1">昨日情况
       <view class="small">{{lastDate}}销售情况</view>
+      
     </view>
 
     <!--h1 end-->

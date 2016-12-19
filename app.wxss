@@ -58,19 +58,29 @@ th, td {
 .bg-green {
   background: #00acac !important;
 }
+.bg-green-hover {
+  background: #008f8f !important;
+}
 
 .bg-blue {
   background: #348fe2 !important;
+}
+.bg-blue-hover {
+  background: #2970b1 !important;
 }
 
 .bg-purple {
   background: #727cb6 !important;
 }
-
+.bg-purple-hover{
+  background: #616a9b !important;
+}
 .bg-red {
   background: #ff5b57 !important;
 }
-
+.bg-red-hover {
+  background: #c64643 !important;
+}
 .tabbar {
   position: fixed;
   bottom: 0;

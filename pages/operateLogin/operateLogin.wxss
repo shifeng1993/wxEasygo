@@ -1,0 +1,198 @@
+.container {
+  position: relative;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  font-size: 32rpx;
+}
+
+.operateLogin {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  height: 50%;
+  text-align: center;
+}
+
+.equipmentOperate {
+  height: auto;
+  min-height: 95%;
+  width: 90%;
+  padding: 5%;
+  position: relative;
+  transition: all 0.25s;
+  z-index: 10;
+  overflow-x: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
+}
+.operateLogin .title{
+    font-size: 48rpx;
+}
+
+.text, .btn {
+  display: block;
+  margin: 60rpx auto;
+  height: 100rpx;
+  flex: 1;
+  font-size: 32rpx;
+}
+
+.text {
+  width: 90%;
+  border: 2rpx solid #bbb;
+  border-radius: 20rpx;
+  background: #fff;
+  padding: 4rpx 20rpx;
+}
+
+.text input {
+  width: 100%;
+  height: 100%;
+}
+
+.btn button {
+  border-radius: 20rpx;
+  margin: 10rpx;
+  padding: 4rpx 20rpx;
+}
+
+.btn button {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 32rpx;
+}
+
+.equipmentName, .equipmentBtn, .equipmentNumber, equipmentFill {
+  width: 100%;
+  height: 100rpx;
+}
+
+.equipmentName text {
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+  line-height: 100rpx;
+}
+
+.equipmentName input {
+  width: 60%;
+  display: inline-block;
+  border: 2rpx solid #ddd;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  margin: 20rpx 0;
+  font-size: 28rpx;
+}
+
+.equipmentBtn {
+  display: flex;
+
+}
+
+.equipmentBtn button {
+  flex: 1;
+  margin: 10rpx 40rpx;
+  font-size: 32rpx;
+    color:#fff;
+}
+.equipmentNumber text{
+    display: inline-block;
+    width: 25%;
+    height: 100%;
+    text-align: left;
+    line-height: 100rpx;
+}
+.equipmentFill button{
+    width: 80%;
+    color: #fff;
+    line-height: 80rpx;
+}
+
+.form {
+  width: 99%;
+  margin-bottom: 15px;
+  overflow-y: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border-bottom: 2rpx solid #ddd;
+  min-height: 0.01%;
+  overflow-x: auto;
+}
+
+.form .table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 98%;
+  border-radus: 6rpx;
+  background: #fff;
+  border-color: #e2e7eb;
+  margin-bottom: 0;
+  font-size: 24rpx;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #707478;
+}
+.form input{
+    border: 1rpx solid #bbb;
+    border-radius: 10rpx;
+    width: 100%;
+    line-height: 24rpx;
+}
+.form tbody, .form thead {
+  width: 100%;
+}
+
+.form th {
+  border-top: 0;
+  white-space: nowrap;
+  border-color: #e2e7eb;
+  padding: 10px 15px;
+  background: #fff;
+  color: #242a30;
+  font-weight: 600;
+  border-bottom: 2rpx solid #e2e7eb !important;
+  line-height: 1.42857143;
+  vertical-align: bottom;
+  text-align: left;
+  width: 14%;
+}
+
+.table-title {
+  text-align: center;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  margin-top: 30rpx;
+}
+
+.table-title .title {
+  font-weight: 500;
+  color: #242a30;
+  font-size: 32rpx;
+  line-height: 56rpx;
+  font-family: inherit;
+}
+
+.form td {
+  white-space: nowrap;
+  border-color: #e2e7eb;
+  padding: 10px 15px;
+  background: #fff;
+  line-height: 60rpx;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  text-align: left;
+  width: 14%;
+}
+.putStock{
+    padding: 50rpx;
+}
+.putStock button{
+    color: #fff;
+}

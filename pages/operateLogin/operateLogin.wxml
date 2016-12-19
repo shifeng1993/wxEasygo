@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="operateLogin" wx-if="{{operateLogin}}">
+    <text class="title">查询机器编号</text>
+    <view class="text">
+      <input type="text" placeholder="请输入要查询的机器号码" />
+    </view>
+    <view class="btn">
+      <button type="primary" bindtap="operateLogin"> 确定 </button>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" class="equipmentOperate" wx-if="{{equipmentOperate}}">
+    <view class="equipmentName">
+      <text>机器名称：</text>
+      <input type="text" placeholder="设备名称" value="611#续航电梯间" />
+    </view>
+    <view class="equipmentBtn">
+      <button type="default" class="bg-blue" hover-class="bg-blue-hover">修改名称</button>
+      <button type="default" class="bg-red" hover-class="bg-red-hover">重启设备</button>
+    </view>
+    <view class="equipmentNumber">
+      <text>设备编号：</text>
+      <text>{{equipmentNumber}}</text>
+    </view>
+    <view class="equipmentFill">
+      <button type="default" class="bg-green" hover-class="bg-green-hover">一键补满</button>
+    </view>
+    <view class="table-title">
+      <view class="title">设备统计列表</view>
+    </view>
+    <view class="form">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>货到编号</th>
+            <th>商品信息</th>
+            <th>价格</th>
+            <th>库存数量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td><input type="text"/></td>
+
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td><input type="text"/></td>
+  
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+           <td><input type="text"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </view>
+    <view class="putStock"><button type="default" class="bg-purple" hover-class="bg-purple-hover">确认库存</button></view>
+  </scroll-view>
+</view>

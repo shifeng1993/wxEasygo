@@ -32,11 +32,11 @@ Page({
         tabbarIndex: 0
       });
     }
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 10000
-    })
+    // wx.showToast({
+    //   title: '加载中',
+    //   icon: 'loading',
+    //   duration: 10000
+    // })
     wx.getStorage({
       key: 'tabbarIndex',
       success: function (res) {
@@ -64,11 +64,15 @@ Page({
         userInfo: userInfo
       })
     })
-    setTimeout(function () {
-      wx.hideToast()
-    }, 100)
+    // setTimeout(function () {
+    //   wx.hideToast()
+    // }, 100)
   },
-
+  operateLogin:function(e){
+    wx.navigateTo({
+        url: "/pages/operateLogin/operateLogin"
+      });
+  },
   tabbarClick: function (e) {
     let link = e.currentTarget.dataset.link;
     let tabbarIndex = e.currentTarget.dataset.index;
