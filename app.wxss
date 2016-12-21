@@ -42,6 +42,9 @@ thead {
   display: table-header-group;
 }
 
+tfoot{
+  display: table-footer-group;
+}
 tr {
   display: table-row;
 }
@@ -80,6 +83,23 @@ th, td {
 }
 .bg-red-hover {
   background: #c64643 !important;
+}
+
+.bg-gray {
+  background: #dbdbdb !important;
+}
+
+.bg-gray-hover{
+background: #bcbcbc !important;
+}
+.color-black{
+  color: #000 !important;
+}
+.color-white{
+  color: #fff !important;
+}
+.color-gray{
+  color: #747474 !important;
 }
 .tabbar {
   position: fixed;

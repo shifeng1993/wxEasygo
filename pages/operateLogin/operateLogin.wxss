@@ -16,7 +16,7 @@
   right: 0;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 92%;
   height: 50%;
   text-align: center;
 }
@@ -24,8 +24,8 @@
 .equipmentOperate {
   height: auto;
   min-height: 95%;
-  width: 90%;
-  padding: 5%;
+  width: 92%;
+  padding: 4%;
   position: relative;
   transition: all 0.25s;
   z-index: 10;
@@ -33,24 +33,24 @@
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
 }
-.operateLogin .title{
-    font-size: 48rpx;
+
+.operateLogin .title {
+  font-size: 48rpx;
 }
 
 .text, .btn {
   display: block;
   margin: 60rpx auto;
-  height: 100rpx;
+  height: 88rpx;
   flex: 1;
   font-size: 32rpx;
 }
 
 .text {
-  width: 90%;
+  width: 640rpx;
   border: 2rpx solid #bbb;
   border-radius: 20rpx;
   background: #fff;
-  padding: 4rpx 20rpx;
 }
 
 .text input {
@@ -59,14 +59,10 @@
 }
 
 .btn button {
+  width: 640rpx;
   border-radius: 20rpx;
-  margin: 10rpx;
-  padding: 4rpx 20rpx;
-}
-
-.btn button {
-  width: 50%;
   margin: 0 auto;
+  padding: 4rpx 20rpx;
   font-size: 32rpx;
 }
 
@@ -94,26 +90,30 @@
 
 .equipmentBtn {
   display: flex;
-
 }
 
 .equipmentBtn button {
   flex: 1;
   margin: 10rpx 40rpx;
+  width: 276rpx;
+  height: 88rpx;
+  line-height: 88rpx;
   font-size: 32rpx;
-    color:#fff;
+  color: #fff;
 }
-.equipmentNumber text{
-    display: inline-block;
-    width: 25%;
-    height: 100%;
-    text-align: left;
-    line-height: 100rpx;
+
+.equipmentNumber text {
+  display: inline-block;
+  width: 25%;
+  height: 100%;
+  text-align: left;
+  line-height: 100rpx;
 }
-.equipmentFill button{
-    width: 80%;
-    color: #fff;
-    line-height: 80rpx;
+
+.equipmentFill button {
+  width: 80%;
+  color: #fff;
+  line-height: 80rpx;
 }
 
 .form {
@@ -138,12 +138,14 @@
   font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #707478;
 }
-.form input{
-    border: 1rpx solid #bbb;
-    border-radius: 10rpx;
-    width: 100%;
-    line-height: 24rpx;
+
+.form input {
+  border: 1rpx solid #bbb;
+  border-radius: 10rpx;
+  width: 100%;
+  line-height: 24rpx;
 }
+
 .form tbody, .form thead {
   width: 100%;
 }
@@ -190,9 +192,14 @@
   text-align: left;
   width: 14%;
 }
-.putStock{
-    padding: 50rpx;
+
+.putStock {
+  width: 100%;
+  height: 88rpx;
 }
-.putStock button{
-    color: #fff;
+
+.putStock button {
+  color: #fff;
+  width: 640rpx;
+  height: 100%;
 }

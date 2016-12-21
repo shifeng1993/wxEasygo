@@ -18,7 +18,7 @@
             <view class="equipment-key">
               <view class="equipment-title">设备：</view>
               <view class="equipment-val">
-                <block wx:for-items="{{checkedValues}}" wx:key="index">
+                <block wx:for-items="{{equipment}}" wx:key="index">
                   <view>{{item}}</view>
                 </block>
               </view>
@@ -98,7 +98,7 @@
           <view class="search">
             <view class="group-key">组织：
               <view class="group-val">{{offline}}</view>
-              <button type="default" class="group-btn" catchtap="offlineGroup" hover-class="group-btn-hover"> 更换 </button>
+              <button type="default" class="group-btn" catchtap="offlineGroup" hover-class="group-btn-hover"> 选择 </button>
             </view>
             <view class="query">
               <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover"> 查询 </button>
@@ -144,11 +144,11 @@
           <view class="copy">
             <view class="wrap">
               <view class="text">从</view>
-              <input password type="text" placeholder="完整的机器编号" />
+              <input type="text" placeholder="完整的机器编号" />
               <view class="text">复制到</view>
-              <input password type="text" placeholder="完整的机器编号" />
+              <input type="text" placeholder="完整的机器编号" />
             </view>
-            <button type="default" class="copy-btn" bindtap="default" hover-class="copy-btn-hover"> 确定 </button>
+            <button type="default" class="copy-btn" bindtap="copy" hover-class="copy-btn-hover"> 确定 </button>
           </view>
         </view>
       </view>
@@ -156,58 +156,50 @@
   </scroll-view>
   <view class="sidebar" style="z-index:{{sidebarZindex}};">
     <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
-      <view class="list1">
-        <view class="menu-header" >前海易购</view>
-        <block wx:for-items="{{grouplist1}}" wx:key="index">
-          <view id="{{index}}" class="item {{activeList1 == index ? 'activeList1' : ''}}" bindtap="groupList1Click">
-            <view class="grouplist1-title">
-              <view class="icon" hidden="{{activeList1 != index}}">
-                <image src="../../img/downIcon.png">
-                </image>
-              </view>
-              {{item}}
-            </view>
-          </view>
-          <view class="list1-selete" hidden="{{activeList1 != index}}" >
-            <block wx:for-items="{{grouplist1Selete}}" wx:key="index">
-              <view id="{{index}}" class="item {{activeList1 == list1 && activeList1Selete == index ? 'activeSelete' : ''}}" bindtap="list1seleteClick">
-                <view class="grouplist1-title">
-                  {{item}}
-                </view>
-              </view>
-            </block>
-          </view>
-        </block>
+      <view class="grouplist-header" data-level="{{grouplist.level}}">{{grouplist.name}}
+        <view class="sidebarbtn">
+          <button type="default" hover-class="hover" bindtap="grouplistBack" plain="true">确定</button>
+        </view>
       </view>
-      <view class="list2">
-        <block wx:for-items="{{grouplist2}}" wx:key="index">
-          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete != item }}">
-            <block wx:for-items="{{grouplist2item}}" wx:key="index">
-              <view id="{{index}}" class="item {{activeList2 == index ? 'active' : ''}}" bindtap="groupList2Click">
-                <view class="grouplist2-title">
-                  {{item}}
-                </view>
-              </view>
+      <view class="grouplist-wrap">
+        <scroll-view scroll-y="true" class="list2">
+          <view>
+            <block wx:for-items="{{grouplist2}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList2 == index ? 'active' : ''}}" bindtap="list2Click">{{item.name}}</view>
             </block>
           </view>
-        </block>
-      </view>
-      <view class="list3">
-        <block wx:for-items="{{grouplist3}}" wx:key="index">
-          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete + activeList2 != item }}">
-            <block wx:for-items="{{grouplist3item}}" wx:key="index">
-              <view id="{{index}}" class="item {{activeList3 == index && groupList3Color == true  ? 'active' : ''}}" data-item="{{item}}" bindtap="groupList3Click">
-                <view class="grouplist3-title">
-                  {{item}}
-                </view>
-              </view>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="list3">
+          <view>
+            <block wx:for-items="{{grouplist3}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList3 == index ? 'active' : ''}}" bindtap="list3Click">{{item.name}}</view>
             </block>
           </view>
-        </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="list4">
+          <view>
+            <block wx:for-items="{{grouplist4}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList4 == index ? 'active' : ''}}" bindtap="list4Click">{{item.name}}</view>
+            </block>
+          </view>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="list5">
+          <view>
+            <block wx:for-items="{{grouplist5}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList5 == index ? 'active' : ''}}" bindtap="list5Click">{{item.name}}</view>
+            </block>
+          </view>
+        </scroll-view>
       </view>
     </view>
+    
     <view class="equipment-menu" wx:if="{{equipmentMenu}}" style="opacity:{{equipmentlistOpacity}};transform:{{equipmentlistTransform}};">
       <view class="header">设备选择</view>
+      <view class="sidebarbtn">
+        <button type="default" hover-class="hover" bindtap="equipmentBack" plain="true">确定</button>
+        <button type="default" hover-class="hover" bindtap="allCheckbox" plain="true">全选</button>
+      </view>
+
       <!-- CheckboxGroup容器 -->
       <view class="lxCheckboxGroup">
         <block wx:for-items="{{equipmentItems}}" wx:key="index">
@@ -220,5 +212,3 @@
     </view>
   </view>
 </view>
-<import src="/templates/tabbar.wxml" />
-<template is="TABBAR" data="{{tabbar,tabbarIndex}}"/>

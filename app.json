@@ -5,7 +5,8 @@
     "pages/operate/operate",
     "pages/form/form",
     "pages/login/login",
-    "pages/operateLogin/operateLogin"
+    "pages/operateLogin/operateLogin",
+    "pages/groupForm/groupForm"
   ],
 
     "window": {
@@ -14,5 +15,38 @@
         "navigationBarTextStyle": "#fff",
         "backgroundColor": "#000",
         "navigationBarBackgroundColor": "#000"
+    },
+     "tabBar": {
+        "backgroundColor": "#fcfcfc",
+        "color": "#7F8389",
+        "selectedColor": "#348fe2",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "./img/home.png",
+                "selectedIconPath": "./img/home-active.png",
+                "text": "主页"
+            },
+            {
+                "pagePath": "pages/operate/operate",
+                "iconPath": "./img/operate.png",
+                "selectedIconPath": "./img/operate-active.png",
+                "text": "运营"
+            },
+            {
+                "pagePath": "pages/form/form",
+                "iconPath": "./img/form.png",
+                "selectedIconPath": "./img/form-active.png",
+                "text": "报表"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "iconPath": "./img/my.png",
+                "selectedIconPath": "./img/my-active.png",
+                "text": "我的"
+            }
+        ]
     }
+  
 }

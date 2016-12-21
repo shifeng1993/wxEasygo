@@ -4,21 +4,18 @@
   position: relative;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  height: 91%;
+  height: 100%;
 }
 
 .index {
   height: auto;
-  min-height: 93.4%;
-  width: 90%;
+  min-height: 95%;
+  width: 92%;
   background: #d9e0e7;
-  padding: 5%;
+  padding: 4%;
   position: relative;
   transition: all 0.25s;
   z-index: 10;
-  overflow-x: hidden;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  overflow-y: auto;
 }
 
 .index .h1 {
@@ -93,7 +90,7 @@
   color: #fff;
   position: absolute;
   right: 30rpx;
-  top: 50rpx;
+  top: 30rpx;
   opacity: 0.2;
   filter: alpha(opacity=20);
 }
@@ -104,10 +101,6 @@
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
-}
-
-.index .stats-info {
-  padding-top: 20rpx;
 }
 
 .index .stats-info-title {
@@ -134,7 +127,7 @@
 
 .index .stats-link .link {
   display: block;
-  margin: 15px -15px -15px;
+  margin: 10px -15px -15px;
   padding: 7px 15px;
   background: rgba(0, 0, 0, 0.6);
   text-align: right;

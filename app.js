@@ -33,33 +33,5 @@ App({
 
   appDate: {
     userInfo: null
-
-  },
-  tabbar: [
-    {
-      "pagePath": "/pages/index/index",
-      "iconPath": "/img/home.png",
-      "selectedIconPath": "/img/home-active.png",
-      "text": "主页",
-      "selectedColor": "#3a91df"
-    },
-    {
-      "pagePath": "/pages/operate/operate",
-      "iconPath": "/img/operate.png",
-      "selectedIconPath": "/img/operate-active.png",
-      "text": "运营"
-    },
-    {
-      "pagePath": "/pages/form/form",
-      "iconPath": "/img/form.png",
-      "selectedIconPath": "/img/form-active.png",
-      "text": "报表"
-    },
-    {
-      "pagePath": "/pages/my/my",
-      "iconPath": "/img/my.png",
-      "selectedIconPath": "/img/my-active.png",
-      "text": "我的"
-    }
-  ]
+  }
 })

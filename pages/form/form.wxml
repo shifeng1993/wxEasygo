@@ -19,13 +19,20 @@
               <view class="equipment-title">日期：</view>
               <view class="equipment-val">
                 <view class="picker">
-                  {{equipmentDate}}
+                  <picker mode="date" value="{{equipmentFirstDate}}" start="{{equipmentFirstDateStart}}" end="{{equipmentFirstDateEnd}}" bindchange="equipmentFirstDateChange">
+                    <view class="picker">
+                      {{equipmentFirstDate}}
+                    </view>
+                  </picker>
                 </view>
-              </view>
-              <view class="equipment-btn">
-                <picker mode="date" value="{{equipmentDate}}" start="2010-01-01" end="2030-12-31" bindchange="equipmentDateChange">
-                  <button type="default" class="equipment-btn" catchtap="" hover-class="equipment-btn-hover"> 选择 </button>
-                </picker>
+                <text> ~ </text>
+                <view class="picker">
+                  <picker mode="date" value="{{equipmentLastDate}}" start="{{equipmentLastDateStart}}" end="{{equipmentLastDateEnd}}" bindchange="equipmentLastDateChange">
+                    <view class="picker">
+                      {{equipmentLastDate}}
+                    </view>
+                  </picker>
+                </view>
               </view>
             </view>
             <view class="query">
@@ -40,7 +47,7 @@
               <thead>
                 <tr>
                   <th>设备名称</th>
-                  <th>销量（台）</th>
+                  <th>销量（个）</th>
                   <th>销售额（元）</th>
                 </tr>
               </thead>
@@ -61,34 +68,43 @@
                   <td>Table cell</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td>合计</td>
+                  <td>213</td>
+                  <td>421412</td>
+                </tr>
+              </tfoot>
             </table>
-          </view>
-          <view class="total">
-            设备总销售额：
-            <view class="total-info">{{equipmentTotal}}元</view>
           </view>
         </view>
         <view class="tab-card" hidden="{{activeIndex != 1}}">
           <view class="search">
-             <view class="group-key">组织：
+            <view class="group-key">组织：
               <view class="group-val">{{group}}</view>
               <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
             </view>
-             <view class="machine-key">机器编号：
-             <input type="text" placeholder="输入机器编号" class="machine-val"/>
-             
+            <view class="machine-key">机器编号：
+              <input type="text" placeholder="输入机器编号" class="machine-val" />
             </view>
-            <view class="equipment-key">
-              <view class="equipment-title">日期：</view>
-              <view class="equipment-val">
+            <view class="group-key">
+              <view class="group-title">日期：</view>
+              <view class="group-val">
                 <view class="picker">
-                  {{goodsDate}}
+                  <picker mode="date" value="{{groupFirstDate}}" start="{{groupFirstDateStart}}" end="{{groupFirstDateEnd}}" bindchange="groupFirstDateChange">
+                    <view class="picker">
+                      {{groupFirstDate}}
+                    </view>
+                  </picker>
                 </view>
-              </view>
-              <view class="equipment-btn">
-                <picker mode="date" value="{{goodsDate}}" start="2010-01-01" end="2030-12-31" bindchange="goodsDateChange">
-                  <button type="default" class="equipment-btn" catchtap="" hover-class="equipment-btn-hover"> 选择 </button>
-                </picker>
+                <text> ~ </text>
+                <view class="picker">
+                  <picker mode="date" value="{{groupLastDate}}" start="{{groupLastDateStart}}" end="{{groupLastDateEnd}}" bindchange="groupLastDateChange">
+                    <view class="picker">
+                      {{groupLastDate}}
+                    </view>
+                  </picker>
+                </view>
               </view>
             </view>
             <view class="query">
@@ -103,7 +119,7 @@
               <thead>
                 <tr>
                   <th>产品名称</th>
-                  <th>产品销量（个）</th>
+                  <th>销量（个）</th>
                   <th>销售额（元）</th>
                 </tr>
               </thead>
@@ -124,11 +140,14 @@
                   <td>Table cell</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td>合计</td>
+                  <td>213</td>
+                  <td>421412</td>
+                </tr>
+              </tfoot>
             </table>
-          </view>
-          <view class="total">
-            产品总销售额：
-            <view class="total-info">{{goodsTotal}}元</view>
           </view>
         </view>
         <view class="tab-card" hidden="{{activeIndex != 2}}">
@@ -147,58 +166,49 @@
   </scroll-view>
   <view class="sidebar" style="z-index:{{sidebarZindex}};">
     <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
-      <view class="list1">
-        <view class="menu-header">前海易购</view>
-        <block wx:for-items="{{grouplist1}}" wx:key="index">
-          <view id="{{index}}" class="item {{activeList1 == index ? 'activeList1' : ''}}" bindtap="groupList1Click">
-            <view class="grouplist1-title">
-              <view class="icon" hidden="{{activeList1 != index}}">
-                <image src="../../img/downIcon.png">
-                </image>
-              </view>
-              {{item}}
-            </view>
-          </view>
-          <view class="list1-selete" hidden="{{activeList1 != index}}">
-            <block wx:for-items="{{grouplist1Selete}}" wx:key="index">
-              <view id="{{index}}" class="item {{activeList1 == list1 && activeList1Selete == index ? 'activeSelete' : ''}}" bindtap="list1seleteClick">
-                <view class="grouplist1-title">
-                  {{item}}
-                </view>
-              </view>
-            </block>
-          </view>
-        </block>
+      <view class="grouplist-header" data-level="{{grouplist.level}}">{{grouplist.name}}
+        <view class="sidebarbtn">
+          <button type="default" hover-class="hover" bindtap="grouplistBack" plain="true">确定</button>
+        </view>
       </view>
-      <view class="list2">
-        <block wx:for-items="{{grouplist2}}" wx:key="index">
-          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete != item }}">
-            <block wx:for-items="{{grouplist2item}}" wx:key="index">
-              <view id="{{index}}" class="item {{activeList2 == index ? 'active' : ''}}" bindtap="groupList2Click">
-                <view class="grouplist2-title">
-                  {{item}}
-                </view>
-              </view>
+      <view class="grouplist-wrap">
+        <scroll-view scroll-y="true" class="list2">
+          <view>
+            <block wx:for-items="{{grouplist2}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList2 == index ? 'active' : ''}}" bindtap="list2Click">{{item.name}}</view>
             </block>
           </view>
-        </block>
-      </view>
-      <view class="list3">
-        <block wx:for-items="{{grouplist3}}" wx:key="index">
-          <view id="{{index}}" class="list-wrap" hidden="{{activeList1 + activeList1Selete + activeList2 != item }}">
-            <block wx:for-items="{{grouplist3item}}" wx:key="index">
-              <view id="{{index}}" class="item {{activeList3 == index && groupList3Color == true  ? 'active' : ''}}" data-item="{{item}}" bindtap="groupList3Click">
-                <view class="grouplist3-title">
-                  {{item}}
-                </view>
-              </view>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="list3">
+          <view>
+            <block wx:for-items="{{grouplist3}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList3 == index ? 'active' : ''}}" bindtap="list3Click">{{item.name}}</view>
             </block>
           </view>
-        </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="list4">
+          <view>
+            <block wx:for-items="{{grouplist4}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList4 == index ? 'active' : ''}}" bindtap="list4Click">{{item.name}}</view>
+            </block>
+          </view>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="list5">
+          <view>
+            <block wx:for-items="{{grouplist5}}" wx:key="index">
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList5 == index ? 'active' : ''}}" bindtap="list5Click">{{item.name}}</view>
+            </block>
+          </view>
+        </scroll-view>
       </view>
     </view>
+    
     <view class="equipment-menu" wx:if="{{equipmentMenu}}" style="opacity:{{equipmentlistOpacity}};transform:{{equipmentlistTransform}};">
       <view class="header">设备选择</view>
+      <view class="sidebarbtn">
+        <button type="default" hover-class="hover" bindtap="equipmentBack" plain="true">确定</button>
+        <button type="default" hover-class="hover" bindtap="allCheckbox" plain="true">全选</button>
+      </view>
 
       <!-- CheckboxGroup容器 -->
       <view class="lxCheckboxGroup">
@@ -212,5 +222,3 @@
     </view>
   </view>
 </view>
-<import src="/templates/tabbar.wxml" />
-<template is="TABBAR" data="{{tabbar,tabbarIndex}}" />

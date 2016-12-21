@@ -1,24 +1,17 @@
-// pages/operateLogin/operateLogin.js
+// pages/groupForm/groupForm.js
 Page({
   data: {
-    operateLogin: true,
-    equipmentOperate: false,
-    equipmentNumber:'EGZS0300611'
+    array: ['是', '否'],
+    index: 0,
   },
-
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
   },
-  operateLogin(e) {
+  sale: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      operateLogin: false,
-      equipmentOperate: true
-    });
-  },
-    groupForm:function(e){
-    wx.navigateTo({
-        url: "/pages/groupForm/groupForm"
-      });
+      index: e.detail.value
+    })
   },
   onReady: function () {
     // 页面渲染完成
