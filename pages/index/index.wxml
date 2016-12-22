@@ -25,7 +25,7 @@
     <view class="list">
 
       <!--wrap1 start-->
-      <view class="list-wrap">
+      <view class="list-wrap" bindtap="link1">
 
         <!--widget start-->
         <view class="widget bg-green">
@@ -37,7 +37,7 @@
             <view class="p">3,291,922</view>
           </view>
           <view class="stats-link">
-            <view class="link" bindtap="link1"> 查看详情
+            <view class="link"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>
@@ -49,7 +49,7 @@
       <!--wrap1 end-->
 
       <!--wrap2 start-->
-      <view class="list-wrap">
+      <view class="list-wrap" bindtap="link2">
 
         <!--widget start-->
         <view class="widget bg-blue">
@@ -61,7 +61,7 @@
             <view class="p">3,291,922</view>
           </view>
           <view class="stats-link">
-            <view class="link"  bindtap="link2"> 查看详情
+            <view class="link"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>
@@ -73,7 +73,7 @@
       <!--wrap2 end-->
 
       <!--wrap3 start-->
-      <view class="list-wrap">
+      <view class="list-wrap" bindtap="link3">
 
         <!--widget start-->
         <view class="widget bg-red">
@@ -85,7 +85,7 @@
             <view class="p">3,291,922</view>
           </view>
           <view class="stats-link">
-            <view class="link"  bindtap="link3"> 查看详情
+            <view class="link"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>
@@ -97,7 +97,7 @@
       <!--wrap3 end-->
 
       <!--wrap4 start-->
-      <view class="list-wrap">
+      <view class="list-wrap" bindtap="link4">
 
         <!--widget start-->
         <view class="widget bg-purple">
@@ -109,7 +109,7 @@
             <view class="p">3,291,922</view>
           </view>
           <view class="stats-link">
-            <view class="link"  bindtap="link4"> 查看详情
+            <view class="link"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>
