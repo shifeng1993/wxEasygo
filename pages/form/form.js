@@ -157,8 +157,6 @@ Page({
             success: function (res) {
                 _this.setData({
                     sliderLeft: (res.windowWidth / _this.data.tabs.length - sliderWidth) / 2,
-                    menuTop: (res.windowHeight / _this.data.grouplist1.length - menuHeight) / 2,
-
                 });
             }
         });
