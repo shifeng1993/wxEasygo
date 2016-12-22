@@ -16,19 +16,19 @@
   position: relative;
   transition: all 0.25s;
   z-index: 10;
+    overflow-x: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
 }
 
 .index .h1 {
-  font-weight: 500;
   color: #242a30;
-  font-size: 48rpx;
-  margin: 0 0 40rpx;
+  margin: 0 0 20rpx;
   padding: 0;
-  /*border: none;/dd*/
-  line-height: 56rpx;
-  font-family: inherit;
+  font-size: 32rpx;
+  line-height: 90rpx;
+  text-align: center;
 }
-
 .index .h1 .small {
   display: inline;
   font-size: 28rpx;
@@ -38,8 +38,8 @@
 
 .operate-login {
   position: absolute;
-  top: 30rpx;
-  right: 30rpx;
+  top: 0rpx;
+  right: 0rpx;
   width: 80rpx;
   height: 100rpx;
   text-align: center;

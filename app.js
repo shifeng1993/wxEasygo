@@ -33,5 +33,11 @@ App({
 
   appDate: {
     userInfo: null
+  },
+  form: {
+    activeIndex: null
+  },
+  operate:{
+    activeIndex: null
   }
 })

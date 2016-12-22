@@ -17,6 +17,7 @@
   overflow-x: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
+  font-size: 32rpx;
 }
 
 .index .tab-wrap {
@@ -52,13 +53,13 @@
   border-radius: 4px 4px 0 0;
   position: relative;
   display: inline-block;
-  font-size: 15px;
   max-width: 8em;
   width: auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
+  font-size: 32rpx;
 }
 
 .index .navbar .active {
@@ -216,7 +217,7 @@ view {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding:100rpx 0;
   box-sizing: border-box;
 }
 

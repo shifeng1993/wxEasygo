@@ -17,6 +17,7 @@
   overflow-x: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
+  font-size: 32rpx;
 }
 
 .index .tab-wrap {
@@ -52,7 +53,7 @@
   border-radius: 4px 4px 0 0;
   position: relative;
   display: inline-block;
-  font-size: 15px;
+  font-size: 32rpx;
   max-width: 8em;
   width: auto;
   overflow: hidden;
@@ -114,13 +115,18 @@
 .search .equipment-val text,.search .group-val text{
   display: inline-block;
   vertical-align: top;
-  margin: 0 30rpx;
+  margin: 0 20rpx;
 }
 .search .equipment-title,.search .group-title{
   vertical-align: top;
   overflow: hidden;
 }
 
+.equipment-val .val,.group-val .val{
+  border: 1rpx solid #bbb;
+  border-radius: 10rpx;
+  padding: 2rpx 10rpx;
+}
 
 .search .group-btn, .search .equipment-btn {
   width: 160rpx;
@@ -225,7 +231,6 @@
 }
 
 .copy {
-  height: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;

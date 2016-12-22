@@ -12,23 +12,24 @@
         <view class="tab-card" hidden="{{activeIndex != 0}}">
           <view class="search">
             <view class="group-key">组织：
-              <view class="group-val">{{group}}</view>
+              <view class="group-val">{{equipment}}</view>
               <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
             </view>
             <view class="equipment-key">
               <view class="equipment-title">日期：</view>
               <view class="equipment-val">
+                <text>从</text>
                 <view class="picker">
                   <picker mode="date" value="{{equipmentFirstDate}}" start="{{equipmentFirstDateStart}}" end="{{equipmentFirstDateEnd}}" bindchange="equipmentFirstDateChange">
-                    <view class="picker">
+                    <view class="val">
                       {{equipmentFirstDate}}
                     </view>
                   </picker>
                 </view>
-                <text> ~ </text>
+                <text>到</text>
                 <view class="picker">
                   <picker mode="date" value="{{equipmentLastDate}}" start="{{equipmentLastDateStart}}" end="{{equipmentLastDateEnd}}" bindchange="equipmentLastDateChange">
-                    <view class="picker">
+                    <view class="val">
                       {{equipmentLastDate}}
                     </view>
                   </picker>
@@ -81,7 +82,7 @@
         <view class="tab-card" hidden="{{activeIndex != 1}}">
           <view class="search">
             <view class="group-key">组织：
-              <view class="group-val">{{group}}</view>
+              <view class="group-val">{{goods}}</view>
               <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
             </view>
             <view class="machine-key">机器编号：
@@ -90,17 +91,18 @@
             <view class="group-key">
               <view class="group-title">日期：</view>
               <view class="group-val">
+                <text>从</text>
                 <view class="picker">
                   <picker mode="date" value="{{groupFirstDate}}" start="{{groupFirstDateStart}}" end="{{groupFirstDateEnd}}" bindchange="groupFirstDateChange">
-                    <view class="picker">
+                    <view class="val">
                       {{groupFirstDate}}
                     </view>
                   </picker>
                 </view>
-                <text> ~ </text>
+                <text>到</text>
                 <view class="picker">
                   <picker mode="date" value="{{groupLastDate}}" start="{{groupLastDateStart}}" end="{{groupLastDateEnd}}" bindchange="groupLastDateChange">
-                    <view class="picker">
+                    <view class="val">
                       {{groupLastDate}}
                     </view>
                   </picker>
@@ -168,7 +170,8 @@
     <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
       <view class="grouplist-header" data-level="{{grouplist.level}}">{{grouplist.name}}
         <view class="sidebarbtn">
-          <button type="default" hover-class="hover" bindtap="grouplistBack" plain="true">确定</button>
+          <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="1" plain="true">确定</button>
+          <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="0" plain="true">取消</button>
         </view>
       </view>
       <view class="grouplist-wrap">
@@ -202,7 +205,6 @@
         </scroll-view>
       </view>
     </view>
-    
     <view class="equipment-menu" wx:if="{{equipmentMenu}}" style="opacity:{{equipmentlistOpacity}};transform:{{equipmentlistTransform}};">
       <view class="header">设备选择</view>
       <view class="sidebarbtn">

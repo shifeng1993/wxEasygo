@@ -158,7 +158,8 @@
     <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
       <view class="grouplist-header" data-level="{{grouplist.level}}">{{grouplist.name}}
         <view class="sidebarbtn">
-          <button type="default" hover-class="hover" bindtap="grouplistBack" plain="true">确定</button>
+          <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="1" plain="true">确定</button>
+          <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="0" plain="true">取消</button>
         </view>
       </view>
       <view class="grouplist-wrap">
@@ -192,7 +193,6 @@
         </scroll-view>
       </view>
     </view>
-    
     <view class="equipment-menu" wx:if="{{equipmentMenu}}" style="opacity:{{equipmentlistOpacity}};transform:{{equipmentlistTransform}};">
       <view class="header">设备选择</view>
       <view class="sidebarbtn">

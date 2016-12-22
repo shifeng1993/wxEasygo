@@ -1,21 +1,36 @@
 <view class="container">
   <view class="index">
-    <view class="header">商品详情修改</view>
+    <view class="header">商品详情</view>
     <view class="number">
-      <text>货到编号：</text>
-      <input type="text" />
+      <text>货道编号：</text>
+      <text class="flex-2">{{number}}</text>
     </view>
     <view class="name">
       <text>商品名称：</text>
-      <input type="text" />
+      <view class="picker">
+        {{name[nameindex]}}
+      </view>
+      <picker bindchange="name" value="{{nameindex}}" range="{{name}}">
+        <button type="default" class="color-black">选择</button>
+      </picker>
     </view>
     <view class="brand">
       <text>商品品牌：</text>
-      <input type="text" />
+      <view class="picker">
+        {{brand[brandindex]}}
+      </view>
+      <picker bindchange="brand" value="{{brandindex}}" range="{{brand}}">
+        <button type="default" class="color-black">选择</button>
+      </picker>
     </view>
     <view class="norms">
       <text>商品规格：</text>
-      <input type="text" />
+      <view class="picker">
+        {{norms[normsindex]}}
+      </view>
+      <picker bindchange="norms" value="{{normsindex}}" range="{{norms}}">
+        <button type="default" class="color-black">选择</button>
+      </picker>
     </view>
     <view class="price">
       <text>销售价(元)：</text>
@@ -27,10 +42,11 @@
     </view>
     <view class="sale">
       <text>是否销售：</text>
-      <picker bindchange="sale" value="{{index}}" range="{{array}}">
-        <view class="picker">
-      {{array[index]}}
-        </view>
+      <view class="picker">
+        {{sale[saleindex]}}
+      </view>
+      <picker bindchange="sale" value="{{saleindex}}" range="{{sale}}">
+        <button type="default" class="color-black">选择</button>
       </picker>
     </view>
     <view class="defaultStock">
@@ -38,7 +54,7 @@
       <input type="text" />
     </view>
     <view>
-      <button type="default" class="bg-green" hover-class="bg-green-hover">重置</button>
+      <button type="default" class="bg-gary color-black" hover-class="bg-gary-hover" bindtap="cancle">取消</button>
       <button type="default" class="bg-blue" hover-class="bg-blue-hover">确认</button>
     </view>
   </view>

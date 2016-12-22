@@ -1,8 +1,6 @@
 // pages/operateLogin/operateLogin.js
 Page({
   data: {
-    operateLogin: true,
-    equipmentOperate: false,
     equipmentNumber:'EGZS0300611'
   },
 

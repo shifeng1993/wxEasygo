@@ -7,19 +7,6 @@
   font-size: 32rpx;
 }
 
-.operateLogin {
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  flex-direction: column;
-  align-items: center;
-  width: 92%;
-  height: 50%;
-  text-align: center;
-}
 
 .equipmentOperate {
   height: auto;
@@ -32,10 +19,6 @@
   overflow-x: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
-}
-
-.operateLogin .title {
-  font-size: 48rpx;
 }
 
 .text, .btn {
@@ -69,16 +52,18 @@
 .equipmentName, .equipmentBtn, .equipmentNumber, equipmentFill {
   width: 100%;
   height: 100rpx;
+  display: flex;
 }
 
 .equipmentName text {
-  display: inline-block;
+  flex: 1;
   vertical-align: top;
   width: 25%;
   line-height: 100rpx;
 }
 
 .equipmentName input {
+  flex: 3;
   width: 60%;
   display: inline-block;
   border: 2rpx solid #ddd;

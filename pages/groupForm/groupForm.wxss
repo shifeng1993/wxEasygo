@@ -39,9 +39,25 @@
   margin: 20rpx 0;
   font-size: 28rpx;
 }
+.index view .picker{
+flex: 1;
+line-height: 100rpx;
+  display: inline;
+}
 .index view picker{
-flex: 2;
-  margin: 28rpx 0;
+  flex: 1;
+  position: relative;
+}
+.index view picker button{
+  position: absolute;
+  right: 0;
+width: 120rpx;
+height: 60rpx;
+line-height: 60rpx;
+font-size: 28rpx;
+margin-top: 20rpx;
+margin-right: 0rpx;
+padding: 0;
 }
 .index view button{
      flex: 1;

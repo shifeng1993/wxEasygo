@@ -31,7 +31,7 @@ Page({
       var y = dd.getFullYear();
       var m = dd.getMonth() + 1;//获取当前月份的日期
       var d = dd.getDate();
-      return y + "-" + m + "-" + d;
+      return y + "年" + m + "月" + d + "日";
     }
     this.setData({
       lastDate: GetDateStr(-1),
@@ -47,9 +47,39 @@ Page({
     //   wx.hideToast()
     // }, 100)
   },
-  operateLogin:function(e){
+  operateLogin: function (e) {
+    // wx.scanCode({
+    //   success: (res) => {
+    //     console.log(res)
+    //   }
+    // })
     wx.navigateTo({
-        url: "/pages/operateLogin/operateLogin"
-      });
-  }
+      url: "/pages/operateLogin/operateLogin"
+    });
+  },
+  // 以下是跳转tabbar
+  link1: function () {
+    wx.switchTab({
+      url: '/pages/form/form'
+    })
+    app.form.activeIndex = "0"
+  },
+  link2: function () {
+    wx.switchTab({
+      url: '/pages/form/form'
+    })
+    app.form.activeIndex = "1"
+  },
+  link3: function () {
+     wx.switchTab({
+      url: '/pages/operate/operate'
+    })
+    app.operate.activeIndex = "1"
+  },
+  link4: function () {
+     wx.switchTab({
+      url: '/pages/operate/operate'
+    })
+    app.operate.activeIndex = "0"
+  },
 })

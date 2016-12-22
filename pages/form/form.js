@@ -24,7 +24,7 @@ Page({
         group: '',
         groupMenu: false,
         equipmentMenu: false,
-        equipment: "大梅沙二号机",
+        equipment: '',
         lack: "11",
         nogoods: "32",
         indexleft: "",
@@ -161,7 +161,15 @@ Page({
             }
         });
     },
-  // tab切换以及ui侧滑出
+    onShow: function () {
+        let _this=this;
+        if (app.form.activeIndex != null) {
+            _this.setData({
+                activeIndex: app.form.activeIndex,
+            })
+        }
+    },
+    // tab切换以及ui侧滑出
     tabClick: function (e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
@@ -208,14 +216,16 @@ Page({
             equipmentlistOpacity: "0",
             equipmentlistTransform: "translateX(100rpx)",
         });
-        if (this.data.activeIndex === "0") {
-            this.setData({
-                group: this.data.groupValues
-            });
-        } else {
-            this.setData({
-                offline: this.data.groupValues
-            });
+        if (e.currentTarget.dataset.back != 0) {
+            if (this.data.activeIndex === "0") {
+                this.setData({
+                    equipment: this.data.groupValues
+                });
+            } else {
+                this.setData({
+                    goods: this.data.groupValues
+                });
+            }
         }
     },
     equipmentBack: function (e) {
@@ -230,7 +240,7 @@ Page({
         });
     },
 
- offlineGroup: function (e) {
+    offlineGroup: function (e) {
         this.setData({
             indexleft: "translateX(100%)",
             groupMenu: true,

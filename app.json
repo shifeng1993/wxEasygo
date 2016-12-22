@@ -8,6 +8,7 @@
     "pages/operateLogin/operateLogin",
     "pages/groupForm/groupForm"
   ],
+  
 
     "window": {
         "backgroundTextStyle": "dark",

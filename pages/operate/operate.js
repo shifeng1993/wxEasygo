@@ -137,6 +137,14 @@ Page({
             }
         });
     },
+        onShow: function () {
+        let _this=this;
+        if (app.operate.activeIndex != null) {
+            _this.setData({
+                activeIndex: app.operate.activeIndex,
+            })
+        }
+    },
 
     // tab切换以及ui侧滑出
     tabClick: function (e) {
@@ -185,14 +193,16 @@ Page({
             equipmentlistOpacity: "0",
             equipmentlistTransform: "translateX(100rpx)",
         });
-        if (this.data.activeIndex === "0") {
-            this.setData({
-                group: this.data.groupValues
-            });
-        } else {
-            this.setData({
-                offline: this.data.groupValues
-            });
+        if (e.currentTarget.dataset.back != 0) {
+            if (this.data.activeIndex === "0") {
+                this.setData({
+                    group: this.data.groupValues
+                });
+            } else {
+                this.setData({
+                    offline: this.data.groupValues
+                });
+            }
         }
     },
     equipmentBack: function (e) {
