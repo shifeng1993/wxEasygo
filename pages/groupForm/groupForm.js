@@ -6,7 +6,6 @@ Page({
     name: ['冰峰', '可乐'],
     brand: ['可口可乐', '美年达'],
     norms: ['300ml', '500ml'],
-
     saleindex: 0,
     nameindex: 0,
     brandindex: 0,

@@ -9,6 +9,6 @@
     <text>当前绑定用户：{{bindUser}}</text>
   </view>
   <view class="usermotto">
-    <button type="warn" class="" bindtap="warn"> 解绑并退出 </button>
+    <button type="warn" class="" bindtap="removeBind"> 解绑并退出 </button>
   </view>
 </view>

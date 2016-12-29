@@ -82,6 +82,9 @@
   transition: opacity 0.3s linear;
 }
 
+
+
+
 .search .group-key,.search .machine-key,.search .equipment-key {
   color: #000;
   margin: 50rpx 30rpx;
@@ -91,19 +94,9 @@
   text-align: left;
 }
 
-.search .equipment-title,.search .group-title, .search .group-val, .search .machine-val,.search .equipment-val {
+.search .equipment-title,.search .group-title, .search .group-val,.search .equipment-val,.search .machine-title, .search .machine-val {
   display: inline-block;
 }
-.search .machine-val{
-  width: 400rpx;
-  float: right;
-  border: 2rpx solid #bbb;
-  border-radius: 20rpx;
-  background: #fff;
-  padding: 0 20rpx;
-  font-size: 28rpx;
-}
-
 
 .search .equipment-val view,.search .group-val view {
   white-space: nowrap;
@@ -115,9 +108,9 @@
 .search .equipment-val text,.search .group-val text{
   display: inline-block;
   vertical-align: top;
-  margin: 0 20rpx;
+  margin: 0 10rpx;
 }
-.search .equipment-title,.search .group-title{
+.search .equipment-title,.search .group-title,.search .machine-title {
   vertical-align: top;
   overflow: hidden;
 }
@@ -126,15 +119,29 @@
   border: 1rpx solid #bbb;
   border-radius: 10rpx;
   padding: 2rpx 10rpx;
+  font-size: 28rpx;
 }
 
-.search .group-btn, .search .equipment-btn {
-  width: 160rpx;
+.search .machine-val
+view {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+  width: 320rpx;
   height: 50rpx;
-  float: right;
-  font-size: 32rpx;
-  line-height: 50rpx;
 }
+
+.search .group-btn, .search .equipment-btn,.search .machine-btn {
+  width: 120rpx;
+  height: 60rpx;
+  float: right;
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
+
+
+
 
 .search .query {
   font-size: 32rpx;
@@ -143,10 +150,10 @@
 }
 
 .search .query-btn {
-  height: 80rpx;
+  height: 88rpx;
   font-size: 32rpx;
-  line-height: 80rpx;
-  width: 90%;
+  line-height: 88rpx;
+  width: 640rpx;
   color: #fff;
   background: #348fe2;
 }
@@ -359,9 +366,7 @@
   height: 100%;
   display: flex;
 }
-.group-menu .grouplist-wrap .active{
-  color: #fff;
-}
+
 .grouplist-wrap .list2, .grouplist-wrap .list3, .grouplist-wrap .list4,
 .grouplist-wrap .list5 {
   flex: 1;
@@ -369,6 +374,22 @@
   overflow-x: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
+   font-size: 32rpx;
+}
+.group-menu .grouplist-item{
+  color: #bbb;
+  text-align: left;
+  padding: 5rpx 10rpx;
+}
+.group-menu .grouplist-wrap .active{
+  color: #fff;
+  border: 1px solid #393a3f;
+  border-radius: 10rpx;
+  background: #242a30;
+  background-image: url("../../img/rightIcon.png");
+  background-repeat:no-repeat;
+  background-position: center right;
+  background-size: 28rpx;
 }
 
 

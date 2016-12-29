@@ -25,6 +25,7 @@ Page({
         groupMenu: false,
         equipmentMenu: false,
         equipment: '',
+        machine: '',
         lack: "11",
         nogoods: "32",
         indexleft: "",
@@ -138,20 +139,12 @@ Page({
 
             })
         })()
-        function GetDateStr(AddDayCount) {
-            var dd = new Date();
-            dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
-            var y = dd.getFullYear();
-            var m = dd.getMonth() + 1;//获取当前月份的日期
-            var d = dd.getDate();
-            return y + "-" + m + "-" + d;
-        };
         this.setData({
-            equipmentFirstDate: GetDateStr(-1),
-            equipmentLastDate: GetDateStr(-1),
-            groupFirstDate: GetDateStr(-1),
-            groupLastDate: GetDateStr(-1),
-            goodsDate: GetDateStr(-1),
+            equipmentFirstDate: app.GetDate(-1),
+            equipmentLastDate: app.GetDate(-1),
+            groupFirstDate: app.GetDate(-1),
+            groupLastDate: app.GetDate(-1),
+            goodsDate: app.GetDate(-1),
         });
         wx.getSystemInfo({
             success: function (res) {
@@ -162,7 +155,7 @@ Page({
         });
     },
     onShow: function () {
-        let _this=this;
+        let _this = this;
         if (app.form.activeIndex != null) {
             _this.setData({
                 activeIndex: app.form.activeIndex,
@@ -236,7 +229,7 @@ Page({
             grouplistTransform: "translateX(100rpx)",
             equipmentlistOpacity: "0",
             equipmentlistTransform: "translateX(100rpx)",
-            equipment: this.data.checkedValues
+            machine: this.data.checkedValues
         });
     },
 
@@ -328,48 +321,53 @@ Page({
     },
     // 以下是grouplist的点击效果
     list2Click: function (e) {
+        let grouplist3 = [];
+        let arr2 = this.data.grouplist.children;
+        let arr3 = arr2[e.currentTarget.id].children;
+        // 添加
         this.setData({
             activeList2: e.currentTarget.id,
             groupValues: e.currentTarget.dataset.name,
-        });
-        let _this = this;
-        let grouplist3 = [];
-        let arr2 = _this.data.grouplist.children;
-        let arr3 = arr2[e.currentTarget.id].children;
-        _this.setData({
             grouplist3: arr3,
+        });
+        // 撤销
+        this.setData({
             grouplist4: [],
             grouplist5: [],
+            activeList3: null,
+            activeList4: null,
+            activeList5: null
         })
     },
     list3Click: function (e) {
+        let grouplist4 = [];
+        let arr2 = this.data.grouplist.children;
+        let arr3 = arr2[this.data.activeList2].children;
+        let arr4 = arr3[e.currentTarget.id].children;
         this.setData({
             activeList3: e.currentTarget.id,
             groupValues: e.currentTarget.dataset.name,
-        });
-        let _this = this;
-        let grouplist4 = [];
-        let arr2 = _this.data.grouplist.children;
-        let arr3 = arr2[this.data.activeList2].children;
-        let arr4 = arr3[e.currentTarget.id].children;
-        _this.setData({
             grouplist4: arr4,
+        });
+        this.setData({
             grouplist5: [],
+            activeList4: null,
+            activeList5: null,
         })
     },
     list4Click: function (e) {
-        this.setData({
-            activeList4: e.currentTarget.id,
-            groupValues: e.currentTarget.dataset.name,
-        });
-        let _this = this;
         let grouplist5 = [];
-        let arr2 = _this.data.grouplist.children;
+        let arr2 = this.data.grouplist.children;
         let arr3 = arr2[this.data.activeList2].children;
         let arr4 = arr3[this.data.activeList3].children;
         let arr5 = arr4[e.currentTarget.id].children;
-        _this.setData({
+        this.setData({
+            activeList4: e.currentTarget.id,
+            groupValues: e.currentTarget.dataset.name,
             grouplist5: arr5,
+        });
+        this.setData({
+            activeList5: null,
         })
     },
     list5Click: function (e) {
@@ -448,17 +446,17 @@ Page({
     groupFirstDateChange: function (e) {
         var _this = this;
         this.setData({
-            equipmentFirstDate: e.detail.value,
-            equipmentLastDateStart: e.detail.value,
-            equipmentLastDateEnd: _this.endDate(e.detail.value),
+            groupFirstDate: e.detail.value,
+            groupLastDateStart: e.detail.value,
+            groupLastDateEnd: _this.endDate(e.detail.value),
         })
     },
     groupLastDateChange: function (e) {
         var _this = this;
         this.setData({
-            equipmentLastDate: e.detail.value,
-            equipmentFirstDateStart: _this.startDate(e.detail.value),
-            equipmentFirstDateEnd: e.detail.value,
+            groupLastDate: e.detail.value,
+            groupFirstDateStart: _this.startDate(e.detail.value),
+            groupFirstDateEnd: e.detail.value,
         })
     },
     goodsDateChange: function (e) {
@@ -466,4 +464,11 @@ Page({
             goodsDate: e.detail.value
         })
     },
+
+    // 以下是发送ajax
+    goodsQuery: function (e) {
+
+    }
+
+
 });

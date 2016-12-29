@@ -4,49 +4,50 @@ var app = getApp()
 Page({
   data: {
     lastDate: '',
-    scanQrcode: '../../img/qrcode.png'
+    scanQrcode: '../../img/qrcode.png',
+    salesAmount: '',
+    salesNumber: '',
+    offlineMachines: '',
+    needFillMachines: '',
   },
-  // ajax: function() {
-  //   wx.request({
-  //     url: 'https://open.easygovm.com/api/v1/machine/machineTypes',
-  //     header: {
-  //         'content-type': 'application/json'
-  //     },
-  //     success: function(res) {
-  //       console.log(res.data)
-  //     }
-  //   })
-  // },
 
   onLoad: function () {
     let _this = this;
-    // if (app.appDate.userInfo == null) {
+    this.setData({
+      lastDate: app.GetDateStr(-1),
+    })
+  },
+  onShow: function () {
+    var _this = this;
+    // if (app.globalData.adminUser == null) {
     //   wx.redirectTo({
     //     url: '/pages/login/login'
     //   })
     // }
-    function GetDateStr(AddDayCount) {
-      var dd = new Date();
-      dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
-      var y = dd.getFullYear();
-      var m = dd.getMonth() + 1;//获取当前月份的日期
-      var d = dd.getDate();
-      return y + "年" + m + "月" + d + "日";
-    }
-    this.setData({
-      lastDate: GetDateStr(-1),
-    })
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      _this.setData({
-        userInfo: userInfo
-      })
-    })
-    // setTimeout(function () {
-    //   wx.hideToast()
-    // }, 100)
+
+    // wx.request({
+    //   url: apiServer + apiVersion + '/rpt/home',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   method: 'GET',
+    //   data: {
+    //     openId: app.globalData.openid
+    //   },
+    //   success: function (res) {
+    //     if (res) {
+    //       _this.setData({
+    //         salesAmount: app.thousandsData(res.salesAmount),
+    //         salesNumber: app.thousandsData(res.salesNumber),
+    //         offlineMachines: app.thousandsData(res.offlineMachines),
+    //         needFillMachines: app.thousandsData(res.needFillMachines),
+    //       })
+    //     }
+    //   }
+    // })
   },
+
+  // 二维码扫描
   operateLogin: function (e) {
     // wx.scanCode({
     //   success: (res) => {
@@ -57,7 +58,8 @@ Page({
       url: "/pages/operateLogin/operateLogin"
     });
   },
-  // 以下是跳转tabbar
+
+  // 以下是index页面card查看详情跳转
   link1: function () {
     wx.switchTab({
       url: '/pages/form/form'
@@ -71,13 +73,13 @@ Page({
     app.form.activeIndex = "1"
   },
   link3: function () {
-     wx.switchTab({
+    wx.switchTab({
       url: '/pages/operate/operate'
     })
     app.operate.activeIndex = "1"
   },
   link4: function () {
-     wx.switchTab({
+    wx.switchTab({
       url: '/pages/operate/operate'
     })
     app.operate.activeIndex = "0"

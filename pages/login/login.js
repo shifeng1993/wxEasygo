@@ -2,43 +2,50 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
     name: '前海易购',
     logo: '/img/logo.png',
-    loginBind: true,
+    username: null,
+    password: null
   },
-  submit: function() {
+
+  // binding提交
+  binding: function () {
+    var _this = this;
     wx.request({
-      url: 'https://open.easygovm.com/api/v1/machine/machineTypes',
+      url: apiServer + apiVersion + '/usr/binding',
       header: {
-          'content-type': 'application/json'
+        'content-type': 'application/json'
       },
-      success: function(res) {
-        console.log(res.data)
+      method: 'POST',
+      data: {
+        openId: app.globalData.openid,
+        username: _this.data.username,
+        password: _this.data.password
+      },
+      success: function (res) {
+        if (res.message === "binding success") {
+          app.globalData.adminUser = _this.data.username
+          wx.redirectTo({
+            url: '/pages/index/index'
+          })
+        }
       }
     })
   },
-  onLoad: function () {
-    console.log('onLoad')
-    var that = this
-    function GetDateStr(AddDayCount) {
-      var dd = new Date();
-      dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
-      var y = dd.getFullYear();
-      var m = dd.getMonth() + 1;//获取当前月份的日期
-      var d = dd.getDate();
-      return y + "-" + m + "-" + d;
-    }
+
+  // inputchange
+  username: function (e) {
     this.setData({
-      lastDate: GetDateStr(-1)
+      username: e.detail.value,
     })
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
+  },
+  password: function (e) {
+    this.setData({
+      password: e.detail.value,
     })
+  },
+  onLoad: function () {
+    //页面初始化完成
   },
   onReady: function () {
     // 页面渲染完成

@@ -37,7 +37,7 @@
               </view>
             </view>
             <view class="query">
-              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
+              <button type="default" class="query-btn" bindtap="machineQuery" hover-class="query-btn-hover">查询</button>
             </view>
           </view>
           <view class="table-title">
@@ -85,8 +85,14 @@
               <view class="group-val">{{goods}}</view>
               <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
             </view>
-            <view class="machine-key">机器编号：
-              <input type="text" placeholder="输入机器编号" class="machine-val" />
+            <view class="machine-key">
+              <view class="machine-title">机器编号：</view>
+              <view class="machine-val">
+                <block wx:for-items="{{machine}}" wx:key="index">
+                  <view>{{item}}</view>
+                </block>
+              </view>
+              <button type="default" class="machine-btn" catchtap="equipmentPatch" hover-class="machine-btn-hover"> 选择 </button>
             </view>
             <view class="group-key">
               <view class="group-title">日期：</view>
@@ -110,7 +116,7 @@
               </view>
             </view>
             <view class="query">
-              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
+              <button type="default" class="query-btn" bindtap="goodsQuery" hover-class="query-btn-hover">查询</button>
             </view>
           </view>
           <view class="table-title">

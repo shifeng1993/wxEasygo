@@ -8,9 +8,9 @@
       <text class="name">{{name}}</text>
     </view>
     <view class="user">
-      <input password type="text" placeholder="请输入后台账号" />
-      <input class="password" password type="text" placeholder="请输入密码" />
-      <button type="primary" bindtap="ajax"> 绑定微信账号 </button>
+      <input type="text" placeholder="请输入后台账号" bindchange="username" />
+      <input class="password" password type="text" placeholder="请输入密码" bindchange="password"/>
+      <button type="primary" bindtap="binding"> 绑定微信账号 </button>
     </view>
   </view>
 </view>

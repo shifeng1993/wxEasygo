@@ -1,13 +1,8 @@
-
-<!--index.wxml-->
 <view class="container">
-
-  <!--index start-->
   <scroll-view scroll-y="true" class="index">
-
-    <!--h1 start -->
     <view class="h1">
-    <text>{{lastDate}}</text>
+      <text>{{lastDate}}</text>
+
       <!--<view class="small">运营一览</view>-->
     </view>
     <view class="operate-login" bindtap="operateLogin">
@@ -18,23 +13,15 @@
         <text>扫一扫</text>
       </view>
     </view>
-
-    <!--h1 end-->
-
-    <!--list start-->
     <view class="list">
-
-      <!--wrap1 start-->
       <view class="list-wrap" bindtap="link1">
-
-        <!--widget start-->
         <view class="widget bg-green">
           <view class="stats-icon">
             <image class="fa money" src="../../img/money.png"></image>
           </view>
           <view class="stats-info">
             <view class="stats-info-title">昨日销售额（元）</view>
-            <view class="p">3,291,922</view>
+            <view class="p">{{salesAmount}}</view>
           </view>
           <view class="stats-link">
             <view class="link"> 查看详情
@@ -42,23 +29,15 @@
             </view>
           </view>
         </view>
-
-        <!--widget end-->
       </view>
-
-      <!--wrap1 end-->
-
-      <!--wrap2 start-->
       <view class="list-wrap" bindtap="link2">
-
-        <!--widget start-->
         <view class="widget bg-blue">
           <view class="stats-icon">
             <image class="fa chart" src="../../img/chart.png"></image>
           </view>
           <view class="stats-info">
             <view class="stats-info-title">昨日销量（个）</view>
-            <view class="p">3,291,922</view>
+            <view class="p">{{salesNumber}}</view>
           </view>
           <view class="stats-link">
             <view class="link"> 查看详情
@@ -66,23 +45,15 @@
             </view>
           </view>
         </view>
-
-        <!--widget end-->
       </view>
-
-      <!--wrap2 end-->
-
-      <!--wrap3 start-->
       <view class="list-wrap" bindtap="link3">
-
-        <!--widget start-->
         <view class="widget bg-red">
           <view class="stats-icon">
             <image class="fa offline" src="../../img/offline.png"></image>
           </view>
           <view class="stats-info">
             <view class="stats-info-title">后台离线设备（台）</view>
-            <view class="p">3,291,922</view>
+            <view class="p">{{offlineMachines}}</view>
           </view>
           <view class="stats-link">
             <view class="link"> 查看详情
@@ -90,23 +61,15 @@
             </view>
           </view>
         </view>
-
-        <!--widget end-->
       </view>
-
-      <!--wrap3 end-->
-
-      <!--wrap4 start-->
       <view class="list-wrap" bindtap="link4">
-
-        <!--widget start-->
         <view class="widget bg-purple">
           <view class="stats-icon">
             <image class="fa setup" src="../../img/setup.png"></image>
           </view>
           <view class="stats-info">
             <view class="stats-info-title">建议补货设备（台）</view>
-            <view class="p">3,291,922</view>
+            <view class="p">{{needFillMachines}}</view>
           </view>
           <view class="stats-link">
             <view class="link"> 查看详情
@@ -114,15 +77,7 @@
             </view>
           </view>
         </view>
-
-        <!--widget end-->
       </view>
-
-      <!--wrap4 end-->
     </view>
-
-    <!--list end-->
   </scroll-view>
-
-  <!--index end-->
 </view>

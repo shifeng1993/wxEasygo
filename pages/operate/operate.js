@@ -1,13 +1,8 @@
-const sliderWidth = 125; // 需要设置slider的宽度，用于计算中间位置
-const menuHeight = 125;
 var app = getApp();
 Page({
     data: {
         tabs: ["补货统计", "离线设备", "设备复制"],
         activeIndex: "0",
-        sliderOffset: 0,
-        sliderLeft: 0,
-        menuTop: 0,
         group: '',
         offline: "",
         groupMenu: false,
@@ -105,14 +100,25 @@ Page({
     // 初始化页面
     onLoad: function () {
         let _this = this;
-        // if (app.appDate.userInfo == null) {
-        //     wx.redirectTo({
-        //         url: '/pages/login/login'
-        //     })
-        // }
+        wx.request({
+            url: apiServer + apiVersion + '/orgs',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            method: 'GET',
+            data: {
+                openId: app.globalData.openid
+            },
+            success: function (res) {
+                if (res) {
+                   _this.setData({
+                       grouplist:res
+                   })
+                }
+            }
+        });
 
         // 这是sidebar菜单
-
         (function () {
             let grouplist2 = [];
             let arr2 = _this.data.grouplist.children
@@ -124,21 +130,11 @@ Page({
             }
             _this.setData({
                 grouplist2: grouplist2,
-
             })
         })()
-
-        wx.getSystemInfo({
-            success: function (res) {
-                _this.setData({
-                    sliderLeft: (res.windowWidth / _this.data.tabs.length - sliderWidth) / 2,
-
-                });
-            }
-        });
     },
-        onShow: function () {
-        let _this=this;
+    onShow: function () {
+        let _this = this;
         if (app.operate.activeIndex != null) {
             _this.setData({
                 activeIndex: app.operate.activeIndex,
@@ -149,7 +145,6 @@ Page({
     // tab切换以及ui侧滑出
     tabClick: function (e) {
         this.setData({
-            sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id,
         });
     },
@@ -311,48 +306,53 @@ Page({
     },
     // 以下是grouplist的点击效果
     list2Click: function (e) {
+        let grouplist3 = [];
+        let arr2 = this.data.grouplist.children;
+        let arr3 = arr2[e.currentTarget.id].children;
+        // 添加
         this.setData({
             activeList2: e.currentTarget.id,
             groupValues: e.currentTarget.dataset.name,
-        });
-        let _this = this;
-        let grouplist3 = [];
-        let arr2 = _this.data.grouplist.children;
-        let arr3 = arr2[e.currentTarget.id].children;
-        _this.setData({
             grouplist3: arr3,
+        });
+        // 撤销
+        this.setData({
             grouplist4: [],
             grouplist5: [],
+            activeList3: null,
+            activeList4: null,
+            activeList5: null
         })
     },
     list3Click: function (e) {
+        let grouplist4 = [];
+        let arr2 = this.data.grouplist.children;
+        let arr3 = arr2[this.data.activeList2].children;
+        let arr4 = arr3[e.currentTarget.id].children;
         this.setData({
             activeList3: e.currentTarget.id,
             groupValues: e.currentTarget.dataset.name,
-        });
-        let _this = this;
-        let grouplist4 = [];
-        let arr2 = _this.data.grouplist.children;
-        let arr3 = arr2[this.data.activeList2].children;
-        let arr4 = arr3[e.currentTarget.id].children;
-        _this.setData({
             grouplist4: arr4,
+        });
+        this.setData({
             grouplist5: [],
+            activeList4: null,
+            activeList5: null,
         })
     },
     list4Click: function (e) {
-        this.setData({
-            activeList4: e.currentTarget.id,
-            groupValues: e.currentTarget.dataset.name,
-        });
-        let _this = this;
         let grouplist5 = [];
-        let arr2 = _this.data.grouplist.children;
+        let arr2 = this.data.grouplist.children;
         let arr3 = arr2[this.data.activeList2].children;
         let arr4 = arr3[this.data.activeList3].children;
         let arr5 = arr4[e.currentTarget.id].children;
-        _this.setData({
+        this.setData({
+            activeList4: e.currentTarget.id,
+            groupValues: e.currentTarget.dataset.name,
             grouplist5: arr5,
+        });
+         this.setData({
+            activeList5: null,
         })
     },
     list5Click: function (e) {

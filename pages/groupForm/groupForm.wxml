@@ -5,15 +5,7 @@
       <text>货道编号：</text>
       <text class="flex-2">{{number}}</text>
     </view>
-    <view class="name">
-      <text>商品名称：</text>
-      <view class="picker">
-        {{name[nameindex]}}
-      </view>
-      <picker bindchange="name" value="{{nameindex}}" range="{{name}}">
-        <button type="default" class="color-black">选择</button>
-      </picker>
-    </view>
+
     <view class="brand">
       <text>商品品牌：</text>
       <view class="picker">
@@ -23,6 +15,16 @@
         <button type="default" class="color-black">选择</button>
       </picker>
     </view>
+    <view class="name">
+      <text>商品名称：</text>
+      <view class="picker">
+        {{name[nameindex]}}
+      </view>
+      <picker bindchange="name" value="{{nameindex}}" range="{{name}}">
+        <button type="default" class="color-black">选择</button>
+      </picker>
+    </view>
+    
     <view class="norms">
       <text>商品规格：</text>
       <view class="picker">
@@ -51,6 +53,10 @@
     </view>
     <view class="defaultStock">
       <text>默认库存：</text>
+      <input type="text" />
+    </view>
+    <view class="nowStock">
+      <text>当前库存：</text>
       <input type="text" />
     </view>
     <view>
