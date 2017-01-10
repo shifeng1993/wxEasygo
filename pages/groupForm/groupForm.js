@@ -1,7 +1,7 @@
 // pages/groupForm/groupForm.js
 Page({
   data: {
-    number:'dsadsadsa',
+    number: 'dsadsadsa',
     sale: ['是', '否'],
     name: ['冰峰', '可乐'],
     brand: ['可口可乐', '美年达'],
@@ -12,29 +12,87 @@ Page({
     normsindex: 0,
   },
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
+    // wx.request({
+    //   url: apiServer + apiVersion + '/goods/brand',
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    //   },
+    //   method: 'GET',
+    //   data: {
+    //     openId: app.globalData.openid,
+    //   },
+    //   success: function (res) {
+    //     if (res) {
+    //       this.setData({
+    //         brand: res.brandList
+    //       })
+    //     }
+    //   }
+    // })
   },
   sale: function (e) {
+
     this.setData({
       saleindex: e.detail.value
     })
+
   },
   name: function (e) {
     this.setData({
       nameindex: e.detail.value
+    })
+    wx.request({
+      url: apiServer + apiVersion + '/goods/size',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      method: 'GET',
+      data: {
+        openId: app.globalData.openid,
+        skuBrand: this.data.brand[brandindex],
+        skuSubject: this.data.name[e.detail.value]
+      },
+      success: function (res) {
+        if (res) {
+          this.setData({
+            
+
+            
+          })
+        }
+      }
     })
   },
   brand: function (e) {
     this.setData({
       brandindex: e.detail.value
     })
+    wx.request({
+      url: apiServer + apiVersion + '/goods/subject',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      method: 'GET',
+      data: {
+        openId: app.globalData.openid,
+        skuBrand: this.data.brand[e.detail.value]
+      },
+      success: function (res) {
+        if (res) {
+          this.setData({
+            name: res.subjectList
+          })
+        }
+      }
+    })
   },
   norms: function (e) {
     this.setData({
       normsindex: e.detail.value
     })
+
   },
-  cancle:function(e){
+  cancle: function (e) {
     wx.navigateBack()
   },
   onReady: function () {

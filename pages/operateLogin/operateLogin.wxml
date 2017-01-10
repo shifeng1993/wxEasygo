@@ -2,18 +2,18 @@
   <scroll-view scroll-y="true" class="equipmentOperate">
     <view class="equipmentNumber">
       <text>设备编号：</text>
-      <text class="flex-3">{{equipmentNumber}}</text>
+      <text class="flex-3">{{machineId}}</text>
     </view>
     <view class="equipmentName">
       <text>机器名称：</text>
-      <input type="text" placeholder="设备名称" value="611#续航电梯间" />
+      <input type="text" placeholder="设备名称" value="{{name}}" bindchange="nameChange" />
     </view>
     <view class="equipmentBtn">
-      <button type="default" class="bg-green color-white" hover-class="bg-green-hover">修改名称</button>
-      <button type="default" class="bg-blue" hover-class="bg-blue-hover">一键补满</button>
+      <button type="default" class="bg-green color-white" hover-class="bg-green-hover" bindtap="rename">修改名称</button>
+      <button type="default" class="bg-blue" hover-class="bg-blue-hover" bindtap="fillingAll">一键补满</button>
     </view>
     <view class="table-title">
-      <view class="title">设备统计列表</view>
+      <view class="title">商品统计列表</view>
     </view>
     <view class="form">
       <table class="table">
@@ -28,16 +28,12 @@
           <tr>
             <td>1</td>
             <td bindtap="groupForm">Table cell</td>
-            <td>
-              <input type="text" />
-            </td>
+            <td>3</td>
           </tr>
           <tr>
             <td>2</td>
             <td bindtap="groupForm">Table cell</td>
-            <td>
-              <input type="text" />
-            </td>
+            <td>2</td>
           </tr>
         </tbody>
       </table>

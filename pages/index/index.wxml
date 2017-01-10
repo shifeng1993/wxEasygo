@@ -1,7 +1,7 @@
 <view class="container">
   <scroll-view scroll-y="true" class="index">
     <view class="h1">
-      <text>{{lastDate}}</text>
+      <text>{{today}}</text>
 
       <!--<view class="small">运营一览</view>-->
     </view>

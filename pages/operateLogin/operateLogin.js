@@ -1,7 +1,8 @@
 // pages/operateLogin/operateLogin.js
 Page({
   data: {
-    equipmentNumber:'EGZS0300611'
+    machineId: 'EGZS0300611',
+    name: "611#续航电梯间"
   },
 
   onLoad: function (options) {
@@ -13,10 +14,61 @@ Page({
       equipmentOperate: true
     });
   },
-    groupForm:function(e){
+  groupForm: function (e) {
     wx.navigateTo({
-        url: "/pages/groupForm/groupForm"
-      });
+      url: "/pages/groupForm/groupForm"
+    });
+  },
+  nameChange(e) {
+    this.setData({
+      name: e.detail.value,
+    })
+  },
+  rename: function (e) {
+    var _this = this;
+    wx.request({
+      url: apiServer + apiVersion + '/usr/binding',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'PUT',
+      data: {
+        openId: app.globalData.openid,
+        machineId: _this.data.machineId,
+        machineName: _this.data.name
+      },
+      success: function (res) {
+        if (res.msg === "update machine name success!") {
+          wx.showToast({
+            title: '成功',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      }
+    })
+  },
+  fillingAll: function (e) {
+    var _this = this;
+    wx.request({
+      url: apiServer + '/api/v1/machine/aisle/fillingAll',
+      header: {
+         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      method: 'POST',
+      data: {
+        machineId: _this.data.machineId,
+      },
+      success: function (res) {
+        if (res.msg === "update machine name success!") {
+          wx.showToast({
+            title: '成功',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      }
+    })
   },
   onReady: function () {
     // 页面渲染完成

@@ -8,7 +8,6 @@ App({
           wx.getUserInfo({
             success: function (res) {
               _this.globalData.wxUser = res.userInfo
-              console.log(res)
             }
           })
           // 获取openid
@@ -30,6 +29,9 @@ App({
       }
     });
   },
+
+
+  
   GetDateStr: function (AddDayCount) {
     var dd = new Date();
     dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期

@@ -317,7 +317,8 @@ view {
   left: 0;
   top: 0;
   bottom: 0;
-  height: 100%;
+  height: auto;
+  min-height: 95%;
 }
 
 .group-menu, .equipment-menu {
@@ -326,6 +327,7 @@ view {
   transform: translateX(50px);
   transition: all 0.4s;
   height: 100%;
+
 }
 
 .group-menu .grouplist-header {
@@ -334,7 +336,6 @@ view {
 }
 
 .group-menu .grouplist-wrap {
-
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -345,7 +346,7 @@ view {
 .grouplist-wrap .list2, .grouplist-wrap .list3, .grouplist-wrap .list4,
 .grouplist-wrap .list5 {
   flex: 1;
-  height: auto;
+  height: 85%;
   overflow-x: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
@@ -367,11 +368,43 @@ view {
   background-size: 28rpx;
 }
 
+.equipment-menu .header {
+  font-size: 36rpx;
+  color: #fff;
+  padding: 10rpx;
+  display: inline-block;
+}
+
+
+.sidebarbtn {
+  float: right;
+  width: 50%;
+}
+
+.sidebarbtn button {
+  float: right;
+  width: 40%;
+  line-height: 56rpx;
+  font-size: 28rpx;
+  margin: 20rpx 15rpx;
+  color: #fff;
+  border: 1rpx solid #fff;
+}
+
+.sidebarbtn .hover {
+  color: #e2e7eb;
+  border: 1rpx solid #e2e7eb;
+}
+
 /*整个复选框组容器*/
 
 .lxCheckboxGroup {
   margin: 20px auto;
   color: #fff;
+ height: 85%;
+  overflow-x: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
 }
 
 /*单个复选框容器*/
@@ -409,32 +442,4 @@ view {
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   overflow: hidden;
-}
-
-.equipment-menu .header {
-  font-size: 36rpx;
-  color: #fff;
-  padding: 10rpx;
-  display: inline-block;
-}
-
-
-.sidebarbtn {
-  float: right;
-  width: 50%;
-}
-
-.sidebarbtn button {
-  float: right;
-  width: 40%;
-  line-height: 56rpx;
-  font-size: 28rpx;
-  margin: 20rpx 15rpx;
-  color: #fff;
-  border: 1rpx solid #fff;
-}
-
-.sidebarbtn .hover {
-  color: #e2e7eb;
-  border: 1rpx solid #e2e7eb;
 }

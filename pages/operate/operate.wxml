@@ -144,9 +144,9 @@
           <view class="copy">
             <view class="wrap">
               <view class="text">从</view>
-              <input type="text" placeholder="完整的机器编号" />
+              <input type="text" bindchange="fromId" placeholder="完整的机器编号" />
               <view class="text">复制到</view>
-              <input type="text" placeholder="完整的机器编号" />
+              <input type="text" bindchange="toId" placeholder="完整的机器编号" />
             </view>
             <button type="default" class="copy-btn" bindtap="copy" hover-class="copy-btn-hover"> 确定 </button>
           </view>
@@ -201,14 +201,14 @@
       </view>
 
       <!-- CheckboxGroup容器 -->
-      <view class="lxCheckboxGroup">
+      <scroll-view scroll-y="true" class="lxCheckboxGroup" bindscrolltolower="equipmentloadMore">
         <block wx:for-items="{{equipmentItems}}" wx:key="index">
           <view id="{{inedx}}" class="item" data-index="{{index}}" size="20" bindtap="bindCheckbox">
             <icon type="{{item.type}}" size="20" />
             <text>{{item.text}}</text>
           </view>
         </block>
-      </view>
+      </scroll-view>
     </view>
   </view>
 </view>

@@ -3,6 +3,7 @@
 var app = getApp()
 Page({
   data: {
+    today:'',
     lastDate: '',
     scanQrcode: '../../img/qrcode.png',
     salesAmount: '',
@@ -15,6 +16,7 @@ Page({
     let _this = this;
     this.setData({
       lastDate: app.GetDateStr(-1),
+      today:app.GetDateStr(0)
     })
   },
   onShow: function () {

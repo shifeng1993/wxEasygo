@@ -89,34 +89,40 @@ Page({
             { value: '我是设备4', text: '我是设备4', type: 'circle' },
             { value: '我是设备5', text: '我是设备5', type: 'circle' },
             { value: '我是设备6', text: '我是设备6', type: 'circle' },
+            { value: '我是设备6', text: '我是设备6', type: 'circle' },
+            { value: '我是设备6', text: '我是设备6', type: 'circle' },
+
         ],
         grouplistOpacity: "0",
         grouplistTransform: "",
         checkedValues: [],
         groupValues: "",
-
+        fromId: "",
+        toId: "",
+        sidebarPageNumber: 0,
+        orgIds: [],
     },
 
     // 初始化页面
     onLoad: function () {
         let _this = this;
-        wx.request({
-            url: apiServer + apiVersion + '/orgs',
-            header: {
-                'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
-            method: 'GET',
-            data: {
-                openId: app.globalData.openid
-            },
-            success: function (res) {
-                if (res) {
-                   _this.setData({
-                       grouplist:res
-                   })
-                }
-            }
-        });
+        // wx.request({
+        //     url: apiServer + apiVersion + '/orgs',
+        //     header: {
+        //         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        //     },
+        //     method: 'GET',
+        //     data: {
+        //         openId: app.globalData.openid
+        //     },
+        //     success: function (res) {
+        //         if (res) {
+        //             _this.setData({
+        //                 grouplist: res
+        //             })
+        //         }
+        //     }
+        // });
 
         // 这是sidebar菜单
         (function () {
@@ -132,6 +138,7 @@ Page({
                 grouplist2: grouplist2,
             })
         })()
+
     },
     onShow: function () {
         let _this = this;
@@ -180,6 +187,8 @@ Page({
 
     },
     grouplistBack: function (e) {
+        var _this = this;
+
         this.setData({
             indexleft: "translateX(0px)",
             groupMenuZindex: "0",
@@ -189,13 +198,17 @@ Page({
             equipmentlistTransform: "translateX(100rpx)",
         });
         if (e.currentTarget.dataset.back != 0) {
-            if (this.data.activeIndex === "0") {
-                this.setData({
-                    group: this.data.groupValues
+            if (_this.data.activeIndex === "0") {
+                var orgIds = _this.data.orgIds;
+                orgIds.push(_this.data.groupValues);
+                _this.setData({
+                    group: _this.data.groupValues,
+                    orgIds: orgIds
                 });
+                _this.equipmentloadMore();
             } else {
-                this.setData({
-                    offline: this.data.groupValues
+                _this.setData({
+                    offline: _this.data.groupValues
                 });
             }
         }
@@ -211,12 +224,42 @@ Page({
             equipment: this.data.checkedValues
         });
     },
-    copy: function (e) {
-        wx.showToast({
-            title: '复制成功',
-            icon: 'success',
-            duration: 2000
+    fromId: function (e) {
+
+        this.setData({
+            fromId: e.detail.value,
         })
+
+    },
+    toId: function (e) {
+        this.setData({
+            toId: e.detail.value,
+        })
+    },
+    copy: function (e) {
+        let _this = this;
+        wx.request({
+            url: apiServer + apiVersion + '/machine/copy',
+            header: {
+                'content-type': 'application/json'
+            },
+            method: 'POST',
+            data: {
+                openId: app.globalData.openid,
+                fromId: _this.data.fromId,
+                toId: _this.data.toId
+            },
+            success: function (res) {
+                if (res.message === "copy machine asile and goods success") {
+                    wx.showToast({
+                        title: '复制成功',
+                        icon: 'success',
+                        duration: 2000
+                    })
+                }
+            }
+        })
+
     },
     offlineGroup: function (e) {
         this.setData({
@@ -228,7 +271,6 @@ Page({
             grouplistTransform: "translateX(0px)",
 
         });
-
     },
     init: function (e) {
         this.setData({
@@ -351,7 +393,7 @@ Page({
             groupValues: e.currentTarget.dataset.name,
             grouplist5: arr5,
         });
-         this.setData({
+        this.setData({
             activeList5: null,
         })
     },
@@ -361,4 +403,40 @@ Page({
             groupValues: e.currentTarget.dataset.name,
         });
     },
+    equipmentloadMore: function (e) {
+        var _this = this;
+        var equipmentItems = this.data.equipmentItems;
+        if (_this.data.sidebarPageNumber != 0) {
+            wx.showToast({
+                title: '加载中',
+                icon: 'loading',
+                duration: 10000
+            })
+        }
+        wx.request({
+            url: apiServer + apiVersion + '/machine/all',
+            header: {
+                'content-type': 'application/json'
+            },
+            method: 'POST',
+            data: {
+                openId: app.globalData.openid,
+                "orgIds": _this.data.orgIds,
+                "status": "both", // both, online, offline
+                "pageNumber": _this.data.sidebarPageNumber,
+                "pageSize": 30
+            },
+            success: function (res) {
+                if (res) {
+                    wx.hideToast();
+                    equipmentItems.concat(res.data);
+                    _this.setData({
+                        sidebarPageNumber: _this.data.sidebarPageNumber++, equipmentItems: equipmentItems
+                    });
+                }
+            }
+
+        })
+
+    }
 });

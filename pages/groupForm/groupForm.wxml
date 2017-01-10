@@ -53,11 +53,11 @@
     </view>
     <view class="defaultStock">
       <text>默认库存：</text>
-      <input type="text" />
+      <text class="flex-2">5</text> 
     </view>
     <view class="nowStock">
       <text>当前库存：</text>
-      <input type="text" />
+      <text class="flex-2">3</text> 
     </view>
     <view>
       <button type="default" class="bg-gary color-black" hover-class="bg-gary-hover" bindtap="cancle">取消</button>
