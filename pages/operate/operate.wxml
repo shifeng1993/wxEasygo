@@ -25,7 +25,7 @@
               <button type="default" class="equipment-btn" catchtap="equipmentPatch" hover-class="equipment-btn-hover"> 选择 </button>
             </view>
             <view class="query">
-              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover">查询</button>
+              <button type="default" class="query-btn" bindtap="fillGoods" hover-class="query-btn-hover">查询</button>
             </view>
           </view>
 
@@ -39,7 +39,7 @@
               </view>
               <view class="stats-info">
                 <view class="stats-info-title">缺货率（%）</view>
-                <view class="p">{{lack}}</view>
+                <view class="p">{{needFillGoodsRate}}</view>
               </view>
             </view>
 
@@ -58,7 +58,7 @@
               </view>
               <view class="stats-info">
                 <view class="stats-info-title">断货率（%）</view>
-                <view class="p">{{nogoods}}</view>
+                <view class="p">{{noGoodsRate}}</view>
               </view>
             </view>
 
@@ -78,18 +78,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Table cell</td>
-                </tr>
+                <block wx:for-items="{{fillGoods}}" wx:key="index">
+                  <tr id="{{index}}">
+                    <td>{{item.goodsSubject}}</td>
+                    <td>{{item.needFillStock}}</td>
+                  </tr>
+                </block>
               </tbody>
             </table>
           </view>
@@ -101,7 +95,7 @@
               <button type="default" class="group-btn" catchtap="offlineGroup" hover-class="group-btn-hover"> 选择 </button>
             </view>
             <view class="query">
-              <button type="default" class="query-btn" bindtap="default" hover-class="query-btn-hover"> 查询 </button>
+              <button type="default" class="query-btn" bindtap="offlinemachine" hover-class="query-btn-hover"> 查询 </button>
             </view>
           </view>
           <view class="table-title">
@@ -118,24 +112,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
+                <block wx:for-items="{{offlines}}" wx:key="index">
+                  <tr id="{{index}}">
+                    <td>{{item.machineId}}</td>
+                    <td>{{item.machineName}}</td>
+                    <td>{{item.organizationName}}</td>
+                    <td data-offlinetime='{{item.offlineOrOnlineTime}}'>{{item.offlineOrOnlineTime}}</td>
+                  </tr>
+                </block>
               </tbody>
             </table>
           </view>
@@ -144,9 +128,9 @@
           <view class="copy">
             <view class="wrap">
               <view class="text">从</view>
-              <input type="text" bindchange="fromId" placeholder="完整的机器编号" />
+              <input type="text" bindinput="fromId" placeholder="完整的机器编号" />
               <view class="text">复制到</view>
-              <input type="text" bindchange="toId" placeholder="完整的机器编号" />
+              <input type="text" bindinput="toId" placeholder="完整的机器编号" />
             </view>
             <button type="default" class="copy-btn" bindtap="copy" hover-class="copy-btn-hover"> 确定 </button>
           </view>
@@ -156,7 +140,8 @@
   </scroll-view>
   <view class="sidebar" style="z-index:{{sidebarZindex}};">
     <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
-      <view class="grouplist-header" data-level="{{grouplist.level}}">{{grouplist.name}}
+      <view class="grouplist-header">
+        <view style='display:inline-block;padding:0rpx 30rpx;' class="{{activeList1 == 1 ? 'active' : ''}}" data-level="{{grouplist.level}}" data-name="{{grouplist.orgName}}" data-orgid="{{grouplist.orgId}}" bindtap="list1Click">{{grouplist.orgName}}</view>
         <view class="sidebarbtn">
           <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="1" plain="true">确定</button>
           <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="0" plain="true">取消</button>
@@ -166,28 +151,28 @@
         <scroll-view scroll-y="true" class="list2">
           <view>
             <block wx:for-items="{{grouplist2}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList2 == index ? 'active' : ''}}" bindtap="list2Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList2 == index ? 'active' : ''}}" bindtap="list2Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
         <scroll-view scroll-y="true" class="list3">
           <view>
             <block wx:for-items="{{grouplist3}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList3 == index ? 'active' : ''}}" bindtap="list3Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList3 == index ? 'active' : ''}}" bindtap="list3Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
         <scroll-view scroll-y="true" class="list4">
           <view>
             <block wx:for-items="{{grouplist4}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList4 == index ? 'active' : ''}}" bindtap="list4Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList4 == index ? 'active' : ''}}" bindtap="list4Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
         <scroll-view scroll-y="true" class="list5">
           <view>
             <block wx:for-items="{{grouplist5}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList5 == index ? 'active' : ''}}" bindtap="list5Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList5 == index ? 'active' : ''}}" bindtap="list5Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
@@ -203,9 +188,9 @@
       <!-- CheckboxGroup容器 -->
       <scroll-view scroll-y="true" class="lxCheckboxGroup" bindscrolltolower="equipmentloadMore">
         <block wx:for-items="{{equipmentItems}}" wx:key="index">
-          <view id="{{inedx}}" class="item" data-index="{{index}}" size="20" bindtap="bindCheckbox">
+          <view id="{{index}}" class="item" data-index="{{index}}" data-machineid="{{item.machineId}}" size="20" bindtap="bindCheckbox">
             <icon type="{{item.type}}" size="20" />
-            <text>{{item.text}}</text>
+            <text>{{item.machineName}}</text>
           </view>
         </block>
       </scroll-view>

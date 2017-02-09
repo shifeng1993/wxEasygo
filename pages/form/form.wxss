@@ -96,6 +96,8 @@
 
 .search .equipment-title,.search .group-title, .search .group-val,.search .equipment-val,.search .machine-title, .search .machine-val {
   display: inline-block;
+  overflow: auto;
+  max-height: 300rpx;
 }
 
 .search .equipment-val view,.search .group-val view {
@@ -391,6 +393,16 @@ view {
   background-position: center right;
   background-size: 28rpx;
 }
+.group-menu .grouplist-header .active {
+  color: #fff;
+  border: 1px solid #393a3f;
+  border-radius: 10rpx;
+  background: #242a30;
+  background-image: url("../../img/rightIcon.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: 32rpx;
+}
 
 
 
@@ -399,6 +411,10 @@ view {
 .lxCheckboxGroup {
   margin: 20px auto;
   color: #fff;
+  height: 85%;
+  overflow-x: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
 }
 
 /*单个复选框容器*/
@@ -437,7 +453,6 @@ view {
   -o-text-overflow: ellipsis;
   overflow: hidden;
 }
-
 .equipment-menu .header {
   font-size: 36rpx;
   color: #fff;

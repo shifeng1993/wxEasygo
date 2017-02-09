@@ -53,27 +53,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>1</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>1</td>
-                  <td>Table cell</td>
-                </tr>
+                <block wx:for-items="{{machineamounts}}" wx:key="index">
+                  <tr id="{{index}}">
+                    <td>{{item.machineName}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                </block>
               </tbody>
               <tfoot>
                 <tr>
                   <td>合计</td>
-                  <td>213</td>
-                  <td>421412</td>
+                  <td>{{machinetotal.quantity}}</td>
+                  <td>{{machinetotal.amount}}</td>
                 </tr>
               </tfoot>
             </table>
@@ -131,28 +123,20 @@
                   <th>销售额（元）</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
+             <tbody>
+                <block wx:for-items="{{goodsmounts}}" wx:key="index">
+                  <tr id="{{index}}">
+                    <td>{{item.goodsSubject}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                </block>
               </tbody>
               <tfoot>
                 <tr>
                   <td>合计</td>
-                  <td>213</td>
-                  <td>421412</td>
+                  <td>{{goodstotal.quantity}}</td>
+                  <td>{{goodstotal.amount}}</td>
                 </tr>
               </tfoot>
             </table>
@@ -174,7 +158,8 @@
   </scroll-view>
   <view class="sidebar" style="z-index:{{sidebarZindex}};">
     <view class="group-menu" wx:if="{{groupMenu}}" style="opacity:{{grouplistOpacity}};transform:{{grouplistTransform}};">
-      <view class="grouplist-header" data-level="{{grouplist.level}}">{{grouplist.name}}
+      <view class="grouplist-header">
+        <view style='display:inline-block;padding:0rpx 30rpx;' class="{{activeList1 == 1 ? 'active' : ''}}" data-level="{{grouplist.level}}" data-name="{{grouplist.orgName}}" data-orgid="{{grouplist.orgId}}" bindtap="list1Click">{{grouplist.orgName}}</view>
         <view class="sidebarbtn">
           <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="1" plain="true">确定</button>
           <button type="default" hover-class="hover" bindtap="grouplistBack" data-back="0" plain="true">取消</button>
@@ -184,28 +169,28 @@
         <scroll-view scroll-y="true" class="list2">
           <view>
             <block wx:for-items="{{grouplist2}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList2 == index ? 'active' : ''}}" bindtap="list2Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList2 == index ? 'active' : ''}}" bindtap="list2Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
         <scroll-view scroll-y="true" class="list3">
           <view>
             <block wx:for-items="{{grouplist3}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList3 == index ? 'active' : ''}}" bindtap="list3Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList3 == index ? 'active' : ''}}" bindtap="list3Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
         <scroll-view scroll-y="true" class="list4">
           <view>
             <block wx:for-items="{{grouplist4}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList4 == index ? 'active' : ''}}" bindtap="list4Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList4 == index ? 'active' : ''}}" bindtap="list4Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
         <scroll-view scroll-y="true" class="list5">
           <view>
             <block wx:for-items="{{grouplist5}}" wx:key="index">
-              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.name}}" class="grouplist-item {{activeList5 == index ? 'active' : ''}}" bindtap="list5Click">{{item.name}}</view>
+              <view id="{{index}}" data-level="{{item.level}}" data-name="{{item.orgName}}" data-orgid="{{item.orgId}}" class="grouplist-item {{activeList5 == index ? 'active' : ''}}" bindtap="list5Click">{{item.orgName}}</view>
             </block>
           </view>
         </scroll-view>
@@ -219,14 +204,14 @@
       </view>
 
       <!-- CheckboxGroup容器 -->
-      <view class="lxCheckboxGroup">
+      <scroll-view scroll-y="true" class="lxCheckboxGroup" bindscrolltolower="equipmentloadMore">
         <block wx:for-items="{{equipmentItems}}" wx:key="index">
-          <view id="{{inedx}}" class="item" data-index="{{index}}" size="20" bindtap="bindCheckbox">
+          <view id="{{index}}" class="item" data-index="{{index}}" data-machineid="{{item.machineId}}" size="20" bindtap="bindCheckbox">
             <icon type="{{item.type}}" size="20" />
-            <text>{{item.text}}</text>
+            <text>{{item.machineName}}</text>
           </view>
         </block>
-      </view>
+      </scroll-view>
     </view>
   </view>
 </view>

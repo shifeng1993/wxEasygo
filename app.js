@@ -31,7 +31,7 @@ App({
   },
 
 
-  
+
   GetDateStr: function (AddDayCount) {
     var dd = new Date();
     dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
@@ -77,8 +77,7 @@ App({
     wxUser: null,
     adminUser: null,
     openid: null,
-    apiServer: '',
-    apiVersion: '',
+    apiOpen: 'http://test.open.easygovm.com/oper/v1'
   },
   form: {
     activeIndex: null

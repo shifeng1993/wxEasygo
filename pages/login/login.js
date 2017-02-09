@@ -11,8 +11,12 @@ Page({
   // binding提交
   binding: function () {
     var _this = this;
+    wx.setStorage({
+      key: "adminUser",
+      data: ""
+    })
     wx.request({
-      url: apiServer + apiVersion + '/usr/binding',
+      url: app.globalData.apiOpen + '/user/binding',
       header: {
         'content-type': 'application/json'
       },
@@ -23,12 +27,15 @@ Page({
         password: _this.data.password
       },
       success: function (res) {
-        if (res.message === "binding success") {
-          app.globalData.adminUser = _this.data.username
-          wx.redirectTo({
+        if (res.data.status === 200) {
+          wx.setStorage({
+            key: "adminUser",
+            data: _this.data.username
+          })
+          wx.switchTab({
             url: '/pages/index/index'
           })
-        }
+        } 
       }
     })
   },

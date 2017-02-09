@@ -3,7 +3,7 @@
 var app = getApp()
 Page({
   data: {
-    today:'',
+    today: '',
     lastDate: '',
     scanQrcode: '../../img/qrcode.png',
     salesAmount: '',
@@ -11,42 +11,47 @@ Page({
     offlineMachines: '',
     needFillMachines: '',
   },
-
   onLoad: function () {
     let _this = this;
     this.setData({
       lastDate: app.GetDateStr(-1),
-      today:app.GetDateStr(0)
+      today: app.GetDateStr(0)
     })
   },
   onShow: function () {
     var _this = this;
-    // if (app.globalData.adminUser == null) {
-    //   wx.redirectTo({
-    //     url: '/pages/login/login'
-    //   })
-    // }
-
-    // wx.request({
-    //   url: apiServer + apiVersion + '/rpt/home',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   method: 'GET',
-    //   data: {
-    //     openId: app.globalData.openid
-    //   },
-    //   success: function (res) {
-    //     if (res) {
-    //       _this.setData({
-    //         salesAmount: app.thousandsData(res.salesAmount),
-    //         salesNumber: app.thousandsData(res.salesNumber),
-    //         offlineMachines: app.thousandsData(res.offlineMachines),
-    //         needFillMachines: app.thousandsData(res.needFillMachines),
-    //       })
-    //     }
-    //   }
-    // })
+    wx.getStorage({
+      key: 'adminUser',
+      success: function (res) {
+        if (!res.data) {
+          wx.redirectTo({
+            url: '/pages/login/login'
+          })
+        }else {
+          app.globalData.adminUser = res.data
+        }
+      }
+    })
+    wx.request({
+      url: app.globalData.apiOpen + '/rpt/home',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      data: {
+        openId: app.globalData.openid
+      },
+      success: function (res) {
+        if (res.data) {
+          _this.setData({
+            salesAmount: app.thousandsData(res.data.salesAmount),
+            salesNumber: app.thousandsData(res.data.salesNumber),
+            offlineMachines: app.thousandsData(res.data.offlineMachines),
+            needFillMachines: app.thousandsData(res.data.needFillMachines),
+          })
+        }
+      }
+    })
   },
 
   // 二维码扫描

@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="list">
-      <view class="list-wrap" bindtap="link1">
+      <view class="list-wrap">
         <view class="widget bg-green">
           <view class="stats-icon">
             <image class="fa money" src="../../img/money.png"></image>
@@ -24,13 +24,13 @@
             <view class="p">{{salesAmount}}</view>
           </view>
           <view class="stats-link">
-            <view class="link"> 查看详情
+            <view class="link" bindtap="link1"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>
         </view>
       </view>
-      <view class="list-wrap" bindtap="link2">
+      <view class="list-wrap">
         <view class="widget bg-blue">
           <view class="stats-icon">
             <image class="fa chart" src="../../img/chart.png"></image>
@@ -40,13 +40,13 @@
             <view class="p">{{salesNumber}}</view>
           </view>
           <view class="stats-link">
-            <view class="link"> 查看详情
+            <view class="link" bindtap="link2"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>
         </view>
       </view>
-      <view class="list-wrap" bindtap="link3">
+      <view class="list-wrap">
         <view class="widget bg-red">
           <view class="stats-icon">
             <image class="fa offline" src="../../img/offline.png"></image>
@@ -56,13 +56,13 @@
             <view class="p">{{offlineMachines}}</view>
           </view>
           <view class="stats-link">
-            <view class="link"> 查看详情
+            <view class="link" bindtap="link3"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>
         </view>
       </view>
-      <view class="list-wrap" bindtap="link4">
+      <view class="list-wrap">
         <view class="widget bg-purple">
           <view class="stats-icon">
             <image class="fa setup" src="../../img/setup.png"></image>
@@ -72,7 +72,7 @@
             <view class="p">{{needFillMachines}}</view>
           </view>
           <view class="stats-link">
-            <view class="link"> 查看详情
+            <view class="link" bindtap="link4"> 查看详情
               <image class="fa send" src="../../img/send.png"></image>
             </view>
           </view>

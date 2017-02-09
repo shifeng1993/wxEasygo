@@ -89,19 +89,22 @@
   font-size: 32rpx;
   vertical-align: top;
   text-align: left;
+  line-height: 35rpx;
 }
 
 .search .equipment-title, .search .group-val, .search .equipment-val {
   display: inline-block;
+  overflow: auto;
+  max-height: 300rpx;
 }
 
 .search .equipment-val
-view {
+view ,.search .group-val view{
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   overflow: hidden;
-  width: 320rpx;
+  width: 350rpx;
   height: 50rpx;
 }
 
@@ -217,7 +220,7 @@ view {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding:100rpx 0;
+  padding: 100rpx 0;
   box-sizing: border-box;
 }
 
@@ -322,12 +325,11 @@ view {
 }
 
 .group-menu, .equipment-menu {
-    padding: 20rpx;
+  padding: 20rpx;
   opacity: 0;
   transform: translateX(50px);
   transition: all 0.4s;
   height: 100%;
-
 }
 
 .group-menu .grouplist-header {
@@ -352,20 +354,33 @@ view {
   overflow-y: auto;
   font-size: 32rpx;
 }
-.group-menu .grouplist-item{
+
+.group-menu .grouplist-item {
   color: #bbb;
   text-align: left;
   padding: 5rpx 10rpx;
 }
-.group-menu .grouplist-wrap .active{
+
+.group-menu .grouplist-wrap .active {
   color: #fff;
   border: 1px solid #393a3f;
   border-radius: 10rpx;
   background: #242a30;
   background-image: url("../../img/rightIcon.png");
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   background-position: center right;
   background-size: 28rpx;
+}
+
+.group-menu .grouplist-header .active {
+  color: #fff;
+  border: 1px solid #393a3f;
+  border-radius: 10rpx;
+  background: #242a30;
+  background-image: url("../../img/rightIcon.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: 32rpx;
 }
 
 .equipment-menu .header {
@@ -374,7 +389,6 @@ view {
   padding: 10rpx;
   display: inline-block;
 }
-
 
 .sidebarbtn {
   float: right;
@@ -401,7 +415,7 @@ view {
 .lxCheckboxGroup {
   margin: 20px auto;
   color: #fff;
- height: 85%;
+  height: 85%;
   overflow-x: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
