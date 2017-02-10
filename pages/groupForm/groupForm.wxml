@@ -5,7 +5,6 @@
       <text>货道编号：</text>
       <text class="flex-2">{{number}}</text>
     </view>
-
     <view class="brand">
       <text>商品品牌：</text>
       <view class="picker">
@@ -24,7 +23,6 @@
         <button type="default" class="color-black">选择</button>
       </picker>
     </view>
-    
     <view class="norms">
       <text>商品规格：</text>
       <view class="picker">
@@ -36,11 +34,11 @@
     </view>
     <view class="price">
       <text>销售价(元)：</text>
-      <input type="text" />
+      <input type="text" bindchange="aisleGoodsPrice" value="{{aisleGoodsPrice}}" />
     </view>
     <view class="costPrice">
       <text>成本价(元)：</text>
-      <input type="text" />
+      <input type="text" bindchange="aisleOriginalPrice" value="{{aisleOriginalPrice}}" />
     </view>
     <view class="sale">
       <text>是否销售：</text>
@@ -53,15 +51,15 @@
     </view>
     <view class="defaultStock">
       <text>默认库存：</text>
-      <text class="flex-2">5</text> 
+      <text class="flex-2">{{defaultGoodsStock}}</text>
     </view>
     <view class="nowStock">
       <text>当前库存：</text>
-      <text class="flex-2">3</text> 
+      <text class="flex-2">{{goodsStock}}</text>
     </view>
     <view>
       <button type="default" class="bg-gary color-black" hover-class="bg-gary-hover" bindtap="cancle">取消</button>
-      <button type="default" class="bg-blue" hover-class="bg-blue-hover">确认</button>
+      <button type="default" class="bg-blue" hover-class="bg-blue-hover" bindtap="save">确认</button>
     </view>
   </view>
 </view>

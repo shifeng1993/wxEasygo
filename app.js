@@ -77,7 +77,9 @@ App({
     wxUser: null,
     adminUser: null,
     openid: null,
-    apiOpen: 'http://test.open.easygovm.com/oper/v1'
+    apiOpen: 'http://test.open.easygovm.com/oper/v1',
+    apiServer: 'http://test.open.easygovm.com/api/v1/',
+    machineAisles: []
   },
   form: {
     activeIndex: null

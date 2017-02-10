@@ -27,7 +27,7 @@ Page({
           wx.redirectTo({
             url: '/pages/login/login'
           })
-        }else {
+        } else {
           app.globalData.adminUser = res.data
         }
       }
@@ -61,8 +61,9 @@ Page({
     //     console.log(res)
     //   }
     // })
+    app.globalData.machineId = 1480062879775
     wx.navigateTo({
-      url: "/pages/operateLogin/operateLogin"
+      url: "/pages/operateLogin/operateLogin?machineId=" + app.globalData.machineId
     });
   },
 

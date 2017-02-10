@@ -6,7 +6,7 @@
     </view>
     <view class="equipmentName">
       <text>机器名称：</text>
-      <input type="text" placeholder="设备名称" value="{{name}}" bindchange="nameChange" />
+      <input type="text" placeholder="设备名称" value="{{machineName}}" bindchange="nameChange" />
     </view>
     <view class="equipmentBtn">
       <button type="default" class="bg-green color-white" hover-class="bg-green-hover" bindtap="rename">修改名称</button>
@@ -25,16 +25,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td bindtap="groupForm">Table cell</td>
-            <td>3</td>
+        <block wx:for-items="{{machineAisles}}" wx:key="index">
+          <tr id="{{index}}">
+            <td >{{item.aisleName}}</td>
+            <td data-index="{{index}}" bindtap="groupForm">{{item.goodsSkuInfo.skuPackageType}}{{item.goodsSkuInfo.skuSubject}}{{item.goodsSkuInfo.skuSize}}</td>
+            <td>{{item.goodsStock}}</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td bindtap="groupForm">Table cell</td>
-            <td>2</td>
-          </tr>
+         </block>
         </tbody>
       </table>
     </view>

@@ -1,12 +1,34 @@
 // pages/operateLogin/operateLogin.js
+var app = getApp()
 Page({
   data: {
     machineId: 'EGZS0300611',
-    name: "611#续航电梯间"
+    machineName: "611#续航电梯间",
+    machineAisles: []
   },
-
   onLoad: function (options) {
-    // 页面初始化 options为页面跳转所带来的参数
+    let _this = this
+    wx.request({
+      url: app.globalData.apiOpen + '/machine/' + options.machineId,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      data: {
+        openId: app.globalData.openid,
+        machineId: options.machineId
+      },
+      success: function (res) {
+        if (res.data) {
+          _this.setData({
+            machineAisles: res.data.machineAisles,
+            machineId: res.data.machineId,
+            machineName: res.data.machineName
+          })
+          app.globalData.machineAisles = res.data.machineAisles
+        }
+      }
+    })
   },
   operateLogin(e) {
     this.setData({
@@ -16,7 +38,7 @@ Page({
   },
   groupForm: function (e) {
     wx.navigateTo({
-      url: "/pages/groupForm/groupForm"
+      url: "/pages/groupForm/groupForm?index=" + e.currentTarget.dataset.index
     });
   },
   nameChange(e) {
@@ -27,7 +49,7 @@ Page({
   rename: function (e) {
     var _this = this;
     wx.request({
-      url: apiServer + apiVersion + '/usr/binding',
+      url: app.globalData.apiOpen + '/machine/name',
       header: {
         'content-type': 'application/json'
       },
@@ -35,12 +57,12 @@ Page({
       data: {
         openId: app.globalData.openid,
         machineId: _this.data.machineId,
-        machineName: _this.data.name
+        machineName: _this.data.machineName
       },
       success: function (res) {
-        if (res.msg === "update machine name success!") {
+        if (res.data.status === 200) {
           wx.showToast({
-            title: '成功',
+            title: '修改成功',
             icon: 'success',
             duration: 2000
           })
@@ -51,18 +73,18 @@ Page({
   fillingAll: function (e) {
     var _this = this;
     wx.request({
-      url: apiServer + '/api/v1/machine/aisle/fillingAll',
+      url: app.globalData.apiServer + '/machine/aisle/fillingAll',
       header: {
-         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
       method: 'POST',
       data: {
         machineId: _this.data.machineId,
       },
       success: function (res) {
-        if (res.msg === "update machine name success!") {
+        if (res.data.status === 200) {
           wx.showToast({
-            title: '成功',
+            title: '补货成功',
             icon: 'success',
             duration: 2000
           })
