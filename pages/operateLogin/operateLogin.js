@@ -2,8 +2,8 @@
 var app = getApp()
 Page({
   data: {
-    machineId: 'EGZS0300611',
-    machineName: "611#续航电梯间",
+    machineId: '',
+    machineName: '',
     machineAisles: []
   },
   onLoad: function (options) {
@@ -70,28 +70,28 @@ Page({
       }
     })
   },
-  fillingAll: function (e) {
-    var _this = this;
-    wx.request({
-      url: app.globalData.apiServer + '/machine/aisle/fillingAll',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      },
-      method: 'POST',
-      data: {
-        machineId: _this.data.machineId,
-      },
-      success: function (res) {
-        if (res.data.status === 200) {
-          wx.showToast({
-            title: '补货成功',
-            icon: 'success',
-            duration: 2000
-          })
-        }
-      }
-    })
-  },
+  // fillingAll: function (e) {
+  //   var _this = this;
+  //   wx.request({
+  //     url: app.globalData.apiServer + '/machine/aisle/fillingAll',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+  //     },
+  //     method: 'POST',
+  //     data: {
+  //       machineId: _this.data.machineId,
+  //     },
+  //     success: function (res) {
+  //       if (res.data.status === 200) {
+  //         wx.showToast({
+  //           title: '补货成功',
+  //           icon: 'success',
+  //           duration: 2000
+  //         })
+  //       }
+  //     }
+  //   })
+  // },
   onReady: function () {
     // 页面渲染完成
   },

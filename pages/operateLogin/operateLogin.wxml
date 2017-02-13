@@ -9,8 +9,8 @@
       <input type="text" placeholder="设备名称" value="{{machineName}}" bindchange="nameChange" />
     </view>
     <view class="equipmentBtn">
-      <button type="default" class="bg-green color-white" hover-class="bg-green-hover" bindtap="rename">修改名称</button>
-      <button type="default" class="bg-blue" hover-class="bg-blue-hover" bindtap="fillingAll">一键补满</button>
+      <button type="default" class="renamebtn bg-green color-white" hover-class="bg-green-hover" bindtap="rename">修改名称</button>
+      <!--<button type="default" class="bg-blue" hover-class="bg-blue-hover" bindtap="fillingAll">一键补满</button>-->
     </view>
     <view class="table-title">
       <view class="title">商品统计列表</view>
@@ -35,8 +35,8 @@
         </tbody>
       </table>
     </view>
-    <view class="putStock">
+    <!--<view class="putStock">
       <button type="default" class="bg-blue" hover-class="bg-blue-hover">确认库存</button>
-    </view>
+    </view>-->
   </scroll-view>
 </view>

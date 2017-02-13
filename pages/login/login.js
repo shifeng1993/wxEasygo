@@ -35,7 +35,15 @@ Page({
           wx.switchTab({
             url: '/pages/index/index'
           })
-        } 
+        } else if(res.data.status === 400){
+          wx.setStorage({
+            key: "adminUser",
+            data: _this.data.username
+          })
+          wx.switchTab({
+            url: '/pages/index/index'
+          })
+        }
       }
     })
   },

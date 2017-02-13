@@ -9,13 +9,23 @@ Page({
     salesAmount: '',
     salesNumber: '',
     offlineMachines: '',
-    needFillMachines: '',
+    needFillMachines: ''
   },
   onLoad: function () {
     let _this = this;
     this.setData({
       lastDate: app.GetDateStr(-1),
       today: app.GetDateStr(0)
+    })
+    wx.getStorage({
+      key: 'adminUser',
+      success: function (res) {
+        if (!res.data) {
+          wx.redirectTo({
+            url: '/pages/login/login'
+          })
+        }
+      }
     })
   },
   onShow: function () {
@@ -28,30 +38,35 @@ Page({
             url: '/pages/login/login'
           })
         } else {
-          app.globalData.adminUser = res.data
-        }
-      }
-    })
-    wx.request({
-      url: app.globalData.apiOpen + '/rpt/home',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'GET',
-      data: {
-        openId: app.globalData.openid
-      },
-      success: function (res) {
-        if (res.data) {
-          _this.setData({
-            salesAmount: app.thousandsData(res.data.salesAmount),
-            salesNumber: app.thousandsData(res.data.salesNumber),
-            offlineMachines: app.thousandsData(res.data.offlineMachines),
-            needFillMachines: app.thousandsData(res.data.needFillMachines),
+          wx.getStorage({
+            key: 'openid',
+            success: function (res) {
+              wx.request({
+                url: app.globalData.apiOpen + '/rpt/home',
+                header: {
+                  'content-type': 'application/json'
+                },
+                method: 'GET',
+                data: {
+                  openId: res.data
+                },
+                success: function (res) {
+                  if (res.data) {
+                    _this.setData({
+                      salesAmount: _this.thousandsData(res.data.salesAmount),
+                      salesNumber: _this.thousandsData(res.data.salesNumber),
+                      offlineMachines: _this.thousandsData(res.data.offlineMachines),
+                      needFillMachines: _this.thousandsData(res.data.needFillMachines),
+                    })
+                  }
+                }
+              })
+            }
           })
         }
       }
     })
+
   },
 
   // 二维码扫描
@@ -66,7 +81,32 @@ Page({
       url: "/pages/operateLogin/operateLogin?machineId=" + app.globalData.machineId
     });
   },
-
+  // 千分位格式化
+  thousandsData: function (val) {
+    //根据`.`作为分隔，将val值转换成一个数组
+    var aIntNum = val.toString().split('.');
+    // 整数部分
+    var iIntPart = aIntNum[0];
+    // 小数部分（传的值有小数情况之下）
+    var iFlootPart = aIntNum.length > 1 ? '.' + aIntNum[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    // 如果整数部分位数大于或等于5
+    if (iIntPart.length >= 5) {
+      // 根据正则要求，将整数部分用逗号每三位分隔
+      while (rgx.test(iIntPart)) {
+        iIntPart = iIntPart.replace(rgx, '$1' + ',' + '$2');
+      }
+    }
+    // 如果小数部分位数大于或等于5
+    if (iFlootPart && iFlootPart.length >= 5) {
+      // 根据正则要求，将小数部分用每三位分隔按空格号分开
+      while (rgx.test(iFlootPart)) {
+        iFlootPart = iFlootPart.replace(/(\d{3})/g, '$1 ');
+      }
+    }
+    // 将整数部分和小数组部分合并在一起，并返回
+    return iIntPart + iFlootPart;
+  },
   // 以下是index页面card查看详情跳转
   link1: function () {
     wx.switchTab({

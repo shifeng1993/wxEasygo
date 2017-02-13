@@ -87,8 +87,6 @@ Page({
                     wx.redirectTo({
                         url: '/pages/login/login'
                     })
-                } else {
-                    app.globalData.adminUser = res.data
                 }
             }
         })

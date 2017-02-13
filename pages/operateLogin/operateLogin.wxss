@@ -7,7 +7,6 @@
   font-size: 32rpx;
 }
 
-
 .equipmentOperate {
   height: auto;
   min-height: 95%;
@@ -73,7 +72,7 @@
   font-size: 28rpx;
 }
 
-.equipmentBtn {
+/*.equipmentBtn {
   display: flex;
 }
 
@@ -85,7 +84,7 @@
   line-height: 88rpx;
   font-size: 32rpx;
   color: #fff;
-}
+}*/
 
 .equipmentNumber text {
   display: inline-block;
@@ -187,4 +186,11 @@
   color: #fff;
   width: 640rpx;
   height: 100%;
+}
+
+.renamebtn {
+  height: 88rpx;
+  font-size: 32rpx;
+  line-height: 88rpx;
+  width: 640rpx;
 }

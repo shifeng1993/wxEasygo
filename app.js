@@ -2,9 +2,20 @@
 App({
   onLaunch: function () {
     var _this = this
+    wx.getStorage({
+      key: 'adminUser',
+      fail: function (res) {
+        wx.setStorage({
+          key: "adminUser",
+          data: ''
+        })
+      }
+    })
+
     wx.login({
       success: function (res) {
         if (res.code) {
+
           wx.getUserInfo({
             success: function (res) {
               _this.globalData.wxUser = res.userInfo
@@ -20,6 +31,10 @@ App({
               grant_type: 'authorization_code',
             },
             success: function (res) {
+              wx.setStorage({
+                key: "openid",
+                data: res.data.openid
+              })
               _this.globalData.openid = res.data.openid
             }
           })
@@ -48,31 +63,7 @@ App({
     var d = dd.getDate();
     return y + "-" + m + "-" + d;
   },
-  thousandsData: function (val) {
-    //根据`.`作为分隔，将val值转换成一个数组
-    var aIntNum = val.toString().split('.');
-    // 整数部分
-    var iIntPart = aIntNum[0];
-    // 小数部分（传的值有小数情况之下）
-    var iFlootPart = aIntNum.length > 1 ? '.' + aIntNum[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    // 如果整数部分位数大于或等于5
-    if (iIntPart.length >= 5) {
-      // 根据正则要求，将整数部分用逗号每三位分隔
-      while (rgx.test(iIntPart)) {
-        iIntPart = iIntPart.replace(rgx, '$1' + ',' + '$2');
-      }
-    }
-    // 如果小数部分位数大于或等于5
-    if (iFlootPart && iFlootPart.length >= 5) {
-      // 根据正则要求，将小数部分用每三位分隔按空格号分开
-      while (rgx.test(iFlootPart)) {
-        iFlootPart = iFlootPart.replace(/(\d{3})/g, '$1 ');
-      }
-    }
-    // 将整数部分和小数组部分合并在一起，并返回
-    return iIntPart + iFlootPart;
-  },
+
   globalData: {
     wxUser: null,
     adminUser: null,

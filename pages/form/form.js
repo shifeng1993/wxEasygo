@@ -58,11 +58,6 @@ Page({
     },
     onLoad: function () {
         let _this = this;
-        // if (app.appDate.userInfo == null) {
-        //     wx.redirectTo({
-        //         url: '/pages/login/login'
-        //     })
-        // }
 
         // 这是sidebar菜单
         wx.request({
@@ -111,6 +106,16 @@ Page({
     },
     onShow: function () {
         let _this = this;
+        wx.getStorage({
+            key: 'adminUser',
+            success: function (res) {
+                if (!res.data) {
+                    wx.redirectTo({
+                        url: '/pages/login/login'
+                    })
+                }
+            }
+        })
         if (app.form.activeIndex != null) {
             _this.setData({
                 activeIndex: app.form.activeIndex,
