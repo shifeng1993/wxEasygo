@@ -186,7 +186,7 @@
       </view>
 
       <!-- CheckboxGroup容器 -->
-      <scroll-view scroll-y="true" class="lxCheckboxGroup" bindscrolltolower="equipmentloadMore">
+      <scroll-view scroll-y="true" class="lxCheckboxGroup" lower-threshold="100" bindscrolltolower="equipmentloadMore">
         <block wx:for-items="{{equipmentItems}}" wx:key="index">
           <view id="{{index}}" class="item" data-index="{{index}}" data-machineid="{{item.machineId}}" size="20" bindtap="bindCheckbox">
             <icon type="{{item.type}}" size="20" />

@@ -131,5 +131,5 @@ Page({
       url: '/pages/operate/operate'
     })
     app.operate.activeIndex = "0"
-  },
+  }
 })

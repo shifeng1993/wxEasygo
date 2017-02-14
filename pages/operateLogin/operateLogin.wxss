@@ -8,6 +8,7 @@
 }
 
 .equipmentOperate {
+  background: #fff;
   height: auto;
   min-height: 95%;
   width: 92%;
