@@ -71,15 +71,15 @@ Page({
 
   // 二维码扫描
   operateLogin: function (e) {
-    // wx.scanCode({
-    //   success: (res) => {
-    //     console.log(res)
-    //   }
-    // })
-    app.globalData.machineId = 1480062879775
-    wx.navigateTo({
-      url: "/pages/operateLogin/operateLogin?machineId=" + app.globalData.machineId
-    });
+    wx.scanCode({
+      success: (res) => {
+        if (res.errMsg === 'scanCode:ok') {
+          wx.navigateTo({
+            url: "/pages/operateLogin/operateLogin?machineId=" + res.result
+          });
+        }
+      }
+    })
   },
   // 千分位格式化
   thousandsData: function (val) {

@@ -8,8 +8,8 @@
       <text class="name">{{name}}</text>
     </view>
     <view class="user">
-      <input type="text" placeholder="请输入后台账号" bindchange="username" />
-      <input class="password" password type="text" placeholder="请输入密码" bindchange="password"/>
+      <input type="text" placeholder="请输入后台账号" bindchange="username" value="{{username}}" />
+      <input class="password" password type="text" placeholder="请输入密码" bindchange="password" value="{{password}}"/>
       <button type="primary" bindtap="binding"> 绑定微信账号 </button>
     </view>
   </view>

@@ -29,8 +29,8 @@ Page({
         checkedValues: [],
         machineIds: [],
         groupValues: "",
-        fromId: "",
-        toId: "",
+        fromId: null,
+        toId: null,
         sidebarPageNumber: 0,
         sidebarPagetotal: 0,
         offlinePageNumber: 0,
@@ -328,12 +328,12 @@ Page({
         }
         //    return ( " 离线 " + days + "天 " + hours + "小时 " + minutes + " 分钟" + seconds + " 秒")
     },
-    fromId: function (e) {
+    fromIdinput: function (e) {
         this.setData({
             fromId: e.detail.value,
         })
     },
-    toId: function (e) {
+    toIdinput: function (e) {
         this.setData({
             toId: e.detail.value,
         })
@@ -364,10 +364,9 @@ Page({
                         content: '找不到对应的机器,请检查机器ID',
                         success: function (res) {
                             if (res.confirm) {
-                                console.log('dianqueding')
-                                this.setData({
-                                    fromId: '',
-                                    toId: ''
+                                _this.setData({
+                                    fromId: null,
+                                    toId: null
                                 })
                             }
                         }

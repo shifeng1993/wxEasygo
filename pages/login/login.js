@@ -35,13 +35,18 @@ Page({
           wx.switchTab({
             url: '/pages/index/index'
           })
-        } else if(res.data.status === 400){
-          wx.setStorage({
-            key: "adminUser",
-            data: _this.data.username
-          })
-          wx.switchTab({
-            url: '/pages/index/index'
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '绑定失败，请检查账号密码',
+            success: function (res) {
+              if (res.confirm) {
+                _this.setData({
+                  username: null,
+                  password: null
+                })
+              }
+            }
           })
         }
       }

@@ -43,32 +43,34 @@ Page({
   },
   nameChange(e) {
     this.setData({
-      name: e.detail.value,
+      machineName: e.detail.value,
     })
   },
   rename: function (e) {
     var _this = this;
-    wx.request({
-      url: app.globalData.apiOpen + '/machine/name',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'PUT',
-      data: {
-        openId: app.globalData.openid,
-        machineId: _this.data.machineId,
-        machineName: _this.data.machineName
-      },
-      success: function (res) {
-        if (res.data.status === 200) {
-          wx.showToast({
-            title: '修改成功',
-            icon: 'success',
-            duration: 2000
-          })
+    if (this.data.machineName) {
+      wx.request({
+        url: app.globalData.apiOpen + '/machine/name',
+        header: {
+          'content-type': 'application/json'
+        },
+        method: 'PUT',
+        data: {
+          openId: app.globalData.openid,
+          machineId: _this.data.machineId,
+          machineName: _this.data.machineName
+        },
+        success: function (res) {
+          if (res.data.status === 200) {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
         }
-      }
-    })
+      })
+    }
   },
   // fillingAll: function (e) {
   //   var _this = this;

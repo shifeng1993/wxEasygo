@@ -128,9 +128,9 @@
           <view class="copy">
             <view class="wrap">
               <view class="text">从</view>
-              <input type="text" bindinput="fromId" placeholder="完整的机器编号" />
+              <input type="text" placeholder="完整的机器编号" value="{{fromId}}" bindchange="fromIdinput"/>
               <view class="text">复制到</view>
-              <input type="text" bindinput="toId" placeholder="完整的机器编号" />
+              <input type="text" placeholder="完整的机器编号" value="{{toId}}" bindchange="toIdinput"/>
             </view>
             <button type="default" class="copy-btn" bindtap="copy" hover-class="copy-btn-hover"> 确定 </button>
           </view>
