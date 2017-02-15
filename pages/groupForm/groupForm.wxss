@@ -6,7 +6,8 @@
   height: 100%;
   font-size: 28rpx;
 }
-.index{
+
+.index {
   height: auto;
   min-height: 95%;
   width: 92%;
@@ -19,56 +20,62 @@
   -ms-overflow-style: -ms-autohiding-scrollbar;
   overflow-y: auto;
 }
-.index view{
-    display: flex;
+
+.index view {
+  display: flex;
   width: 100%;
   height: 100rpx;
-
 }
-.index view text{
-     flex: 1;
+
+.index view text {
+  flex: 1;
   vertical-align: top;
   width: 30%;
   line-height: 100rpx;
-
 }
+
 .index view input {
-  flex:2;
+  flex: 2;
   border: 2rpx solid #ddd;
   border-radius: 10rpx;
   padding: 0 20rpx;
   margin: 20rpx 0;
   font-size: 28rpx;
 }
-.index view .picker{
-flex: 1;
-line-height: 100rpx;
+
+.index view .picker {
+  flex: 1;
+  line-height: 100rpx;
   display: inline;
 }
-.index view picker{
+
+.index view picker {
   flex: 1;
   position: relative;
 }
-.index view picker button{
+
+.index view picker button {
   position: absolute;
   right: 0;
-width: 120rpx;
-height: 60rpx;
-line-height: 60rpx;
-font-size: 28rpx;
-margin-top: 20rpx;
-margin-right: 0rpx;
-padding: 0;
+  width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  margin-right: 0rpx;
+  padding: 0;
 }
-.index view button{
-     flex: 1;
-    margin:30rpx;
-    margin-top: 80rpx;
-    height: 80rpx;
-    font-size: 32rpx;
-    line-height: 80rpx;
-    color: #fff;
+
+.index view button {
+  flex: 1;
+  margin: 30rpx;
+  margin-top: 80rpx;
+  height: 80rpx;
+  font-size: 32rpx;
+  line-height: 80rpx;
+  color: #fff;
 }
-.index .header{
-    font-size: 48rpx;
+
+.index .header {
+  font-size: 48rpx;
 }

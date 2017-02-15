@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="header">
+    <view class="input-wrap">
+      <input type="text" placeholder="输入机器id" bindchange="showlist" value="{{input}}" />
+      <view class="img-box">
+        <image src="/img/close.png" hidden="{{ serchbtn!=true }}" catchtap="clear"></image>
+      </view>
+    </view>
+    <button type="default" catchtap="back" hover-class="btn-hover" hidden="{{ serchbtn!=false }}"> 取消 </button>
+    <button type="default" catchtap="serch" class="bg-blue color-white" hover-class="bg-blue-hover" hidden="{{ serchbtn!=true }}"> 搜索 </button>
+  </view>
+  <view class="list">
+    <block wx:for-items="{{serchMachines}}" wx:key="{{index}}">
+      <view id="{{index}}" class="item" data-item="{{item}}" bindtap="machinesitem">
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,15 +1,20 @@
 <view class="container">
-  <scroll-view scroll-y="true" class="index" bindtap="init" style="transform:{{indexleft}};">
+  <scroll-view scroll-y="true" class="index" bindtap="init" style="transform:{{indexleft}};" wx:if="{{menuindex == 9902 ? true:false}}">
     <view class="tab-wrap" bindtap="init">
       <view class="navbar">
-        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
-          <view id="{{index}}" class="item {{activeIndex == index ? 'active' : ''}}" bindtap="tabClick">
-            <view class="navbar-title">{{item}}</view>
+          <view id="0" class="item {{activeIndex == 0 ? 'active' : ''}}" bindtap="tabClick" wx:if="{{menuindex01 == 990201 ? true:false}}">
+            <view class="navbar-title">补货统计</view>
           </view>
-        </block>
+          <view id="1" class="item {{activeIndex == 1 ? 'active' : ''}}" bindtap="tabClick"  wx:if="{{menuindex02 == 990202 ? true:false}}">
+            <view class="navbar-title">离线设备</view>
+          </view>
+          <view id="2" class="item {{activeIndex == 2 ? 'active' : ''}}" bindtap="tabClick" wx:if="{{menuindex03 == 990203 ? true:false}}">
+            <view class="navbar-title">设备复制</view>
+          </view>
+        
       </view>
       <view class="tab-content">
-        <view class="tab-card" hidden="{{activeIndex != 0}}">
+        <view class="tab-card" hidden="{{activeIndex != 0}}" wx:if="{{menuindex01 == 990201 ? true:false}}">
           <view class="search">
             <view class="group-key">组织：
               <view class="group-val">{{group}}</view>
@@ -88,7 +93,7 @@
             </table>
           </view>
         </view>
-        <view class="tab-card" hidden="{{activeIndex != 1}}">
+        <view class="tab-card" hidden="{{activeIndex != 1}}" wx:if="{{menuindex02 == 990202 ? true:false}}">
           <view class="search">
             <view class="group-key">组织：
               <view class="group-val">{{offline}}</view>
@@ -114,7 +119,7 @@
               <tbody>
                 <block wx:for-items="{{offlines}}" wx:key="index">
                   <tr id="{{index}}">
-                    <td>{{item.machineId}}</td>
+                    <td>{{item.machineCode}}</td>
                     <td>{{item.machineName}}</td>
                     <td>{{item.organizationName}}</td>
                     <td data-offlinetime='{{item.offlineOrOnlineTime}}'>{{item.offlineOrOnlineTime}}</td>
@@ -124,13 +129,43 @@
             </table>
           </view>
         </view>
-        <view class="tab-card" hidden="{{activeIndex != 2}}">
-          <view class="copy">
+        <view class="tab-card" hidden="{{activeIndex != 2}}" wx:if="{{menuindex03 == 990203 ? true:false}}">
+
+          <!--<view class="copy">
             <view class="wrap">
               <view class="text">从</view>
               <input type="text" placeholder="完整的机器编号" value="{{fromId}}" bindchange="fromIdinput"/>
               <view class="text">复制到</view>
               <input type="text" placeholder="完整的机器编号" value="{{toId}}" bindchange="toIdinput"/>
+            </view>
+            <button type="default" class="copy-btn" bindtap="copy" hover-class="copy-btn-hover"> 确定 </button>
+          </view>-->
+          <view class="copy">
+            <view class="wrap">
+              <view class="search">
+                <view class="text">从</view>
+                <view class="group-key">组织：
+                  <view class="group-val">{{fromcopygroup}}</view>
+                  <button type="default" class="group-btn" data-copy="from" catchtap="copygroupPatch" hover-class="group-btn-hover"> 选择 </button>
+                </view>
+                <view class="group-key">设备：
+                  <view class="group-val">{{fromcopyequipment}}</view>
+                  <button type="default" class="group-btn" data-copy="from" catchtap="copyequipmentPatch" hover-class="group-btn-hover"> 选择 </button>
+                </view>
+
+                <!--<input type="text"  disabled="true" placeholder="完整的机器编号" value="{{fromId}}" data-serch="fromid"  bindtap="serchmachine"/>-->
+                <view class="text">复制到</view>
+                <view class="group-key">组织：
+                  <view class="group-val">{{tocopygroup}}</view>
+                  <button type="default" class="group-btn" data-copy="to" catchtap="copygroupPatch" hover-class="group-btn-hover"> 选择 </button>
+                </view>
+                <view class="group-key">设备：
+                  <view class="group-val">{{tocopyequipment}}</view>
+                  <button type="default" class="group-btn" data-copy="to" catchtap="copyequipmentPatch" hover-class="group-btn-hover"> 选择 </button>
+                </view>
+              </view>
+
+              <!--<input type="text" disabled="true"  placeholder="完整的机器编号" value="{{toId}}" data-serch="toid" bindtap="serchmachine"/>-->
             </view>
             <button type="default" class="copy-btn" bindtap="copy" hover-class="copy-btn-hover"> 确定 </button>
           </view>
@@ -182,9 +217,8 @@
       <view class="header">设备选择</view>
       <view class="sidebarbtn">
         <button type="default" hover-class="hover" bindtap="equipmentBack" plain="true">确定</button>
-        <button type="default" hover-class="hover" bindtap="allCheckbox" plain="true">全选</button>
+        <button type="default" hover-class="hover" hidden="{{activeIndex != 0}}" bindtap="allCheckbox" plain="true">全选</button>
       </view>
-
       <!-- CheckboxGroup容器 -->
       <scroll-view scroll-y="true" class="lxCheckboxGroup" lower-threshold="100" bindscrolltolower="equipmentloadMore">
         <block wx:for-items="{{equipmentItems}}" wx:key="index">

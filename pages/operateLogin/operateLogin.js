@@ -2,12 +2,27 @@
 var app = getApp()
 Page({
   data: {
-    machineId: '',
+    machineCode: '',
     machineName: '',
-    machineAisles: []
+    machineAisles: [],
+    menuindex: 0,
+    menuindex01: 0,
+    menuindex02: 0,
+    menuindex03: 0,
   },
   onLoad: function (options) {
     let _this = this
+    wx.getStorage({
+      key: 'menuIds',
+      success: function (res) {
+        _this.setData({
+          menuindex: parseInt(res.data[res.data.indexOf('9904')]),
+          menuindex01: parseInt(res.data[res.data.indexOf('990401')]),
+          menuindex02: parseInt(res.data[res.data.indexOf('990402')]),
+          menuindex03: parseInt(res.data[res.data.indexOf('990403')])
+        })
+      }
+    })
     wx.request({
       url: app.globalData.apiOpen + '/machine/' + options.machineId,
       header: {
@@ -22,7 +37,7 @@ Page({
         if (res.data) {
           _this.setData({
             machineAisles: res.data.machineAisles,
-            machineId: res.data.machineId,
+            machineCode: res.data.machineCode,
             machineName: res.data.machineName
           })
           app.globalData.machineAisles = res.data.machineAisles
@@ -37,9 +52,11 @@ Page({
     });
   },
   groupForm: function (e) {
-    wx.navigateTo({
-      url: "/pages/groupForm/groupForm?index=" + e.currentTarget.dataset.index
-    });
+    if (this.data.menuindex03 === 990403) {
+      wx.navigateTo({
+        url: "/pages/groupForm/groupForm?index=" + e.currentTarget.dataset.index
+      });
+    }
   },
   nameChange(e) {
     this.setData({

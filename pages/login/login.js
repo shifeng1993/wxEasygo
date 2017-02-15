@@ -28,12 +28,31 @@ Page({
       },
       success: function (res) {
         if (res.data.status === 200) {
-          wx.setStorage({
-            key: "adminUser",
-            data: _this.data.username
-          })
-          wx.switchTab({
-            url: '/pages/index/index'
+          wx.request({
+            url: app.globalData.apiOpen + '/menus/' + app.globalData.openid,
+            header: {
+              'content-type': 'application/json'
+            },
+            method: 'GET',
+            data: {
+              openId: app.globalData.openid,
+            },
+            success: function (res) {
+              if (res.data) {
+                console.log(res.data.menuIds)
+                wx.setStorage({
+                  key: "menuIds",
+                  data: res.data.menuIds
+                })
+                wx.setStorage({
+                  key: "adminUser",
+                  data: _this.data.username
+                })
+                wx.switchTab({
+                  url: '/pages/index/index'
+                })
+              }
+            }
           })
         } else {
           wx.showModal({

@@ -6,7 +6,8 @@
     "pages/form/form",
     "pages/login/login",
     "pages/operateLogin/operateLogin",
-    "pages/groupForm/groupForm"
+    "pages/groupForm/groupForm",
+    "pages/serchMachine/serchMachine"
   ],
   
 

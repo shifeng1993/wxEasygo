@@ -104,11 +104,10 @@
 .form {
   width: 99%;
   margin-bottom: 15px;
-  overflow-y: hidden;
+  overflow: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   border-bottom: 2rpx solid #ddd;
   min-height: 0.01%;
-  overflow-x: auto;
 }
 
 .form .table {
@@ -167,7 +166,6 @@
 }
 
 .form td {
-  white-space: nowrap;
   border-color: #e2e7eb;
   padding: 10px 15px;
   background: #fff;

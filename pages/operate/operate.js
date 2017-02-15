@@ -1,7 +1,6 @@
 var app = getApp();
 Page({
     data: {
-        tabs: ["补货统计", "离线设备", "设备复制"],
         activeIndex: "0",
         group: '',
         offline: "",
@@ -27,7 +26,9 @@ Page({
         grouplistOpacity: "0",
         grouplistTransform: "",
         checkedValues: [],
+        checkedValue: '',
         machineIds: [],
+        machineId: '',
         groupValues: "",
         fromId: null,
         toId: null,
@@ -37,12 +38,33 @@ Page({
         offlinePagetotal: 0,
         offlines: [],
         orgId: '',
-        orgIds: []
+        childrens: [],
+        orgIds: [],
+        fromcopygroup: '',
+        fromcopyequipment: '',
+        tocopygroup: '',
+        tocopyequipment: '',
+        copyfromto: '',
+        menuindex: 0,
+        menuindex01: 0,
+        menuindex02: 0,
+        menuindex03: 0,
     },
 
     // 初始化页面
     onLoad: function () {
         let _this = this;
+        wx.getStorage({
+            key: 'menuIds',
+            success: function (res) {
+                _this.setData({
+                    menuindex: parseInt(res.data[res.data.indexOf('9902')]),
+                    menuindex01: parseInt(res.data[res.data.indexOf('990201')]),
+                    menuindex02: parseInt(res.data[res.data.indexOf('990202')]),
+                    menuindex03: parseInt(res.data[res.data.indexOf('990203')])
+                })
+            }
+        })
         wx.request({
             url: app.globalData.apiOpen + '/orgs',
             header: {
@@ -90,6 +112,10 @@ Page({
                 }
             }
         })
+        this.setData({
+            fromId: app.globalData.fromid,
+            toId: app.globalData.toid,
+        })
     },
 
     // tab切换以及ui侧滑出
@@ -106,6 +132,28 @@ Page({
             sidebarZindex: "1",
             grouplistOpacity: "1",
             grouplistTransform: "translateX(0px)",
+        });
+    },
+    copygroupPatch: function (e) {
+        this.setData({
+            indexleft: "translateX(100%)",
+            groupMenu: true,
+            equipmentMenu: false,
+            sidebarZindex: "1",
+            grouplistOpacity: "1",
+            grouplistTransform: "translateX(0px)",
+            copyfromto: e.currentTarget.dataset.copy
+        });
+    },
+    copyequipmentPatch: function (e) {
+        this.setData({
+            indexleft: "translateX(100%)",
+            groupMenu: false,
+            equipmentMenu: true,
+            sidebarZindex: "1",
+            equipmentlistOpacity: "1",
+            equipmentlistTransform: "translateX(0px)",
+            copyfromto: e.currentTarget.dataset.copy
         });
     },
     groupBack: function (e) {
@@ -143,11 +191,13 @@ Page({
             if (_this.data.activeIndex === "0") {
                 var orgIds = [];
                 orgIds.push(_this.data.orgId);
+                for (let i = 0; i < _this.data.childrens.length; i++) {
+                    orgIds.push(_this.data.childrens[i].orgId)
+                }
                 _this.setData({
                     group: _this.data.groupValues,
                     orgIds: orgIds
                 });
-
                 wx.request({
                     url: app.globalData.apiOpen + '/machine/all',
                     header: {
@@ -191,17 +241,81 @@ Page({
                         }
                     }
                 })
-            } else {
+            } else if (_this.data.activeIndex === "1") {
                 var orgIds = [];
                 orgIds.push(_this.data.orgId);
+                for (let i = 0; i < _this.data.childrens.length; i++) {
+                    orgIds.push(_this.data.childrens[i].orgId)
+                }
                 _this.setData({
                     offline: _this.data.groupValues,
                     orgIds: orgIds
                 });
+            } else if (_this.data.activeIndex === "2") {
+                var orgIds = [];
+                orgIds.push(_this.data.orgId);
+                for (let i = 0; i < _this.data.childrens.length; i++) {
+                    orgIds.push(_this.data.childrens[i].orgId)
+                }
+                if (_this.data.copyfromto === 'from') {
+                    _this.setData({
+                        fromcopygroup: _this.data.groupValues,
+                        orgIds: orgIds
+                    });
+                } else if (_this.data.copyfromto === 'to') {
+                    _this.setData({
+                        tocopygroup: _this.data.groupValues,
+                        orgIds: orgIds
+                    });
+                }
+                wx.request({
+                    url: app.globalData.apiOpen + '/machine/all',
+                    header: {
+                        'content-type': 'application/json'
+                    },
+                    method: 'POST',
+                    data: {
+                        openId: app.globalData.openid,
+                        "orgIds": _this.data.orgIds,
+                        "status": "both",
+                        "pageNumber": 0,
+                        "pageSize": 60
+                    },
+                    success: function (res) {
+                        if (res.data) {
+                            var machines = []
+                            for (let i = 0; i < res.data.content.length; i++) {
+                                let machineName = '';
+                                let machineId = '';
+                                if (res.data.content[i].machineName === null) {
+                                    machineName = ''
+                                } else {
+                                    machineName = res.data.content[i].machineName
+                                }
+                                if (res.data.content[i].machineId === null) {
+                                    machineId = ''
+                                } else {
+                                    machineId = res.data.content[i].machineId
+                                }
+                                machines.push({
+                                    machineId: machineId,
+                                    machineName: machineName,
+                                    type: 'circle'
+                                })
+                            }
+                            _this.setData({
+                                equipmentItems: machines,
+                                sidebarPageNumber: 1,
+                                sidebarPagetotal: res.data.totalPages,
+                            });
+                        }
+                    }
+                })
             }
         }
     },
     equipmentBack: function (e) {
+        let _this = this
         this.setData({
             indexleft: "translateX(0px)",
             groupMenuZindex: "0",
@@ -209,8 +323,24 @@ Page({
             grouplistTransform: "translateX(100rpx)",
             equipmentlistOpacity: "0",
             equipmentlistTransform: "translateX(100rpx)",
-            equipment: this.data.checkedValues
         });
+        if (_this.data.activeIndex === "0") {
+            _this.setData({
+                equipment: _this.data.checkedValues
+            })
+        } else if (_this.data.activeIndex === "2") {
+            if (_this.data.copyfromto === 'from') {
+                _this.setData({
+                    fromcopyequipment: _this.data.checkedValue,
+                    fromId: _this.data.machineId
+                })
+            } else if (_this.data.copyfromto === 'to') {
+                _this.setData({
+                    tocopyequipment: _this.data.checkedValue,
+                    toId: _this.data.machineId
+                })
+            }
+        }
     },
 
     fillGoods: function (e) {
@@ -259,7 +389,7 @@ Page({
                         var offlines = []
                         for (let i = 0; i < res.data.content.length; i++) {
                             let machineName = '';
-                            let machineId = '';
+                            let machineCode = '';
                             let organizationName = '';
                             let offlineOrOnlineTime = '';
                             if (res.data.content[i].machineName === null) {
@@ -267,10 +397,10 @@ Page({
                             } else {
                                 machineName = res.data.content[i].machineName
                             }
-                            if (res.data.content[i].machineId === null) {
-                                machineId = ''
+                            if (res.data.content[i].machineCode === null) {
+                                machineCode = ''
                             } else {
-                                machineId = res.data.content[i].machineId
+                                machineCode = res.data.content[i].machineCode
                             }
                             if (res.data.content[i].organizationName === null) {
                                 organizationName = ''
@@ -283,7 +413,7 @@ Page({
                                 offlineOrOnlineTime = _this.offlineinit(res.data.content[i].offlineOrOnlineTime)
                             }
                             offlines.push({
-                                machineId: machineId,
+                                machineCode: machineCode,
                                 machineName: machineName,
                                 organizationName: organizationName,
                                 offlineOrOnlineTime: offlineOrOnlineTime
@@ -358,6 +488,19 @@ Page({
                         icon: 'success',
                         duration: 2000
                     })
+                } else if (res.data.statuts === 400) {
+                    wx.showModal({
+                        title: '提示',
+                        content: '复制设备失败，货道不一样，请重新复制',
+                        success: function (res) {
+                            if (res.confirm) {
+                                _this.setData({
+                                    fromId: null,
+                                    toId: null
+                                })
+                            }
+                        }
+                    })
                 } else {
                     wx.showModal({
                         title: '提示',
@@ -398,38 +541,75 @@ Page({
     },
     //    多选以及全选框
     bindCheckbox: function (e) {
-        /*绑定点击事件，将checkbox样式改变为选中与非选中*/
+        let _this = this
+        if (_this.data.activeIndex === "0") {
+            /*绑定点击事件，将checkbox样式改变为选中与非选中*/
 
-        //拿到下标值，以在items作遍历指示用
-        var index = parseInt(e.currentTarget.dataset.index);
-        //原始的icon状态
-        var type = this.data.equipmentItems[index].type;
-        var equipmentItems = this.data.equipmentItems;
-        if (type == 'circle') {
-            //未选中时
-            equipmentItems[index].type = 'success_circle';
-        } else {
-            equipmentItems[index].type = 'circle';
-        }
-
-        // 写回经点击修改后的数组
-        this.setData({
-            equipmentItems: equipmentItems
-        });
-        // 遍历拿到已经勾选的值
-        var checkedValues = [];
-        var machineIds = [];
-        for (var i = 0; i < equipmentItems.length; i++) {
-            if (equipmentItems[i].type == 'success_circle') {
-                checkedValues.push(equipmentItems[i].machineName);
-                machineIds.push(equipmentItems[i].machineId)
+            //拿到下标值，以在items作遍历指示用
+            var index = parseInt(e.currentTarget.dataset.index);
+            //原始的icon状态
+            var type = this.data.equipmentItems[index].type;
+            var equipmentItems = this.data.equipmentItems;
+            if (type == 'circle') {
+                //未选中时
+                equipmentItems[index].type = 'success_circle';
+            } else {
+                equipmentItems[index].type = 'circle';
             }
+            // 写回经点击修改后的数组
+            this.setData({
+                equipmentItems: equipmentItems
+            });
+            // 遍历拿到已经勾选的值
+            var checkedValues = [];
+            var machineIds = [];
+            for (var i = 0; i < equipmentItems.length; i++) {
+                if (equipmentItems[i].type == 'success_circle') {
+                    checkedValues.push(equipmentItems[i].machineName);
+                    machineIds.push(equipmentItems[i].machineId)
+                }
+            }
+            // 写回data，供提交到网络
+            this.setData({
+                checkedValues: checkedValues,
+                machineIds: machineIds
+            });
+        } else if (_this.data.activeIndex === "2") {
+            /*绑定点击事件，将checkbox样式改变为选中与非选中*/
+
+            //拿到下标值，以在items作遍历指示用
+            var index = parseInt(e.currentTarget.dataset.index);
+            //原始的icon状态
+            var type = this.data.equipmentItems[index].type;
+            var equipmentItems = this.data.equipmentItems;
+            if (type == 'circle') {
+                //未选中时
+                for (let a = 0; a < equipmentItems.length; a++) {
+                    equipmentItems[a].type = 'circle';
+                }
+                equipmentItems[index].type = 'success_circle';
+            } else {
+                equipmentItems[index].type = 'circle';
+            }
+            // 写回经点击修改后的数组
+            this.setData({
+                equipmentItems: equipmentItems
+            });
+            // 遍历拿到已经勾选的值
+            var checkedValue = '';
+            var machineId = '';
+            for (var i = 0; i < equipmentItems.length; i++) {
+                if (equipmentItems[i].type == 'success_circle') {
+                    checkedValue = equipmentItems[i].machineName;
+                    machineId = equipmentItems[i].machineId
+                }
+            }
+            // 写回data，供提交到网络
+            this.setData({
+                checkedValue: checkedValue,
+                machineId: machineId
+            });
         }
-        // 写回data，供提交到网络
-        this.setData({
-            checkedValues: checkedValues,
-            machineIds: machineIds
-        });
     },
     allCheckbox: function (e) {
         var equipmentItems = this.data.equipmentItems;
@@ -473,6 +653,7 @@ Page({
             activeList1: e.currentTarget.dataset.level,
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
+            childrens: this.data.grouplist.childrens
         });
         // 撤销
         this.setData({
@@ -495,6 +676,7 @@ Page({
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
             grouplist3: arr3,
+            childrens: arr3
         });
         // 撤销
         this.setData({
@@ -515,6 +697,7 @@ Page({
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
             grouplist4: arr4,
+            childrens: arr4
         });
         this.setData({
             grouplist5: [],
@@ -533,6 +716,7 @@ Page({
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
             grouplist5: arr5,
+            childrens: arr5
         });
         this.setData({
             activeList5: null,
@@ -589,6 +773,18 @@ Page({
         }
     },
     offlineloadMore: function () {
+
+    },
+    serchmachine: function (e) {
+        if (e.currentTarget.dataset.serch === 'fromid') {
+            wx.navigateTo({
+                url: "/pages/serchMachine/serchMachine?serch=" + e.currentTarget.dataset.serch
+            });
+        } else if (e.currentTarget.dataset.serch === 'toid') {
+            wx.navigateTo({
+                url: "/pages/serchMachine/serchMachine?serch=" + e.currentTarget.dataset.serch
+            });
+        }
 
     }
 });

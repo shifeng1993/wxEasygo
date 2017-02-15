@@ -147,11 +147,10 @@ view ,.search .group-val view{
 .form {
   width: 99%;
   margin-bottom: 15px;
-  overflow-y: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   border: 2rpx solid #fff;
   min-height: 0.01%;
-  overflow-x: auto;
+  overflow: hidden;
 }
 
 .form .table {
@@ -203,7 +202,6 @@ view ,.search .group-val view{
 }
 
 .form td {
-  white-space: nowrap;
   border-color: #e2e7eb;
   padding: 10px 15px;
   background: #fff;

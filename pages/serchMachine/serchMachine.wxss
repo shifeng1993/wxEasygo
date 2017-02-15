@@ -1,0 +1,82 @@
+.container {
+  position: relative;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: all 0.25s;
+  z-index: 10;
+  overflow-x: hidden;
+  display: block;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: auto;
+  font-size: 32rpx;
+  height: auto;
+  min-height: 100%;
+  background: #fff;
+}
+
+.index {
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  padding: 2% 0;
+  display: flex;
+}
+
+.header .input-wrap {
+  flex: 8;
+  border: 2rpx solid #ddd;
+  border-radius: 30rpx;
+  margin: 0 20rpx;
+  margin-right: 0;
+  background: #d9e0e7;
+  overflow: hidden;
+  display: flex;
+}
+
+.header input {
+  line-height: 60rpx;
+  height: 60rpx;
+  padding: 0 20rpx;
+  flex: 8;
+  font-size: 28rpx;
+}
+.header .img-box {
+  flex: 1;
+  text-align:center;
+  line-height: 60rpx
+}
+.header image {
+  flex: 1;
+  width: 30rpx;
+  height: 30rpx;
+  background-size: cover;
+}
+
+.header button {
+  flex: 1;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  margin: 0 20rpx;
+}
+
+.btn-hover {
+  background: #d9e0e7;
+}
+
+.list {
+  width: 100%;
+  padding: 2% 0;
+  padding-left: 4%;
+  padding-right: 0;
+  border-top: 2rpx solid #d9e0e7;
+}
+
+.list .item {
+  border-bottom: 2rpx solid #d9e0e7;
+  line-height: 60rpx;
+  height: 60rpx;
+  font-size: 28rpx;
+}

@@ -3,7 +3,6 @@ const menuHeight = 125;
 var app = getApp()
 Page({
     data: {
-        tabs: ["设备销量", "产品销量"],
         activeIndex: "0",
         sliderOffset: 0,
         sliderLeft: 0,
@@ -54,11 +53,24 @@ Page({
         sidebarPageNumber: 0,
         sidebarPagetotal: 0,
         orgId: '',
-        orgIds: []
+        childrens: [],
+        orgIds: [],
+        menuindex: 0,
+        menuindex01: 0,
+        menuindex02: 0,
     },
     onLoad: function () {
         let _this = this;
-
+        wx.getStorage({
+            key: 'menuIds',
+            success: function (res) {
+                _this.setData({
+                    menuindex: parseInt(res.data[res.data.indexOf('9903')]),
+                    menuindex01: parseInt(res.data[res.data.indexOf('990301')]),
+                    menuindex02: parseInt(res.data[res.data.indexOf('990302')])
+                })
+            }
+        })
         // 这是sidebar菜单
         wx.request({
             url: app.globalData.apiOpen + '/orgs',
@@ -95,13 +107,6 @@ Page({
             groupFirstDate: app.GetDate(-1),
             groupLastDate: app.GetDate(-1),
             goodsDate: app.GetDate(-1),
-        });
-        wx.getSystemInfo({
-            success: function (res) {
-                _this.setData({
-                    sliderLeft: (res.windowWidth / _this.data.tabs.length - sliderWidth) / 2,
-                });
-            }
         });
     },
     onShow: function () {
@@ -174,6 +179,9 @@ Page({
             if (this.data.activeIndex === "0") {
                 var orgIds = [];
                 orgIds.push(_this.data.orgId);
+                for (let i = 0; i < _this.data.childrens.length; i++) {
+                    orgIds.push(_this.data.childrens[i].orgId)
+                }
                 _this.setData({
                     equipment: _this.data.groupValues,
                     orgIds: orgIds
@@ -181,6 +189,9 @@ Page({
             } else {
                 var orgIds = [];
                 orgIds.push(_this.data.orgId);
+                for (let i = 0; i < _this.data.childrens.length; i++) {
+                    orgIds.push(_this.data.childrens[i].orgId)
+                }
                 _this.setData({
                     goods: _this.data.groupValues,
                     orgIds: orgIds
@@ -237,9 +248,9 @@ Page({
         let Y = date.getFullYear() + '-'
         let M = (date.getMonth() + 1 < 10 ? (date.getMonth() + 1) : date.getMonth() + 1) + '-'
         let D = date.getDate() + ' '
-        let h = date.getHours() + ':'
-        let m = date.getMinutes() + ':'
-        let s = date.getSeconds()
+        let h = (date.getHours() > 0 ? "00" : '00') + ':'
+        let m = (date.getMinutes() == 0 ? '00' : date.getMinutes()) + ':'
+        let s = (date.getSeconds() == 0 ? '00' : date.getMinutes())
         return (Y + M + D + h + m + s)
     },
     equipmentBack: function (e) {
@@ -354,6 +365,7 @@ Page({
             activeList1: e.currentTarget.dataset.level,
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
+            childrens: this.data.grouplist.childrens
         });
         // 撤销
         this.setData({
@@ -376,6 +388,7 @@ Page({
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
             grouplist3: arr3,
+            childrens: arr3
         });
         // 撤销
         this.setData({
@@ -396,6 +409,7 @@ Page({
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
             grouplist4: arr4,
+            childrens: arr4
         });
         this.setData({
             grouplist5: [],
@@ -414,6 +428,7 @@ Page({
             groupValues: e.currentTarget.dataset.name,
             orgId: e.currentTarget.dataset.orgid,
             grouplist5: arr5,
+            childrens: arr5
         });
         this.setData({
             activeList5: null,
@@ -575,9 +590,17 @@ Page({
                 },
                 success: function (res) {
                     if (res.data) {
+                        let machinetotal =
+                            { amount: res.data.total.amount * 0.01, quantity: res.data.total.quantity }
+                        let machineamounts = []
+                        for (let i = 0; i < res.data.byMachine.length; i++) {
+                            machineamounts.push({
+                                amount: res.data.byMachine[i].amount * 0.01, machineName: res.data.byMachine[i].machineName, quantity: res.data.byMachine[i].quantity
+                            })
+                        }
                         _this.setData({
-                            machinetotal: res.data.total,
-                            machineamounts: res.data.byMachine
+                            machinetotal: machinetotal,
+                            machineamounts: machineamounts
                         })
                     }
                 }
@@ -600,10 +623,19 @@ Page({
                     endDate: _this.dateInit(_this.data.groupLastDate)
                 },
                 success: function (res) {
+                    let goodstotal =
+                        { amount: res.data.total.amount * 0.01, quantity: res.data.total.quantity }
+                    let goodsmounts = []
+                    for (let i = 0; i < res.data.byGoods.length; i++) {
+                        goodsmounts.push({
+                            amount: res.data.byGoods[i].amount * 0.01, goodsSubject: res.data.byGoods[i].goodsSubject, quantity: res.data.byGoods[i].quantity
+                        })
+                    }
+
                     if (res.data) {
                         _this.setData({
-                            goodstotal: res.data.total,
-                            goodsmounts: res.data.byGoods
+                            goodstotal: goodstotal,
+                            goodsmounts: goodsmounts
                         })
                     }
                 }

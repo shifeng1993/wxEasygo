@@ -1,5 +1,5 @@
 <view class="container">
-  <scroll-view scroll-y="true" class="index">
+  <scroll-view scroll-y="true" class="index" wx:if="{{menuindex == 9901 ? true:false}}">
     <view class="h1">
       <text>{{today}}</text>
 
@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="list">
-      <view class="list-wrap">
+      <view class="list-wrap" wx:if="{{menuindex01 == 990101 ? true:false}}">
         <view class="widget bg-green">
           <view class="stats-icon">
             <image class="fa money" src="../../img/money.png"></image>
@@ -30,7 +30,7 @@
           </view>
         </view>
       </view>
-      <view class="list-wrap">
+      <view class="list-wrap" wx:if="{{menuindex01 == 990101 ? true:false}}">
         <view class="widget bg-blue">
           <view class="stats-icon">
             <image class="fa chart" src="../../img/chart.png"></image>
@@ -46,7 +46,7 @@
           </view>
         </view>
       </view>
-      <view class="list-wrap">
+      <view class="list-wrap" wx:if="{{menuindex02 == 990102 ? true:false}}">
         <view class="widget bg-red">
           <view class="stats-icon">
             <image class="fa offline" src="../../img/offline.png"></image>
@@ -62,7 +62,7 @@
           </view>
         </view>
       </view>
-      <view class="list-wrap">
+      <view class="list-wrap" wx:if="{{menuindex02 == 990102 ? true:false}}">
         <view class="widget bg-purple">
           <view class="stats-icon">
             <image class="fa setup" src="../../img/setup.png"></image>

@@ -1,21 +1,22 @@
 <view class="container">
-  <scroll-view scroll-y="true" class="equipmentOperate">
+  <scroll-view scroll-y="true" class="equipmentOperate" wx:if="{{menuindex == 9904 ? true:false}}">
     <view class="equipmentNumber">
       <text>设备编号：</text>
-      <text class="flex-3">{{machineId}}</text>
+      <text class="flex-3">{{machineCode}}</text>
     </view>
     <view class="equipmentName">
       <text>机器名称：</text>
       <input type="text" placeholder="设备名称" value="{{machineName}}" bindchange="nameChange" />
     </view>
-    <view class="equipmentBtn">
+    <view class="equipmentBtn" wx:if="{{menuindex02 == 990402 ? true:false}}">
       <button type="default" class="renamebtn bg-green color-white" hover-class="bg-green-hover" bindtap="rename">修改名称</button>
+
       <!--<button type="default" class="bg-blue" hover-class="bg-blue-hover" bindtap="fillingAll">一键补满</button>-->
     </view>
     <view class="table-title">
       <view class="title">商品统计列表</view>
     </view>
-    <view class="form">
+    <view class="form" wx:if="{{menuindex01 == 990401 ? true:false}}">
       <table class="table">
         <thead>
           <tr>
@@ -25,16 +26,17 @@
           </tr>
         </thead>
         <tbody>
-        <block wx:for-items="{{machineAisles}}" wx:key="index">
-          <tr id="{{index}}">
-            <td >{{item.aisleName}}</td>
-            <td data-index="{{index}}" bindtap="groupForm">{{item.goodsSkuInfo.skuPackageType}}{{item.goodsSkuInfo.skuSubject}}{{item.goodsSkuInfo.skuSize}}</td>
-            <td>{{item.goodsStock}}</td>
-          </tr>
-         </block>
+          <block wx:for-items="{{machineAisles}}" wx:key="index">
+            <tr id="{{index}}" data-index="{{index}}" bindtap="groupForm">
+              <td>{{item.aisleName}}</td>
+              <td>{{item.goodsSkuInfo.skuPackageType}}{{item.goodsSkuInfo.skuSubject}}{{item.goodsSkuInfo.skuSize}}</td>
+              <td>{{item.goodsStock}}</td>
+            </tr>
+          </block>
         </tbody>
       </table>
     </view>
+
     <!--<view class="putStock">
       <button type="default" class="bg-blue" hover-class="bg-blue-hover">确认库存</button>
     </view>-->

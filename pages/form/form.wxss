@@ -83,8 +83,6 @@
 }
 
 
-
-
 .search .group-key,.search .machine-key,.search .equipment-key {
   color: #000;
   margin: 50rpx 30rpx;
@@ -92,6 +90,7 @@
   font-size: 32rpx;
   vertical-align: top;
   text-align: left;
+  line-height: 35rpx;
 }
 
 .search .equipment-title,.search .group-title, .search .group-val,.search .equipment-val,.search .machine-title, .search .machine-val {
@@ -171,11 +170,10 @@ view {
 .form {
   width: 99%;
   margin-bottom: 15px;
-  overflow-y: hidden;
+  overflow: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   border: 2rpx solid #fff;
   min-height: 0.01%;
-  overflow-x: auto;
 }
 
 .form .table {
@@ -228,7 +226,6 @@ view {
 }
 
 .form td {
-  white-space: nowrap;
   border-color: #e2e7eb;
   padding: 10px 15px;
   background: #fff;

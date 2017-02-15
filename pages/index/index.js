@@ -9,13 +9,26 @@ Page({
     salesAmount: '',
     salesNumber: '',
     offlineMachines: '',
-    needFillMachines: ''
+    needFillMachines: '',
+    menuindex: 0,
+    menuindex01: 0,
+    menuindex02: 0,
   },
   onLoad: function () {
     let _this = this;
     this.setData({
       lastDate: app.GetDateStr(-1),
       today: app.GetDateStr(0)
+    })
+    wx.getStorage({
+      key: 'menuIds',
+      success: function (res) {
+        _this.setData({
+          menuindex: parseInt(res.data[res.data.indexOf('9901')]),
+          menuindex01:parseInt(res.data[res.data.indexOf('990101')]),
+          menuindex02:parseInt(res.data[res.data.indexOf('990102')])
+        })
+      }
     })
     wx.getStorage({
       key: 'adminUser',
