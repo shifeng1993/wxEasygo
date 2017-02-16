@@ -29,6 +29,7 @@ Page({
         checkedValue: '',
         machineIds: [],
         machineId: '',
+        machineCode: '',
         groupValues: "",
         fromId: null,
         toId: null,
@@ -286,19 +287,19 @@ Page({
                             var machines = []
                             for (let i = 0; i < res.data.content.length; i++) {
                                 let machineName = '';
-                                let machineId = '';
+                                let machineCode = '';
                                 if (res.data.content[i].machineName === null) {
                                     machineName = ''
                                 } else {
                                     machineName = res.data.content[i].machineName
                                 }
-                                if (res.data.content[i].machineId === null) {
-                                    machineId = ''
+                                if (res.data.content[i].machineCode === null) {
+                                    machineCode = ''
                                 } else {
-                                    machineId = res.data.content[i].machineId
+                                    machineCode = res.data.content[i].machineCode
                                 }
                                 machines.push({
-                                    machineId: machineId,
+                                    machineCode: machineCode,
                                     machineName: machineName,
                                     type: 'circle'
                                 })
@@ -329,15 +330,16 @@ Page({
                 equipment: _this.data.checkedValues
             })
         } else if (_this.data.activeIndex === "2") {
+
             if (_this.data.copyfromto === 'from') {
                 _this.setData({
                     fromcopyequipment: _this.data.checkedValue,
-                    fromId: _this.data.machineId
+                    fromId: _this.data.machineCode
                 })
             } else if (_this.data.copyfromto === 'to') {
                 _this.setData({
                     tocopyequipment: _this.data.checkedValue,
-                    toId: _this.data.machineId
+                    toId: _this.data.machineCode
                 })
             }
         }
@@ -482,16 +484,17 @@ Page({
                 toId: _this.data.toId
             },
             success: function (res) {
-                if (res.data.statuts === 200) {
+                console.log(res.data.status)
+                if (res.data.status === 200) {
                     wx.showToast({
                         title: '复制成功',
                         icon: 'success',
                         duration: 2000
                     })
-                } else if (res.data.statuts === 400) {
+                } else if (res.data.status === 400) {
                     wx.showModal({
                         title: '提示',
-                        content: '复制设备失败，货道不一样，请重新复制',
+                        content: '复制设备失败，货道不一样，请重新选择',
                         success: function (res) {
                             if (res.confirm) {
                                 _this.setData({
@@ -504,7 +507,7 @@ Page({
                 } else {
                     wx.showModal({
                         title: '提示',
-                        content: '找不到对应的机器,请检查机器ID',
+                        content: '找不到对应的机器,请检查机器编码',
                         success: function (res) {
                             if (res.confirm) {
                                 _this.setData({
@@ -597,17 +600,17 @@ Page({
             });
             // 遍历拿到已经勾选的值
             var checkedValue = '';
-            var machineId = '';
+            var machineCode = '';
             for (var i = 0; i < equipmentItems.length; i++) {
                 if (equipmentItems[i].type == 'success_circle') {
                     checkedValue = equipmentItems[i].machineName;
-                    machineId = equipmentItems[i].machineId
+                    machineCode = equipmentItems[i].machineCode
                 }
             }
             // 写回data，供提交到网络
             this.setData({
                 checkedValue: checkedValue,
-                machineId: machineId
+                machineCode: machineCode
             });
         }
     },
