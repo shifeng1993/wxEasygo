@@ -772,8 +772,78 @@ Page({
             })
         }
     },
-    offlineloadMore: function () {
+    offlineloadMore: function (e) {
+        let _this = this
 
+        if (_this.data.activeIndex == 1) {
+
+            if (_this.data.offlinePageNumber > 0 && _this.data.offlinePageNumber < _this.data.offlinePagetotal) {
+                if (_this.data.offline !== '') {
+                    wx.showToast({
+                        title: '加载中',
+                        icon: 'loading',
+                        duration: 10000
+                    })
+                    wx.request({
+                        url: app.globalData.apiOpen + '/machine/all',
+                        header: {
+                            'content-type': 'application/json'
+                        },
+                        method: 'POST',
+                        data: {
+                            openId: app.globalData.openid,
+                            "orgIds": _this.data.orgIds,
+                            "status": "offline",
+                            "pageNumber": _this.data.offlinePageNumber,
+                            "pageSize": 30
+                        },
+                        success: function (res) {
+                            if (res.data) {
+                                wx.hideToast();
+                                var offlines = _this.data.offlines
+                                for (let i = 0; i < res.data.content.length; i++) {
+                                    let machineName = '';
+                                    let machineCode = '';
+                                    let organizationName = '';
+                                    let offlineOrOnlineTime = '';
+                                    if (res.data.content[i].machineName === null) {
+                                        machineName = ''
+                                    } else {
+                                        machineName = res.data.content[i].machineName
+                                    }
+                                    if (res.data.content[i].machineCode === null) {
+                                        machineCode = ''
+                                    } else {
+                                        machineCode = res.data.content[i].machineCode
+                                    }
+                                    if (res.data.content[i].organizationName === null) {
+                                        organizationName = ''
+                                    } else {
+                                        organizationName = res.data.content[i].organizationName
+                                    }
+                                    if (res.data.content[i].offlineOrOnlineTime === null) {
+                                        offlineOrOnlineTime = ''
+                                    } else {
+                                        offlineOrOnlineTime = _this.offlineinit(res.data.content[i].offlineOrOnlineTime)
+                                    }
+                                    offlines.push({
+                                        machineCode: machineCode,
+                                        machineName: machineName,
+                                        organizationName: organizationName,
+                                        offlineOrOnlineTime: offlineOrOnlineTime
+                                    })
+                                }
+                                _this.setData({
+                                    offlines: offlines,
+                                    offlinePageNumber: _this.data.offlinePageNumber + 1,
+                                    offlinePagetotal: res.data.totalPages
+                                })
+                            }
+                        }
+                    })
+                }
+            }
+        }
     },
     serchmachine: function (e) {
         if (e.currentTarget.dataset.serch === 'fromid') {

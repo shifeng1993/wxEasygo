@@ -60,6 +60,11 @@ th, td {
   display: table-cell;
 }
 
+td {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
 .bg-green {
   background: #00acac !important;
 }

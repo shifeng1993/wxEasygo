@@ -1,17 +1,16 @@
 <view class="container">
-  <scroll-view scroll-y="true" class="index" bindtap="init" style="transform:{{indexleft}};" wx:if="{{menuindex == 9902 ? true:false}}">
+  <scroll-view scroll-y="true" class="index" bindtap="init" style="transform:{{indexleft}};" wx:if="{{menuindex == 9902 ? true:false}}" lower-threshold="100" bindscrolltolower="offlineloadMore">
     <view class="tab-wrap" bindtap="init">
       <view class="navbar">
-          <view id="0" class="item {{activeIndex == 0 ? 'active' : ''}}" bindtap="tabClick" wx:if="{{menuindex01 == 990201 ? true:false}}">
-            <view class="navbar-title">补货统计</view>
-          </view>
-          <view id="1" class="item {{activeIndex == 1 ? 'active' : ''}}" bindtap="tabClick"  wx:if="{{menuindex02 == 990202 ? true:false}}">
-            <view class="navbar-title">离线设备</view>
-          </view>
-          <view id="2" class="item {{activeIndex == 2 ? 'active' : ''}}" bindtap="tabClick" wx:if="{{menuindex03 == 990203 ? true:false}}">
-            <view class="navbar-title">设备复制</view>
-          </view>
-        
+        <view id="0" class="item {{activeIndex == 0 ? 'active' : ''}}" bindtap="tabClick" wx:if="{{menuindex01 == 990201 ? true:false}}">
+          <view class="navbar-title">补货统计</view>
+        </view>
+        <view id="1" class="item {{activeIndex == 1 ? 'active' : ''}}" bindtap="tabClick" wx:if="{{menuindex02 == 990202 ? true:false}}">
+          <view class="navbar-title">离线设备</view>
+        </view>
+        <view id="2" class="item {{activeIndex == 2 ? 'active' : ''}}" bindtap="tabClick" wx:if="{{menuindex03 == 990203 ? true:false}}">
+          <view class="navbar-title">设备复制</view>
+        </view>
       </view>
       <view class="tab-content">
         <view class="tab-card" hidden="{{activeIndex != 0}}" wx:if="{{menuindex01 == 990201 ? true:false}}">
@@ -106,7 +105,7 @@
           <view class="table-title">
             <view class="title">离线设备列表</view>
           </view>
-          <view class="form">
+          <scroll-view scroll-y="true" lower-threshold="100" bindscrolltolower="offlineloadMore" class="form" style="height:600rpx;">
             <table class="table">
               <thead>
                 <tr>
@@ -127,7 +126,7 @@
                 </block>
               </tbody>
             </table>
-          </view>
+          </scroll-view>
         </view>
         <view class="tab-card" hidden="{{activeIndex != 2}}" wx:if="{{menuindex03 == 990203 ? true:false}}">
 
@@ -219,6 +218,7 @@
         <button type="default" hover-class="hover" bindtap="equipmentBack" plain="true">确定</button>
         <button type="default" hover-class="hover" hidden="{{activeIndex != 0}}" bindtap="allCheckbox" plain="true">全选</button>
       </view>
+
       <!-- CheckboxGroup容器 -->
       <scroll-view scroll-y="true" class="lxCheckboxGroup" lower-threshold="100" bindscrolltolower="equipmentloadMore">
         <block wx:for-items="{{equipmentItems}}" wx:key="index">

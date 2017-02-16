@@ -79,7 +79,7 @@
               <button type="default" class="group-btn" catchtap="groupPatch" hover-class="group-btn-hover"> 选择 </button>
             </view>
             <view class="machine-key">
-              <view class="machine-title">机器编号：</view>
+              <view class="machine-title">设备：</view>
               <view class="machine-val">
                 <block wx:for-items="{{machine}}" wx:key="index">
                   <view>{{item}}</view>
