@@ -40,9 +40,9 @@ Page({
     var _this = this;
     wx.request({
       url: app.globalData.apiOpen + '/user/logout/' + app.globalData.openid,
-      // header: {
-      //   'content-type': 'application/json'
-      // },
+      header: {
+        'content-type': 'application/json'
+      },
       method: 'POST',
       data: {
         openId: app.globalData.openid
@@ -53,6 +53,10 @@ Page({
           wx.setStorage({
             key: "adminUser",
             data: ""
+          })
+          wx.setStorage({
+            key: "menuIds",
+            data: []
           })
           wx.redirectTo({
             url: '/pages/login/login'

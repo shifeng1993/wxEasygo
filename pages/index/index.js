@@ -20,10 +20,6 @@ Page({
       lastDate: app.GetDateStr(-1),
       today: app.GetDateStr(0)
     })
-    // wx.setStorage({
-    //   key: "menuIds",
-    //   data: ["99", "9902", "9903", "990403", "990202", "990301", "9901", "990401", "990302", "990203", "990101", "990102", "990201", "9904"]
-    // })
     wx.getStorage({
       key: 'menuIds',
       success: function (res) {
