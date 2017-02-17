@@ -111,6 +111,11 @@ Page({
     },
     onShow: function () {
         let _this = this;
+        if (_this.data.menuindex01 === 0) {
+            _this.setData({
+                activeIndex: 1
+            })
+        }
         wx.getStorage({
             key: 'adminUser',
             success: function (res) {
@@ -591,11 +596,11 @@ Page({
                 success: function (res) {
                     if (res.data) {
                         let machinetotal =
-                            { amount: res.data.total.amount * 0.01, quantity: res.data.total.quantity }
+                            { amount: (res.data.total.amount * 0.01).toFixed(2), quantity: res.data.total.quantity }
                         let machineamounts = []
                         for (let i = 0; i < res.data.byMachine.length; i++) {
                             machineamounts.push({
-                                amount: res.data.byMachine[i].amount * 0.01, machineName: res.data.byMachine[i].machineName, quantity: res.data.byMachine[i].quantity
+                                amount: (res.data.byMachine[i].amount * 0.01).toFixed(2), machineName: res.data.byMachine[i].machineName, quantity: res.data.byMachine[i].quantity
                             })
                         }
                         _this.setData({
@@ -624,11 +629,11 @@ Page({
                 },
                 success: function (res) {
                     let goodstotal =
-                        { amount: res.data.total.amount * 0.01, quantity: res.data.total.quantity }
+                        { amount: (res.data.total.amount * 0.01).toFixed(2), quantity: res.data.total.quantity }
                     let goodsmounts = []
                     for (let i = 0; i < res.data.byGoods.length; i++) {
                         goodsmounts.push({
-                            amount: res.data.byGoods[i].amount * 0.01, goodsSubject: res.data.byGoods[i].goodsSubject, quantity: res.data.byGoods[i].quantity
+                            amount: (res.data.byGoods[i].amount * 0.01).toFixed(2), goodsSubject: res.data.byGoods[i].goodsSubject, quantity: res.data.byGoods[i].quantity
                         })
                     }
 

@@ -98,6 +98,13 @@ Page({
     },
     onShow: function () {
         let _this = this;
+        if (_this.data.menuindex01 === 0) {
+            _this.setData({
+                activeIndex: 1
+            })
+        } else if (_this.data.menuindex01 === 0 && _this.data.menuindex02 === 0) {
+            activeIndex: 2
+        }
         if (app.operate.activeIndex != null) {
             _this.setData({
                 activeIndex: app.operate.activeIndex,

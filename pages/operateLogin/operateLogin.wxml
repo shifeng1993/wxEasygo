@@ -6,7 +6,8 @@
     </view>
     <view class="equipmentName">
       <text>机器名称：</text>
-      <input type="text" placeholder="设备名称" value="{{machineName}}" bindchange="nameChange" />
+      <text class="flex-3"wx:if="{{menuindex02 == 990402 ? false:true}}">{{machineName}}</text>
+      <input type="text" placeholder="设备名称" value="{{machineName}}" bindchange="nameChange"  wx:if="{{menuindex02 == 990402 ? true:false}}"/>
     </view>
     <view class="equipmentBtn" wx:if="{{menuindex02 == 990402 ? true:false}}">
       <button type="default" class="renamebtn bg-green color-white" hover-class="bg-green-hover" bindtap="rename">修改名称</button>

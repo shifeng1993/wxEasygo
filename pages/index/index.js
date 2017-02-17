@@ -20,10 +20,10 @@ Page({
       lastDate: app.GetDateStr(-1),
       today: app.GetDateStr(0)
     })
-    wx.setStorage({
-      key: "menuIds",
-      data: ["99", "9902", "990201", "990202", "990203", "990402", "9903", "990403", "990301", "9901", "990302", "990401", "990101", "990102", "9904"]
-    })
+    // wx.setStorage({
+    //   key: "menuIds",
+    //   data: ["99", "9902", "9903", "990403", "990202", "990301", "9901", "990401", "990302", "990203", "990101", "990102", "990201", "9904"]
+    // })
     wx.getStorage({
       key: 'menuIds',
       success: function (res) {
@@ -70,7 +70,7 @@ Page({
                 success: function (res) {
                   if (res.data) {
                     _this.setData({
-                      salesAmount: _this.thousandsData(res.data.salesAmount) * 0.01,
+                      salesAmount: (_this.thousandsData(res.data.salesAmount) * 0.01).toFixed(2),
                       salesNumber: _this.thousandsData(res.data.salesNumber),
                       offlineMachines: _this.thousandsData(res.data.offlineMachines),
                       needFillMachines: _this.thousandsData(res.data.needFillMachines),
