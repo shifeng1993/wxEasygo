@@ -491,7 +491,6 @@ Page({
                 toId: _this.data.toId
             },
             success: function (res) {
-                console.log(res.data.status)
                 if (res.data.status === 200) {
                     wx.showToast({
                         title: '复制成功',

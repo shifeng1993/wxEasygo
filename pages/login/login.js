@@ -39,7 +39,6 @@ Page({
             },
             success: function (res) {
               if (res.data) {
-                console.log(res.data.menuIds)
                 wx.setStorage({
                   key: "menuIds",
                   data: res.data.menuIds
