@@ -54,12 +54,25 @@ Page({
             key: "adminUser",
             data: ""
           })
+          wx.showToast({
+            title: '解绑成功',
+            icon: 'success',
+            duration: 2000
+          })
           wx.setStorage({
             key: "menuIds",
             data: []
           })
           wx.redirectTo({
             url: '/pages/login/login'
+          })
+        } else {
+           wx.showModal({
+            title: '提示',
+            content: '解除绑定失败，请稍后再试',
+            success: function (res) {
+              
+            }
           })
         }
       }

@@ -129,23 +129,13 @@
           </scroll-view>
         </view>
         <view class="tab-card" hidden="{{activeIndex != 2}}" wx:if="{{menuindex03 == 990203 ? true:false}}">
-
-          <!--<view class="copy">
-            <view class="wrap">
-              <view class="text">从</view>
-              <input type="text" placeholder="完整的机器编号" value="{{fromId}}" bindchange="fromIdinput"/>
-              <view class="text">复制到</view>
-              <input type="text" placeholder="完整的机器编号" value="{{toId}}" bindchange="toIdinput"/>
-            </view>
-            <button type="default" class="copy-btn" bindtap="copy" hover-class="copy-btn-hover"> 确定 </button>
-          </view>-->
           <view class="copy">
             <view class="wrap">
               <view class="search">
                 <view class="text">从</view>
                 <view class="group-key">组织：
                   <view class="group-val">{{fromcopygroup}}</view>
-                  <button type="default" class="group-btn" data-copy="from" catchtap="copygroupPatch" hover-class="group-btn-hover"> 选择 </button>
+                  <button type="default" class="group-btn" data-copy="from" catchtap="copygroupPatch" hover-class="group-btn-hover" style="height: 60rpx;line-height: 60rpx;"> 选择 </button>
                 </view>
                 <view class="group-key">设备：
                   <view class="group-val">{{fromcopyequipment}}</view>
